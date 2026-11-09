@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-ivory: #FFFDF9;
+    --color-rose-vintage: #E08798;
+    --color-burgundy: #832232;
+    --color-champagne: #D4AF37;
+    --color-espresso: #2A1E22;
+  }
+
+  body {
+    background-color: var(--color-bg-ivory);
+    color: var(--color-espresso);
+    overflow-x: hidden;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FAF6ED;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #E08798;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #832232;
+  }
+}
+
+/* Subtle paper texture overlay */
+.paper-texture {
+  background-color: #FFFDF9;
+  background-image: radial-gradient(#E8DCC9 0.75px, transparent 0.75px), radial-gradient(#E8DCC9 0.75px, #FFFDF9 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Polaroid Photo Card styling */
+.polaroid-frame {
+  background: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(42, 30, 34, 0.12), 0 8px 10px -6px rgba(42, 30, 34, 0.08);
+  border: 1px solid rgba(224, 135, 152, 0.2);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.polaroid-frame:hover {
+  transform: translateY(-8px) rotate(0deg) scale(1.02);
+  box-shadow: 0 20px 35px -8px rgba(131, 34, 50, 0.25), 0 10px 15px -4px rgba(42, 30, 34, 0.12);
+}
+
+/* Vintage Postcard Stamp */
+.postcard-stamp {
+  border: 2px dashed #E08798;
+  position: relative;
+  background: #FFFDF9;
+}
+
+.postcard-stamp::after {
+  content: "AIR MAIL";
+  position: absolute;
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: #832232;
+  top: -12px;
+  right: 0;
+  font-weight: 700;
+}
+
+/* Washi Tape styling for photos */
+.washi-tape {
+  position: absolute;
+  width: 90px;
+  height: 26px;
+  background: rgba(224, 135, 152, 0.4);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: rotate(-3deg);
+  z-index: 10;
+}
+
+/* Film Strip sprocket holes */
+.film-sprocket {
+  background-image: radial-gradient(circle, #2A1E22 35%, transparent 40%);
+  background-size: 16px 16px;
+  background-repeat: repeat-x;
+}
+
