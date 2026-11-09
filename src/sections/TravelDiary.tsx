@@ -29,3 +29,4 @@ export const TravelDiary: React.FC = () => {
     </section>
   );
 };
+

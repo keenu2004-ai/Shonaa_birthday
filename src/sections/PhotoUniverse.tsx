@@ -92,3 +92,4 @@ export const PhotoUniverse: React.FC = () => {
     </section>
   );
 };
+

@@ -4,6 +4,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { FloatingMusicPlayer } from './components/ui/FloatingMusicPlayer';
 import { ParticleField } from './components/ui/ParticleField';
+import { CursorTrail } from './components/ui/CursorTrail';
 import { HeroOpening } from './sections/HeroOpening';
 import { RelationshipCounter } from './sections/RelationshipCounter';
 import { BirthdayCountdown } from './sections/BirthdayCountdown';
@@ -46,6 +47,7 @@ export const App: React.FC = () => {
     <div className="min-h-screen bg-ivory-100 text-espresso font-sans selection:bg-rose-vintage/30 selection:text-burgundy relative">
       {/* Floating Ambient Romantic Particles */}
       <ParticleField />
+      <CursorTrail />
 
       {/* Persistent Floating Audio Soundtrack Pill */}
       {isUniverseOpen && (
@@ -129,3 +131,4 @@ export const App: React.FC = () => {
 };
 
 export default App;
+

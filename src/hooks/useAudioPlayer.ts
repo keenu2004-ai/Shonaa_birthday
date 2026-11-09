@@ -15,50 +15,54 @@ export function useAudioPlayer() {
   const tracks = loveStoryConfig.music.tracks;
   const currentTrack: MusicTrack = tracks[currentTrackIndex] || tracks[0];
 
-  // Initialize audio element
+  // 1. One-time initialization and event listener attachment
   useEffect(() => {
-    if (!audioRef.current) {
-      const audio = new Audio();
-      audio.preload = 'metadata';
-      audio.loop = false;
-      audioRef.current = audio;
+    const audio = new Audio();
+    audio.preload = 'metadata';
+    audio.loop = false;
+    audioRef.current = audio;
 
-      audio.addEventListener('ended', () => {
-        // Auto play next track
-        setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
-      });
+    const handleEnded = () => {
+      // Auto-advance to next track on finish
+      setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
+    };
 
-      audio.addEventListener('error', () => {
-        console.info('Audio file not found, activating romantic ambient generative soundscape fallback.');
-        setIsSynthFallback(true);
-        if (isPlaying && !isMuted) {
-          soundscape.play();
-        }
-      });
-    }
+    const handleError = () => {
+      console.info('Audio file not found, activating romantic ambient generative soundscape fallback.');
+      setIsSynthFallback(true);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
+      audio.pause();
       soundscape.pause();
     };
-  }, [tracks.length, isPlaying, isMuted]);
+  }, [tracks.length]);
 
-  // Handle track source update
+  // 2. Track source update: ONLY reassigns src when currentTrack.src changes
   useEffect(() => {
-    if (audioRef.current && currentTrack) {
-      audioRef.current.src = currentTrack.src;
-      if (isPlaying && !isMuted && !isSynthFallback) {
+    if (!audioRef.current || !currentTrack) return;
+
+    audioRef.current.src = currentTrack.src;
+    audioRef.current.currentTime = 0;
+
+    if (isPlaying && !isMuted) {
+      if (isSynthFallback) {
+        soundscape.play();
+      } else {
         audioRef.current.play().catch(() => {
           setIsSynthFallback(true);
           soundscape.play();
         });
       }
     }
-  }, [currentTrackIndex, currentTrack, isPlaying, isMuted, isSynthFallback]);
+  }, [currentTrackIndex, currentTrack.src]); // Notice: isPlaying is NOT in dependencies! Prevents restart on play/pause
 
-  // Handle mute toggling
+  // 3. Handle Mute state change
   useEffect(() => {
     sessionStorage.setItem('universe_audio_muted', isMuted ? 'true' : 'false');
     if (audioRef.current) {
@@ -71,23 +75,23 @@ export function useAudioPlayer() {
     }
   }, [isMuted, isPlaying, isSynthFallback]);
 
-  // Master start music function (invoked upon opening interaction)
+  // 4. Start music upon opening gateway interaction
   const startMusic = useCallback(() => {
     setHasInteracted(true);
     if (isMuted) return;
 
     setIsPlaying(true);
-    if (audioRef.current && !isSynthFallback) {
+    if (isSynthFallback) {
+      soundscape.play();
+    } else if (audioRef.current) {
       audioRef.current.play().catch(() => {
         setIsSynthFallback(true);
         soundscape.play();
       });
-    } else {
-      soundscape.play();
     }
   }, [isMuted, isSynthFallback]);
 
-  // Toggle play / pause
+  // 5. Toggle play / pause: Resumes seamlessly from current playhead without restarting
   const togglePlay = useCallback(() => {
     setHasInteracted(true);
     if (isPlaying) {
@@ -96,6 +100,8 @@ export function useAudioPlayer() {
       soundscape.pause();
     } else {
       setIsPlaying(true);
+      if (isMuted) return;
+
       if (isSynthFallback) {
         soundscape.play();
       } else if (audioRef.current) {
@@ -105,14 +111,14 @@ export function useAudioPlayer() {
         });
       }
     }
-  }, [isPlaying, isSynthFallback]);
+  }, [isPlaying, isMuted, isSynthFallback]);
 
-  // Toggle mute
+  // 6. Toggle mute
   const toggleMute = useCallback(() => {
     setIsMuted((prev) => !prev);
   }, []);
 
-  // Next track
+  // 7. Next track
   const nextTrack = useCallback(() => {
     setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
   }, [tracks.length]);

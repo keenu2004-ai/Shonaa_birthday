@@ -196,3 +196,4 @@ export const DigitalLetters: React.FC = () => {
     </section>
   );
 };
+

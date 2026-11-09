@@ -11,12 +11,20 @@ interface BirthdayCountdownProps {
 
 export const BirthdayCountdown: React.FC<BirthdayCountdownProps> = ({ onTriggerCelebration }) => {
   const [countdown, setCountdown] = useState<CountdownState>(() =>
-    calculateBirthdayCountdown(loveStoryConfig.dates.birthdayDate)
+    calculateBirthdayCountdown(
+      loveStoryConfig.dates.birthdayDate,
+      new Date(),
+      loveStoryConfig.dates.forceTestCelebration
+    )
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const state = calculateBirthdayCountdown(loveStoryConfig.dates.birthdayDate);
+      const state = calculateBirthdayCountdown(
+        loveStoryConfig.dates.birthdayDate,
+        new Date(),
+        loveStoryConfig.dates.forceTestCelebration
+      );
       setCountdown(state);
 
       // Auto-trigger celebration if it just hit zero today and hasn't fired yet
@@ -122,3 +130,4 @@ export const BirthdayCountdown: React.FC<BirthdayCountdownProps> = ({ onTriggerC
     </section>
   );
 };
+

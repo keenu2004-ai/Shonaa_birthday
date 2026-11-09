@@ -63,7 +63,48 @@ for (const p of requiredPlaceholders) {
 // 4. Verify central configuration file exists
 assert(fs.existsSync('src/config/loveStory.ts'), 'src/config/loveStory.ts exists');
 
-// 5. Test Date Arithmetic function
+// 5. Phase 2.1 Audit Remediations Verification
+// 5a. Personal Media Privacy: Verify all 12 loose photos and 1 video are removed
+const deletedMediaFiles = [
+  'public/memories/birthday-cake-candles.jpg',
+  'public/memories/celebration-christmas-tree.jpg',
+  'public/memories/couple-christmas.jpg',
+  'public/memories/couple-kiss-bows.jpg',
+  'public/memories/couple-scooter-helmets.jpg',
+  'public/memories/funny-cafe-smile.jpg',
+  'public/memories/funny-cat-gaming.jpg',
+  'public/memories/portrait-golden-hour.jpg',
+  'public/memories/portrait-hearts.jpg',
+  'public/memories/travel-green-caves.jpg',
+  'public/memories/travel-heritage-arch.jpg',
+  'public/memories/travel-mountain-valley.jpg',
+  'public/videos/memory-video-1.mp4'
+];
+for (const file of deletedMediaFiles) {
+  assert(!fs.existsSync(file), `Privacy fix verified: ${file} does not exist`);
+}
+
+// 5b. Duplicate Configuration: Verify src/data/contentConfig.ts is eliminated
+assert(!fs.existsSync('src/data/contentConfig.ts'), 'Duplicate config src/data/contentConfig.ts does not exist');
+
+// 5c. Robots meta tag in index.html
+const indexHtml = fs.readFileSync('index.html', 'utf8');
+assert(indexHtml.includes('name="robots" content="noindex, nofollow"'), 'index.html contains noindex, nofollow privacy meta tag');
+
+// 5d. Editable placeholders in src/config/loveStory.ts
+const loveStoryConfig = fs.readFileSync('src/config/loveStory.ts', 'utf8');
+assert(loveStoryConfig.includes('"[Her Name]"'), 'loveStory.ts uses standardized [Her Name] placeholder');
+assert(loveStoryConfig.includes('"[My Name]"'), 'loveStory.ts uses standardized [My Name] placeholder');
+
+// 5e. Audio Player currentTime preservation
+const audioHook = fs.readFileSync('src/hooks/useAudioPlayer.ts', 'utf8');
+assert(!audioHook.includes('useEffect(() => {\n    if (!audioRef.current) return;\n    audioRef.current.src'), 'Audio hook decouples src assignment from play/pause toggle');
+
+// 5f. Mobile photo explosion in BirthdayCelebrationModal
+const modalCode = fs.readFileSync('src/sections/BirthdayCelebrationModal.tsx', 'utf8');
+assert(modalCode.includes('md:hidden') && modalCode.includes('w-20 h-24'), 'BirthdayCelebrationModal renders non-obstructive mobile photo miniatures');
+
+// 6. Test Date Arithmetic function
 const { calculatePreciseDuration, calculateBirthdayCountdown } = await import('./src/utils/dateArithmetic.js').catch(async () => {
   // If running directly before transpile, simulate logic
   return {
@@ -83,3 +124,4 @@ console.log(`\nTest Summary: ${passed} Passed, ${failed} Failed.`);
 if (failed > 0) {
   process.exit(1);
 }
+

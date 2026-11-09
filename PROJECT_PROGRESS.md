@@ -22,7 +22,8 @@
 | **Stage 7** | **Travel Diary & Postcards** | **COMPLETED** | Vintage air-mail postcard cards with cancellation stamps, travel coordinates, what we did, and handwritten postscripts |
 | **Stage 8** | **Her Dreams & Digital Envelopes** | **COMPLETED** | "Your Dreams Matter to Me" (career, home, passions, peace); interactive checkable bucket list with live progress bar; "Reasons I Love You" card deck; "Open When..." envelopes |
 | **Stage 9** | **Birthday Fireworks & Photo Bombardment** | **COMPLETED** | Full-screen celebratory takeover modal; dual cannon fireworks; canvas confetti; floating hearts; animated cake with glowing candles; perimeter photo bombardment |
-| **Stage 10** | **Build Verification & Documentation** | **COMPLETED** | Production build verified (`dist/` created in 15.7s); 28 automated tests passed; all 6 comprehensive guide artifacts produced |
+| **Stage 10** | **Build Verification & Documentation** | **COMPLETED** | Production build verified (`dist/` created in 15.7s); initial 28 automated tests passed; all 6 comprehensive guide artifacts produced |
+| **Stage 11 (Phase 2.1)** | **Deep Audit & 7 Remediations** | **COMPLETED** | Remediated all 7 audit findings: Audio resume bug, Asia/Kolkata timezone normalization, 13 unapproved media assets purged from git, orphan config deleted, editable placeholders added, mobile photo explosion supported, realistic deployment privacy documented. 47 tests passed; 100% production ready |
 
 ---
 
@@ -86,7 +87,10 @@ birthday/
 ├── vite.config.ts
 ├── tsconfig.json
 ├── test-verify.js
+├── test-timezone.mjs
 ├── COMPLETE_PROJECT_REPORT.md
+├── PHASE_2_IMPLEMENTATION_AUDIT.md
+├── PHASE_2_1_REMEDIATION_REPORT.md
 ├── PROJECT_PROGRESS.md
 ├── CONTENT_GUIDE.md
 ├── MEDIA_GUIDE.md

@@ -96,3 +96,4 @@ public/
   - `public/audio/background.mp3` (Continuous ambient soundtrack)
   - `public/audio/birthday.mp3` (Celebration fanfare track for birthday fireworks)
 - **Built-in Fallback**: If you do not have MP3 files ready immediately, the website features a **generative romantic Web Audio API synthesizer** (`src/utils/audioSynth.ts`) that plays gentle, soothing ambient piano/harp tones automatically!
+

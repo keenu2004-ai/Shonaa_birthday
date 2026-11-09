@@ -1,5 +1,5 @@
 /**
- * Precise calendar date arithmetic and countdown utilities
+ * Precise calendar date arithmetic and timezone-aware countdown utilities
  */
 
 export interface DetailedDuration {
@@ -26,7 +26,7 @@ export interface CountdownState {
  * Calculates exact calendar difference between two dates handling:
  * - Variable days per month (28, 29, 30, 31)
  * - Leap years
- * - Timezone consistency
+ * - Consistency across timezones
  */
 export function calculatePreciseDuration(startDateStr: string, currentDate: Date = new Date()): DetailedDuration {
   const start = new Date(startDateStr);
@@ -85,37 +85,83 @@ export function calculatePreciseDuration(startDateStr: string, currentDate: Date
 }
 
 /**
- * Computes live countdown to target birthday
+ * Helper to get the current timestamp in Asia/Kolkata (IST = UTC + 5:30)
  */
-export function calculateBirthdayCountdown(targetDateStr: string, now: Date = new Date()): CountdownState {
+export function getNowInKolkata(): { kolkataDate: Date; year: number; month: number; day: number } {
+  const now = new Date();
+  // Using Intl API to format to Asia/Kolkata
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false,
+  });
+
+  const parts = formatter.formatToParts(now);
+  const partMap: Record<string, number> = {};
+  for (const p of parts) {
+    if (p.type !== 'literal') {
+      partMap[p.type] = parseInt(p.value, 10);
+    }
+  }
+
+  return {
+    kolkataDate: now,
+    year: partMap.year || now.getFullYear(),
+    month: partMap.month || now.getMonth() + 1,
+    day: partMap.day || now.getDate(),
+  };
+}
+
+/**
+ * Computes live countdown to target birthday specifically calibrated to Asia/Kolkata
+ */
+export function calculateBirthdayCountdown(
+  targetDateStr: string,
+  now: Date = new Date(),
+  forceTestCelebration: boolean = false
+): CountdownState {
+  if (forceTestCelebration) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, isToday: true, isPast: false, totalSecondsRemaining: 0 };
+  }
+
   const target = new Date(targetDateStr);
-  
   if (isNaN(target.getTime())) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isToday: true, isPast: false, totalSecondsRemaining: 0 };
   }
 
-  // Calculate target for current or upcoming birthday
-  let targetYear = now.getFullYear();
-  let currentYearTarget = new Date(target);
-  currentYearTarget.setFullYear(targetYear);
+  // Determine current year in Asia/Kolkata
+  const { year: currentKolkataYear } = getNowInKolkata();
 
-  let diffMs = currentYearTarget.getTime() - now.getTime();
+  // Target birthday month and day from input
+  const targetMonth = target.getMonth(); // 0-indexed
+  const targetDay = target.getDate();
 
-  // If birthday has passed for this year by more than 24 hours, count to next year's birthday
-  // If it's within the 24-hour birthday window, isToday = true
-  const dayMs = 24 * 60 * 60 * 1000;
-  
+  // Build target ISO string in Asia/Kolkata for current year
+  // e.g. 2027-07-31T00:00:00+05:30
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const makeKolkataISO = (y: number) =>
+    `${y}-${pad(targetMonth + 1)}-${pad(targetDay)}T00:00:00+05:30`;
+
+  let kolkataTarget = new Date(makeKolkataISO(currentKolkataYear));
+  let diffMs = kolkataTarget.getTime() - now.getTime();
+  const oneDayMs = 24 * 60 * 60 * 1000;
+
   let isToday = false;
   let isPast = false;
 
-  if (diffMs <= 0 && diffMs > -dayMs) {
-    // It's her birthday right now!
+  // If we are within the 24-hour birthday window in Asia/Kolkata
+  if (diffMs <= 0 && diffMs > -oneDayMs) {
     isToday = true;
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isToday: true, isPast: false, totalSecondsRemaining: 0 };
-  } else if (diffMs < -dayMs) {
-    // Birthday passed this year, point to next year
-    currentYearTarget.setFullYear(targetYear + 1);
-    diffMs = currentYearTarget.getTime() - now.getTime();
+  } else if (diffMs <= -oneDayMs) {
+    // Birthday has passed this year, count down to next year's birthday
+    kolkataTarget = new Date(makeKolkataISO(currentKolkataYear + 1));
+    diffMs = kolkataTarget.getTime() - now.getTime();
   }
 
   const totalSecondsRemaining = Math.max(0, Math.floor(diffMs / 1000));
@@ -134,4 +180,3 @@ export function calculateBirthdayCountdown(targetDateStr: string, now: Date = ne
     totalSecondsRemaining,
   };
 }
-

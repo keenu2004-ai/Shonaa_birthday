@@ -157,3 +157,4 @@ Before publishing the website for her birthday, simply follow this checklist:
    - [ ] Run `npm run dev` to preview everything in your browser.
    - [ ] Test the fireworks celebration by clicking the preview button in the Birthday Countdown section.
    - [ ] Deploy to Vercel or Netlify as detailed in `DEPLOYMENT_GUIDE.md`!
+

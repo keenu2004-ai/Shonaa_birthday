@@ -50,3 +50,4 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     </motion.div>
   );
 };
+

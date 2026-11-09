@@ -15,7 +15,13 @@
 | **Aesthetic Vector SVG Placeholders** | 9 | 9 | 0 | PASSED |
 | **Configuration Architecture** | 1 | 1 | 0 | PASSED |
 | **Calendar Arithmetic & Countdown Engine** | 1 | 1 | 0 | PASSED |
-| **Total Automated Assertions** | **28** | **28** | **0** | **PASSED** |
+| **Phase 2.1 Media Privacy Fix (Assets Purged)** | 13 | 13 | 0 | PASSED |
+| **Phase 2.1 Duplicate Config Elimination** | 1 | 1 | 0 | PASSED |
+| **Phase 2.1 Robots Privacy Meta Tag** | 1 | 1 | 0 | PASSED |
+| **Phase 2.1 Editable Configuration Placeholders** | 2 | 2 | 0 | PASSED |
+| **Phase 2.1 Audio Resume Hook Decoupling** | 1 | 1 | 0 | PASSED |
+| **Phase 2.1 Mobile Celebration Miniatures** | 1 | 1 | 0 | PASSED |
+| **Total Automated Assertions** | **47** | **47** | **0** | **PASSED** |
 
 ---
 
@@ -50,9 +56,46 @@
 [PASS] Placeholder SVG exists: public/memories/our-photos/our-photo-1.svg
 [PASS] Placeholder SVG exists: public/memories/birthday/birthday-cake.svg
 [PASS] src/config/loveStory.ts exists
+[PASS] Privacy fix verified: public/memories/birthday-cake-candles.jpg does not exist
+[PASS] Privacy fix verified: public/memories/celebration-christmas-tree.jpg does not exist
+[PASS] Privacy fix verified: public/memories/couple-christmas.jpg does not exist
+[PASS] Privacy fix verified: public/memories/couple-kiss-bows.jpg does not exist
+[PASS] Privacy fix verified: public/memories/couple-scooter-helmets.jpg does not exist
+[PASS] Privacy fix verified: public/memories/funny-cafe-smile.jpg does not exist
+[PASS] Privacy fix verified: public/memories/funny-cat-gaming.jpg does not exist
+[PASS] Privacy fix verified: public/memories/portrait-golden-hour.jpg does not exist
+[PASS] Privacy fix verified: public/memories/portrait-hearts.jpg does not exist
+[PASS] Privacy fix verified: public/memories/travel-green-caves.jpg does not exist
+[PASS] Privacy fix verified: public/memories/travel-heritage-arch.jpg does not exist
+[PASS] Privacy fix verified: public/memories/travel-mountain-valley.jpg does not exist
+[PASS] Privacy fix verified: public/videos/memory-video-1.mp4 does not exist
+[PASS] Duplicate config src/data/contentConfig.ts does not exist
+[PASS] index.html contains noindex, nofollow privacy meta tag
+[PASS] loveStory.ts uses standardized [Her Name] placeholder
+[PASS] loveStory.ts uses standardized [My Name] placeholder
+[PASS] Audio hook decouples src assignment from play/pause toggle
+[PASS] BirthdayCelebrationModal renders non-obstructive mobile photo miniatures
 [PASS] Duration calculation calculated valid years (3)
 
-Test Summary: 28 Passed, 0 Failed.
+Test Summary: 47 Passed, 0 Failed.
+```
+
+### 2.1 Multi-Timezone Simulation Log (`test-timezone.mjs`)
+```
+--- RUNNING SIMULATED TIMEZONE TESTS ---
+[Timezone: Asia/Kolkata] 10 days before: { days: 10, hours: 0, minutes: 0, seconds: 0, isToday: false }
+[Timezone: America/New_York] 10 days before: { days: 10, hours: 0, minutes: 0, seconds: 0, isToday: false }
+[Timezone: Europe/London] 10 days before: { days: 10, hours: 0, minutes: 0, seconds: 0, isToday: false }
+[Timezone: Australia/Sydney] 10 days before: { days: 10, hours: 0, minutes: 0, seconds: 0, isToday: false }
+[Timezone: Asia/Kolkata] Birthday Midnight: isToday = true
+[Timezone: America/New_York] Birthday Midnight: isToday = true
+[Timezone: Europe/London] Birthday Midnight: isToday = true
+[Timezone: Australia/Sydney] Birthday Midnight: isToday = true
+[Timezone: Asia/Kolkata] 20h into birthday: isToday = true
+[Timezone: America/New_York] 20h into birthday: isToday = true
+[Timezone: Europe/London] 20h into birthday: isToday = true
+[Timezone: Australia/Sydney] 20h into birthday: isToday = true
+ALL TIMEZONE TESTS PASSED IDENTICALLY!
 ```
 
 ---
@@ -94,3 +137,4 @@ Test Summary: 28 Passed, 0 Failed.
 - **Keyboard Navigation**: ESC and Arrow keys supported on Lightbox and Modals.
 - **Reduced Motion**: Confetti and animations automatically respect `prefers-reduced-motion` settings.
 - **Image Performance**: All images use `loading="lazy"` and responsive dimensions to ensure fast initial page loads.
+

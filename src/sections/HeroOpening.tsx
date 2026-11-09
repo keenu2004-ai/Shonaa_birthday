@@ -98,7 +98,7 @@ export const HeroOpening: React.FC<HeroOpeningProps> = ({ onOpenUniverse, isOpen
         <div className="relative mx-auto w-40 h-48 sm:w-48 sm:h-56 rounded-lg p-2 bg-white shadow-md border border-blush-200 -rotate-2 hover:rotate-0 transition-transform duration-500 mb-6 group">
           <div className="w-full h-full rounded overflow-hidden bg-ivory-200 relative">
             <img
-              src="/memories/opening/hero-cover.svg"
+              src={loveStoryConfig.names.heroCoverPhoto}
               alt="Opening memory"
               className="w-full h-full object-cover"
             />
@@ -146,3 +146,4 @@ export const HeroOpening: React.FC<HeroOpeningProps> = ({ onOpenUniverse, isOpen
     </div>
   );
 };
+
