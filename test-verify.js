@@ -104,6 +104,27 @@ assert(!audioHook.includes('useEffect(() => {\n    if (!audioRef.current) return
 const modalCode = fs.readFileSync('src/sections/BirthdayCelebrationModal.tsx', 'utf8');
 assert(modalCode.includes('md:hidden') && modalCode.includes('w-20 h-24'), 'BirthdayCelebrationModal renders non-obstructive mobile photo miniatures');
 
+// 5g. Phase 3 Automatic Discovery Engine & Manifest
+assert(fs.existsSync('scripts/discover-media.mjs'), 'Automatic media discovery script exists');
+assert(fs.existsSync('src/generated/mediaManifest.ts'), 'Auto-generated media manifest exists');
+
+const manifestCode = fs.readFileSync('src/generated/mediaManifest.ts', 'utf8');
+assert(manifestCode.includes('export const discoveredPhotos'), 'mediaManifest exports discoveredPhotos');
+assert(manifestCode.includes('export const discoveredBirthdayPhotos'), 'mediaManifest exports discoveredBirthdayPhotos');
+assert(manifestCode.includes('export const discoveredHeroCoverPhoto'), 'mediaManifest exports discoveredHeroCoverPhoto');
+
+// 5h. Video Optimization: No autoplay and preload="metadata"
+const videoModalCode = fs.readFileSync('src/components/ui/VideoPlayerModal.tsx', 'utf8');
+assert(videoModalCode.includes('preload="metadata"'), 'Video modal uses preload="metadata" for fast page loads');
+assert(!videoModalCode.includes('autoPlay'), 'Video modal does not use autoPlay');
+
+// 5i. Phase 4 Visual Enhancements
+const counterCode = fs.readFileSync('src/sections/RelationshipCounter.tsx', 'utf8');
+assert(counterCode.includes('AnimatedDigit'), 'RelationshipCounter features animated digit transitions');
+
+const bdayCountdownCode = fs.readFileSync('src/sections/BirthdayCountdown.tsx', 'utf8');
+assert(bdayCountdownCode.includes('handleMakeWish'), 'BirthdayCountdown includes interactive candle make-a-wish feature');
+
 // 6. Test Date Arithmetic function
 const { calculatePreciseDuration, calculateBirthdayCountdown } = await import('./src/utils/dateArithmetic.js').catch(async () => {
   // If running directly before transpile, simulate logic

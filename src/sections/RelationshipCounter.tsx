@@ -1,9 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Clock, Calendar, Sparkles, MessageCircle, Compass, Camera } from 'lucide-react';
 import { loveStoryConfig } from '../config/loveStory';
 import { calculatePreciseDuration, DetailedDuration } from '../utils/dateArithmetic';
 import { SectionHeader } from '../components/ui/SectionHeader';
+
+const AnimatedDigit: React.FC<{ value: number; label: string }> = ({ value, label }) => {
+  const formatted = String(value).padStart(2, '0');
+  return (
+    <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 sm:p-5 text-center border border-blush-200/80 shadow-[0_8px_20px_-4px_rgba(42,30,34,0.06)] relative overflow-hidden group hover:border-rose-vintage/60 transition-all duration-300">
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-vintage via-champagne to-rose-vintage opacity-75 group-hover:opacity-100 transition-opacity" />
+      <div className="h-10 sm:h-12 md:h-14 overflow-hidden relative flex items-center justify-center">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.span
+            key={formatted}
+            initial={{ y: 22, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -22, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-burgundy tracking-tight block"
+          >
+            {formatted}
+          </motion.span>
+        </AnimatePresence>
+      </div>
+      <span className="text-[10px] sm:text-xs font-sans uppercase tracking-widest text-espresso-muted font-bold mt-1.5 block">
+        {label}
+      </span>
+    </div>
+  );
+};
 
 export const RelationshipCounter: React.FC = () => {
   const [duration, setDuration] = useState<DetailedDuration>(() =>
@@ -28,32 +54,16 @@ export const RelationshipCounter: React.FC = () => {
     { label: 'Seconds', value: duration.seconds },
   ];
 
-  const milestones = [
-    {
-      title: 'Our First Meeting',
-      date: 'Autumn 2022',
-      icon: Compass,
-      desc: 'The random day that changed my entire universe.',
-    },
-    {
-      title: 'First Conversation',
-      date: 'Late 2022',
-      icon: MessageCircle,
-      desc: 'Hours flew by like minutes; I knew you were rare.',
-    },
-    {
-      title: 'Our First Date',
-      date: 'Early 2023',
-      icon: Heart,
-      desc: 'Shy smiles, butterflies, and dinner that ended too soon.',
-    },
-    {
-      title: 'Our First Photo',
-      date: 'Mid 2023',
-      icon: Camera,
-      desc: 'The beginning of our forever scrapbook.',
-    },
-  ];
+  // Derive milestones dynamically from central timeline config
+  const milestones = loveStoryConfig.timeline.slice(0, 4).map((tl, i) => {
+    const icons = [Compass, MessageCircle, Heart, Camera];
+    return {
+      title: tl.title,
+      date: tl.date,
+      icon: icons[i % icons.length],
+      desc: tl.note || tl.description.slice(0, 60) + '...',
+    };
+  });
 
   return (
     <section id="counter" className="py-20 sm:py-28 bg-[#FFFDF9] relative paper-texture border-b border-blush-200/60">
@@ -64,7 +74,7 @@ export const RelationshipCounter: React.FC = () => {
           subtitle={loveStoryConfig.dates.counterCaption}
         />
 
-        {/* Counter Cards Grid */}
+        {/* Counter Cards Grid with Animated Digits */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-4xl mx-auto">
           {timeUnits.map((unit, index) => (
             <motion.div
@@ -73,24 +83,15 @@ export const RelationshipCounter: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="bg-white rounded-xl p-4 sm:p-5 text-center border border-blush-200 shadow-[0_8px_20px_-4px_rgba(42,30,34,0.08)] relative overflow-hidden group hover:border-rose-vintage/60 transition-colors"
             >
-              {/* Subtle accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-vintage to-champagne opacity-70 group-hover:opacity-100 transition-opacity" />
-
-              <span className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-burgundy tracking-tight block">
-                {String(unit.value).padStart(2, '0')}
-              </span>
-              <span className="text-xs sm:text-sm font-sans uppercase tracking-widest text-espresso-muted font-semibold mt-1 block">
-                {unit.label}
-              </span>
+              <AnimatedDigit value={unit.value} label={unit.label} />
             </motion.div>
           ))}
         </div>
 
         {/* Total days subtitle */}
         <div className="text-center mt-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blush-50 text-xs font-serif italic text-burgundy border border-blush-200">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blush-50 text-xs sm:text-sm font-serif italic text-burgundy border border-blush-200 shadow-sm">
             <Clock className="w-3.5 h-3.5 text-rose-vintage" />
             Together for over {duration.totalDays.toLocaleString()} continuous days of laughter
           </span>

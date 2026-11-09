@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Gift, Sparkles, Clock, PartyPopper, Cake, Flame } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Gift, Sparkles, Clock, PartyPopper, Cake, Flame, Heart } from 'lucide-react';
 import { loveStoryConfig } from '../config/loveStory';
 import { calculateBirthdayCountdown, CountdownState } from '../utils/dateArithmetic';
+import { triggerHeartBurst } from '../utils/confettiUtils';
 import { SectionHeader } from '../components/ui/SectionHeader';
 
 interface BirthdayCountdownProps {
@@ -10,6 +11,7 @@ interface BirthdayCountdownProps {
 }
 
 export const BirthdayCountdown: React.FC<BirthdayCountdownProps> = ({ onTriggerCelebration }) => {
+  const [wishMade, setWishMade] = useState<boolean>(false);
   const [countdown, setCountdown] = useState<CountdownState>(() =>
     calculateBirthdayCountdown(
       loveStoryConfig.dates.birthdayDate,
@@ -39,6 +41,11 @@ export const BirthdayCountdown: React.FC<BirthdayCountdownProps> = ({ onTriggerC
 
     return () => clearInterval(interval);
   }, [onTriggerCelebration]);
+
+  const handleMakeWish = () => {
+    setWishMade(true);
+    triggerHeartBurst(0.5, 0.5);
+  };
 
   const countdownUnits = [
     { label: 'Days', value: countdown.days },
@@ -94,33 +101,60 @@ export const BirthdayCountdown: React.FC<BirthdayCountdownProps> = ({ onTriggerC
           // COUNTDOWN IN PROGRESS
           <div className="max-w-3xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-              {countdownUnits.map((u, i) => (
-                <motion.div
-                  key={u.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white rounded-2xl p-6 sm:p-8 text-center border border-blush-200 shadow-md relative overflow-hidden group hover:border-champagne transition-all"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-vintage via-champagne to-rose-vintage" />
-                  <span className="font-serif text-4xl sm:text-6xl font-bold text-burgundy block">
-                    {String(u.value).padStart(2, '0')}
-                  </span>
-                  <span className="text-xs sm:text-sm font-sans uppercase tracking-widest text-espresso-muted font-bold mt-2 block">
-                    {u.label}
-                  </span>
-                </motion.div>
-              ))}
+              {countdownUnits.map((u, i) => {
+                const formatted = String(u.value).padStart(2, '0');
+                return (
+                  <motion.div
+                    key={u.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-8 text-center border border-blush-200 shadow-md relative overflow-hidden group hover:border-champagne transition-all"
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-vintage via-champagne to-rose-vintage" />
+                    <div className="h-12 sm:h-16 overflow-hidden relative flex items-center justify-center">
+                      <AnimatePresence mode="popLayout" initial={false}>
+                        <motion.span
+                          key={formatted}
+                          initial={{ y: 28, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -28, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: 'easeOut' }}
+                          className="font-serif text-4xl sm:text-6xl font-bold text-burgundy block"
+                        >
+                          {formatted}
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
+                    <span className="text-xs sm:text-sm font-sans uppercase tracking-widest text-espresso-muted font-bold mt-2 block">
+                      {u.label}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Interactive Birthday Candle / Wish Button */}
+            <div className="mt-8 text-center">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={handleMakeWish}
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white hover:bg-blush-50 text-burgundy border border-blush-200 shadow-sm transition-all text-sm font-serif italic"
+              >
+                <Flame className={`w-4 h-4 ${wishMade ? 'text-espresso-muted' : 'text-amber-500 fill-amber-400 animate-pulse'}`} />
+                <span>{wishMade ? "✨ Wish Made: May every dream come true for you!" : "Click to Make An Early Birthday Wish"}</span>
+              </motion.button>
             </div>
 
             {/* Test Celebration Button */}
-            <div className="text-center mt-10">
+            <div className="text-center mt-4">
               <button
                 onClick={onTriggerCelebration}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-blush-50 text-burgundy border border-blush-200 text-xs font-serif italic shadow-sm hover:shadow transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-espresso-muted hover:text-burgundy text-xs font-serif italic hover:bg-blush-100/60 transition-all"
               >
-                <Sparkles className="w-4 h-4 text-champagne" />
+                <Sparkles className="w-3.5 h-3.5 text-champagne" />
                 <span>Preview Grand Birthday Fireworks & Photo Explosion</span>
               </button>
             </div>

@@ -5,3 +5,26 @@ dist
 .DS_Store
 Thumbs.db
 
+# Protect private personal media from unintended Git commits / public leaks
+public/memories/**/*.jpg
+public/memories/**/*.jpeg
+public/memories/**/*.png
+public/memories/**/*.webp
+public/memories/**/*.avif
+public/memories/**/*.mp4
+public/memories/**/*.webm
+public/memories/**/*.mp3
+public/memories/**/*.m4a
+public/videos/**/*.mp4
+public/videos/**/*.webm
+public/audio/**/*.mp3
+public/audio/**/*.m4a
+public/audio/**/*.wav
+public/audio/**/*.ogg
+
+# Always preserve vector placeholder illustrations & structures in Git
+!public/memories/**/*.svg
+!public/videos/**/*.svg
+!public/audio/**/*.svg
+!public/**/.gitkeep
+

@@ -19,23 +19,42 @@ export interface MilestoneItem {
   note?: string;
 }
 
+export type PhotoCategory =
+  | 'favourite' 
+  | 'happy-moments' 
+  | 'adventures' 
+  | 'vacations' 
+  | 'special-days' 
+  | 'random' 
+  | 'her-photos' 
+  | 'our-photos'
+  | 'birthday';
+
 export interface PhotoMemory {
   id: string;
   title: string;
-  category: 
-    | 'favourite' 
-    | 'happy-moments' 
-    | 'adventures' 
-    | 'vacations' 
-    | 'special-days' 
-    | 'random' 
-    | 'her-photos' 
-    | 'our-photos';
+  category: PhotoCategory;
   src: string;
   caption: string;
   date?: string;
   location?: string;
   rotation?: number; // Visual tilt in degrees (-3 to 3) for scrapbook effect
+  featured?: boolean; // Highlighted or hero photo
+  displayOrder?: number; // Custom sorting order
+  isBirthdayCelebration?: boolean; // Included in birthday fireworks/explosion
+  isRealAsset?: boolean; // True if uploaded by user, false if SVG placeholder
+}
+
+export interface MediaOverride {
+  title?: string;
+  caption?: string;
+  date?: string;
+  location?: string;
+  category?: PhotoCategory;
+  featured?: boolean;
+  displayOrder?: number;
+  isBirthdayCelebration?: boolean;
+  rotation?: number;
 }
 
 export interface VideoMemory {
@@ -46,6 +65,7 @@ export interface VideoMemory {
   caption: string;
   date?: string;
   duration?: string;
+  isRealAsset?: boolean;
 }
 
 export interface TravelDestination {
@@ -117,10 +137,15 @@ export const loveStoryConfig = {
     relationshipStart: "2023-01-01T00:00:00+05:30", // [EDITABLE: Replace with your actual anniversary date]
     relationshipStartDisplay: "[Month Day, Year]",    // [EDITABLE: e.g. "August 15, 2023"]
 
+    // First meeting date (optional milestone)
+    firstMeetingDate: "2022-10-01T00:00:00+05:30",    // [EDITABLE: When you first met]
+    firstMeetingDateDisplay: "[Month Day, Year]",     // [EDITABLE: e.g. "October 1, 2022"]
+
     // Her Birthday date & midnight time in Asia/Kolkata timezone
     // Format: "YYYY-MM-DDTHH:mm:ss+05:30"
     birthdayDate: "2027-07-31T00:00:00+05:30",        // [EDITABLE: Replace with her upcoming birthday date]
     birthdayDisplay: "[Her Birthday: e.g. July 31]",  // [EDITABLE: e.g. "July 31"]
+    birthdayTime: "00:00:00",
     timezone: "Asia/Kolkata",
 
     // Preview Flag: Set to true anytime to immediately test the Grand Birthday Fireworks Celebration!
@@ -288,6 +313,24 @@ export const loveStoryConfig = {
       rotation: 1.5,
     },
   ] as PhotoMemory[],
+
+  // =========================================================================
+  // 4b. OPTIONAL MEDIA OVERRIDES (Automatic Media Discovery Customization)
+  // =========================================================================
+  // When you drop personal photos/videos into public/memories/ or public/videos/,
+  // they are automatically discovered at build time!
+  // To customize title, caption, location, or mark as a birthday celebration photo,
+  // simply add an entry matching your filename or path below:
+  mediaOverrides: {
+    // Example:
+    // "vacation-1.jpg": {
+    //   title: "Sunset Over The Bay",
+    //   caption: "The evening you took my breath away",
+    //   date: "June 2024",
+    //   location: "Goa Beach",
+    //   isBirthdayCelebration: true,
+    // },
+  } as Record<string, MediaOverride>,
 
   // =========================================================================
   // 5. OUR VIDEOS

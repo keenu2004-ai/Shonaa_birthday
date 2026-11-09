@@ -1,24 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, Cake, PartyPopper } from 'lucide-react';
 import { loveStoryConfig } from '../config/loveStory';
+import { discoveredBirthdayPhotos, discoveredPhotos } from '../generated/mediaManifest';
 import { triggerGrandBirthdayCelebration } from '../utils/confettiUtils';
 
 interface BirthdayCelebrationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onPlayBirthdayMusic?: () => void;
 }
 
-export const BirthdayCelebrationModal: React.FC<BirthdayCelebrationModalProps> = ({ isOpen, onClose }) => {
+export const BirthdayCelebrationModal: React.FC<BirthdayCelebrationModalProps> = ({
+  isOpen,
+  onClose,
+  onPlayBirthdayMusic,
+}) => {
   const [candlesLit] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
       triggerGrandBirthdayCelebration();
+      onPlayBirthdayMusic?.();
     }
-  }, [isOpen]);
+  }, [isOpen, onPlayBirthdayMusic]);
 
-  const celebrationPhotos = loveStoryConfig.photos.slice(0, 8);
+  // Prioritize discovered birthday photographs, falling back gracefully
+  const celebrationPhotos = useMemo(() => {
+    if (discoveredBirthdayPhotos && discoveredBirthdayPhotos.length > 0) {
+      return discoveredBirthdayPhotos.slice(0, 8);
+    }
+    const birthdayMarked = (discoveredPhotos || []).filter(p => p.isBirthdayCelebration || p.category === 'birthday');
+    if (birthdayMarked.length > 0) {
+      return birthdayMarked.slice(0, 8);
+    }
+    return loveStoryConfig.photos.slice(0, 8);
+  }, []);
 
   // Desktop perimeter positions
   const desktopPositions = [

@@ -92,3 +92,24 @@
   background-repeat: repeat-x;
 }
 
+/* Luxury Editorial Scrapbook Card */
+.card-editorial {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 220, 201, 0.9);
+  box-shadow: 0 10px 30px -6px rgba(42, 30, 34, 0.08), 0 4px 12px -2px rgba(42, 30, 34, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-editorial:hover {
+  border-color: rgba(224, 135, 152, 0.6);
+  box-shadow: 0 16px 36px -6px rgba(131, 34, 50, 0.15), 0 6px 16px -4px rgba(42, 30, 34, 0.06);
+}
+
+/* Wax Seal Badge */
+.wax-seal {
+  background: radial-gradient(circle at 35% 35%, #9E2D41, #832232 60%, #5C1521 100%);
+  box-shadow: 0 4px 10px rgba(92, 21, 33, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(92, 21, 33, 0.6);
+}
+

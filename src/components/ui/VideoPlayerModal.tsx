@@ -62,7 +62,7 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({ video, onClo
                 <video
                   ref={videoRef}
                   src={video.src}
-                  autoPlay
+                  preload="metadata"
                   playsInline
                   controls
                   onError={() => setHasError(true)}

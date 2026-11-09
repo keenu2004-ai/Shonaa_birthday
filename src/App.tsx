@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { loveStoryConfig } from './config/loveStory';
 import { useAudioPlayer } from './hooks/useAudioPlayer';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -35,6 +36,7 @@ export const App: React.FC = () => {
     togglePlay,
     toggleMute,
     nextTrack,
+    playBirthdayTrack,
   } = useAudioPlayer();
 
   const handleOpenUniverse = () => {
@@ -42,6 +44,11 @@ export const App: React.FC = () => {
     setIsUniverseOpen(true);
     startMusic();
   };
+
+  useEffect(() => {
+    const girlfriendName = loveStoryConfig.names.herName.replace(/^\[|\]$/g, '');
+    document.title = `${loveStoryConfig.names.websiteTitle} — For ${girlfriendName}`;
+  }, []);
 
   return (
     <div className="min-h-screen bg-ivory-100 text-espresso font-sans selection:bg-rose-vintage/30 selection:text-burgundy relative">
@@ -123,6 +130,7 @@ export const App: React.FC = () => {
           <BirthdayCelebrationModal
             isOpen={isCelebrationModalOpen}
             onClose={() => setIsCelebrationModalOpen(false)}
+            onPlayBirthdayMusic={playBirthdayTrack}
           />
         </>
       )}

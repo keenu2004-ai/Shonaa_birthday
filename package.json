@@ -4,10 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/discover-media.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/discover-media.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "node test-verify.js"
+    "test": "node test-verify.js",
+    "check-content": "node audit-content.mjs",
+    "discover-media": "node scripts/discover-media.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

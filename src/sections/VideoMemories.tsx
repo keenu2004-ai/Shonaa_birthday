@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Film, Play, Sparkles } from 'lucide-react';
 import { loveStoryConfig, VideoMemory } from '../config/loveStory';
+import { discoveredVideos } from '../generated/mediaManifest';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { VideoPlayerModal } from '../components/ui/VideoPlayerModal';
 
 export const VideoMemories: React.FC = () => {
   const [selectedVideo, setSelectedVideo] = useState<VideoMemory | null>(null);
+
+  const videosToDisplay: VideoMemory[] = useMemo(() => {
+    if (discoveredVideos && discoveredVideos.length > 0) {
+      return discoveredVideos;
+    }
+    return loveStoryConfig.videos;
+  }, []);
 
   return (
     <section id="videos" className="py-20 sm:py-28 bg-[#FAF6ED] relative paper-texture border-b border-blush-200/60">
@@ -19,7 +27,7 @@ export const VideoMemories: React.FC = () => {
 
         {/* Film Reel Showcase Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {loveStoryConfig.videos.map((vid, idx) => (
+          {videosToDisplay.map((vid, idx) => (
             <motion.div
               key={vid.id}
               initial={{ opacity: 0, y: 25 }}

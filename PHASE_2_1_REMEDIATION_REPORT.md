@@ -176,3 +176,4 @@ The application architecture now possesses:
 ```
 
 The application is completely prepared for the user to add their real media files following [`MEDIA_GUIDE.md`](file:///c:/Users/Vaibhav/OneDrive/Music/birthday/MEDIA_GUIDE.md), customize details in [`CONTENT_GUIDE.md`](file:///c:/Users/Vaibhav/OneDrive/Music/birthday/CONTENT_GUIDE.md), and deploy securely using [`DEPLOYMENT_GUIDE.md`](file:///c:/Users/Vaibhav/OneDrive/Music/birthday/DEPLOYMENT_GUIDE.md).
+

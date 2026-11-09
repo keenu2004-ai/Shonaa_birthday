@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { loveStoryConfig, MusicTrack } from '../config/loveStory';
+import { discoveredAudioTracks } from '../generated/mediaManifest';
 import { soundscape } from '../utils/audioSynth';
 
 export function useAudioPlayer() {
@@ -12,7 +13,15 @@ export function useAudioPlayer() {
   const [isSynthFallback, setIsSynthFallback] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const tracks = loveStoryConfig.music.tracks;
+
+  // Use auto-discovered tracks when present, falling back to central config
+  const tracks: MusicTrack[] = useMemo(() => {
+    if (discoveredAudioTracks && discoveredAudioTracks.length > 0) {
+      return discoveredAudioTracks;
+    }
+    return loveStoryConfig.music.tracks;
+  }, []);
+
   const currentTrack: MusicTrack = tracks[currentTrackIndex] || tracks[0];
 
   // 1. One-time initialization and event listener attachment
@@ -123,6 +132,22 @@ export function useAudioPlayer() {
     setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
   }, [tracks.length]);
 
+  // 8. Birthday celebration track transition
+  const playBirthdayTrack = useCallback(() => {
+    const bdayIndex = tracks.findIndex((t) => t.type === 'birthday');
+    if (bdayIndex !== -1) {
+      setCurrentTrackIndex(bdayIndex);
+      setIsPlaying(true);
+      if (audioRef.current) {
+        audioRef.current.src = tracks[bdayIndex].src;
+        audioRef.current.play().catch(() => {
+          setIsSynthFallback(true);
+          soundscape.play();
+        });
+      }
+    }
+  }, [tracks]);
+
   return {
     isPlaying,
     isMuted,
@@ -133,5 +158,6 @@ export function useAudioPlayer() {
     togglePlay,
     toggleMute,
     nextTrack,
+    playBirthdayTrack,
   };
 }

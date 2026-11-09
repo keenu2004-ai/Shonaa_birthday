@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Heart } from 'lucide-react';
 import { loveStoryConfig, PhotoMemory } from '../config/loveStory';
+import { discoveredPhotos } from '../generated/mediaManifest';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { PolaroidCard } from '../components/ui/PolaroidCard';
 import { LightboxModal } from '../components/ui/LightboxModal';
@@ -10,20 +11,34 @@ export const PhotoUniverse: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
 
-  const categories = [
-    { id: 'all', label: 'All Memories' },
-    { id: 'favourite', label: 'Our Favourite Moments' },
-    { id: 'happy-moments', label: 'Happy Moments' },
-    { id: 'adventures', label: 'Adventures' },
-    { id: 'vacations', label: 'Vacations' },
-    { id: 'special-days', label: 'Special Days' },
-    { id: 'her-photos', label: 'Just You' },
-    { id: 'our-photos', label: 'Just Us' },
-  ];
+  // Seamlessly merge auto-discovered photos with central config
+  const allPhotos: PhotoMemory[] = useMemo(() => {
+    if (discoveredPhotos && discoveredPhotos.length > 0) {
+      return discoveredPhotos;
+    }
+    return loveStoryConfig.photos;
+  }, []);
+
+  const categories = useMemo(() => {
+    const list = [
+      { id: 'all', label: 'All Memories' },
+      { id: 'favourite', label: 'Our Favourite Moments' },
+      { id: 'happy-moments', label: 'Happy Moments' },
+      { id: 'adventures', label: 'Adventures' },
+      { id: 'vacations', label: 'Vacations' },
+      { id: 'special-days', label: 'Special Days' },
+      { id: 'her-photos', label: 'Just You' },
+      { id: 'our-photos', label: 'Just Us' },
+    ];
+    if (allPhotos.some(p => p.category === 'birthday' || p.isBirthdayCelebration)) {
+      list.push({ id: 'birthday', label: 'Birthday Special' });
+    }
+    return list;
+  }, [allPhotos]);
 
   const filteredPhotos = selectedCategory === 'all'
-    ? loveStoryConfig.photos
-    : loveStoryConfig.photos.filter((p) => p.category === selectedCategory);
+    ? allPhotos
+    : allPhotos.filter((p) => p.category === selectedCategory || (selectedCategory === 'birthday' && p.isBirthdayCelebration));
 
   return (
     <section id="gallery" className="py-20 sm:py-28 bg-[#FFFDF9] relative paper-texture border-b border-blush-200/60">
