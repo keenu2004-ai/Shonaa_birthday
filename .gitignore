@@ -1,26 +1,50 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+
+# Production builds & caches
+dist/
+.dist/
+.vercel/
+
+# Environment variables & local overrides
 .env
 .env.local
+.env.*.local
+*.local
+
+# Operating System & Editor artifacts
 .DS_Store
 Thumbs.db
+*.log
 
-# Protect private personal media from unintended Git commits / public leaks
-public/memories/**/*.jpg
-public/memories/**/*.jpeg
-public/memories/**/*.png
-public/memories/**/*.webp
-public/memories/**/*.avif
-public/memories/**/*.mp4
-public/memories/**/*.webm
-public/memories/**/*.mp3
-public/memories/**/*.m4a
-public/videos/**/*.mp4
-public/videos/**/*.webm
-public/audio/**/*.mp3
-public/audio/**/*.m4a
-public/audio/**/*.wav
-public/audio/**/*.ogg
+# =============================================================================
+# PERSONAL MEDIA DEPLOYMENT NOTE FOR VERCEL & GITHUB:
+# =============================================================================
+# When deploying to Vercel via GitHub, YOUR REPOSITORY MUST BE PRIVATE.
+# Total personal media size is 47.85 MB (all files well under GitHub's 25MB limit).
+#
+# If the lines below are active, Git will NOT push personal photos/videos/audio to GitHub,
+# which causes Vercel builds to fall back to SVG placeholders.
+#
+# To deploy your real photos & music via a PRIVATE GitHub repository:
+# Comment out or remove the ignore lines below.
+# =============================================================================
+
+# public/memories/**/*.jpg
+# public/memories/**/*.jpeg
+# public/memories/**/*.png
+# public/memories/**/*.webp
+# public/memories/**/*.avif
+# public/memories/**/*.mp4
+# public/memories/**/*.webm
+# public/memories/**/*.mp3
+# public/memories/**/*.m4a
+# public/videos/**/*.mp4
+# public/videos/**/*.webm
+# public/audio/**/*.mp3
+# public/audio/**/*.m4a
+# public/audio/**/*.wav
+# public/audio/**/*.ogg
 
 # Always preserve vector placeholder illustrations & structures in Git
 !public/memories/**/*.svg
@@ -28,3 +52,10 @@ public/audio/**/*.ogg
 !public/audio/**/*.svg
 !public/**/.gitkeep
 
+
+
+# Keep private media review tool out of production
+/public/photo-review.html
+
+# Private local photo review tool
+/public/photo-review.html
