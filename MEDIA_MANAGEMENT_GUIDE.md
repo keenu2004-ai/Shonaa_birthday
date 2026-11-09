@@ -1,152 +1,103 @@
-# Media Management Guide — Our Little Universe ❤️
+# Media Management Guide — SHONAA BIRTHDAY ❤️
 
-Welcome to the **Our Little Universe** media management system. This guide explains how to add your personal photos, videos, and music to the website, how automatic discovery works, and how to customize captions and metadata.
+Welcome to the **SHONAA BIRTHDAY ❤️** media management system. This guide explains how personal photos, videos, and music are organized, how the local review gallery works, and how to customize captions and metadata.
 
 ---
 
-## 1. Quick Start: Where Does Everything Go?
+## 1. Quick Media Review Tool (`public/photo-review.html`)
 
-All media lives in the `public/` directory. Simply drop your media files into the corresponding folders:
+To effortlessly review and reference all 67 photos and 5 videos, open the standalone review gallery:
+
+1. Open your browser and navigate to:
+   ```
+   http://localhost:3000/photo-review.html
+   ```
+   *(Or open `public/photo-review.html` directly in any web browser).*
+2. **Features**:
+   - Every photograph has a sequential ID: `PHOTO 001`, `PHOTO 002`, `PHOTO 003`...
+   - Every video has a sequential ID: `VIDEO 001`, `VIDEO 002`...
+   - Quick category filters: **All Media**, **First Date / Ghagra**, **Mussoorie Vacation**, **Birthday Celebration**, **Cute & Clingy**, **Her Portraits**, **Videos Only**.
+   - **Clicking any thumbnail** opens a high-resolution lightbox modal.
+   - **"Copy ID"** button copies `PHOTO XXX` to your clipboard for quick reference in configs.
+   - **"Copy Path"** button copies `/memories/birthday/...` for direct use.
+
+Complete tabular documentation of all media is saved in [`PHOTO_INDEX.md`](./PHOTO_INDEX.md).
+
+---
+
+## 2. Directory Layout & Shonaa's Uploaded Assets
+
+All media lives in the `public/` directory:
 
 ```
 public/
 ├── memories/
-│   ├── opening/         ← Place your opening hero photo (e.g. hero-cover.jpg)
-│   ├── favourite/       ← Your absolute favourite memories together
-│   ├── happy-moments/   ← Unfiltered, joyful, laughing candid photos
-│   ├── vacations/       ← Trips, getaways, mountain views, beach days
-│   ├── travel/          ← Nature walks, historic sights, explorations
-│   ├── special-days/    ← Anniversaries, date nights, festivals
-│   ├── her-photos/      ← Stunning solo portraits of her
-│   ├── our-photos/      ← Couple photos of both of you together
-│   └── birthday/        ← Birthday celebrations & cake photos
+│   ├── opening/
+│   │   └── hero-cover.jpeg      ← Opening Polaroid cover photo (Cheek kiss with pink bows)
+│   ├── birthday/
+│   │   ├── 67 JPEGs             ← WhatsApp photos from trips, dates, birthdays, celebrations
+│   │   └── 4 MP4 videos         ← WhatsApp video memories
+│   └── favourite/
+│       ├── Kaise Bataaoon.mp3   ← Main background soundtrack
+│       └── Rakhlo_Tum_Chupaake.webm
 │
-├── videos/
-│   ├── memories/        ← Short 15-60s video clips of laughter and moments
-│   ├── vacations/       ← Roadtrip and scenic travel videos
-│   └── special-moments/ ← Birthday greetings, celebration videos
+├── audio/
+│   ├── background.mp3           ← Continuous background audio (Kaise Bataaoon)
+│   ├── opening.mp3              ← Opening theme audio
+│   └── Rakhlo_Tum_Chupaake.webm ← Secondary musical memory
 │
-└── audio/
-    ├── opening.mp3      ← Played when she clicks "Open Your Little Universe"
-    ├── background.mp3   ← Gentle ambient acoustic/piano track
-    └── birthday.mp3     ← Joyful fanfare played during fireworks modal
+└── photo-review.html            ← Interactive local media reviewer
 ```
 
 ---
 
-## 2. Supported File Formats
+## 3. Key Identified Memories
 
-| Media Type | Supported Extensions |
-| :--- | :--- |
-| **Photographs** | `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`, `.svg` |
-| **Videos** | `.mp4`, `.webm` |
-| **Audio Tracks** | `.mp3`, `.m4a`, `.wav`, `.ogg` |
-
-> [!NOTE]
-> All photos and videos are automatically discovered at build time! You do **not** need to register every filename in code unless you want to add custom captions.
-
----
-
-## 3. How Automatic Media Discovery Works
-
-1. When you run `npm run dev` or `npm run build`, our discovery engine (`scripts/discover-media.mjs`) scans all folders under `public/memories/`, `public/videos/`, and `public/audio/`.
-2. It automatically maps photos to gallery categories based on their folder name.
-3. It generates clean titles from filenames (e.g. `mountain-getaway-sunset.jpg` becomes `"Mountain Getaway Sunset"`).
-4. If a category folder has no personal photos yet, it automatically preserves the tasteful vector SVG placeholder so the website never looks broken.
-5. In development mode (`npm run dev`), the Vite server continuously watches `public/` and updates the manifest in real-time as you add files.
-
----
-
-## 4. How to Replace the Opening Hero Photo
-
-1. Place your favourite photo in `public/memories/opening/` (for example, named `hero-cover.jpg` or `our-best-photo.jpg`).
-2. Run `npm run build` or `npm run dev`.
-3. The website will automatically detect your real photo and display it inside the opening scrapbook frame on the opening gateway!
+| Memory Category | Sequential ID | Filename | Key Visual Clue |
+|---|---|---|---|
+| **First Date / First Photograph** | `PHOTO 056` | `WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg` | White and blue ghagra at stone monument |
+| **First Date (Solo Full-Length)** | `PHOTO 052` | `WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg` | White & blue ghagra at carved wooden door |
+| **First Date (Commute)** | `PHOTO 060` | `WhatsApp Image 2026-11-09 at 11.17.05 PM.jpeg` | Metro / train selfie in first date outfits |
+| **Mussoorie Vacation (Mall Road)** | `PHOTO 053` | `WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg` | Couple selfie by Gandhi statue, Mall Road |
+| **Mussoorie (Misty Ridges)** | `PHOTO 005` | `WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg` | Mountain cliff overlooking clouds |
+| **Mussoorie (Robber's Cave)** | `PHOTO 006` | `WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg` | "MIND YOUR HEAD" cave trail stairs |
+| **Mussoorie (Christ Church)** | `PHOTO 065` | `WhatsApp Image 2026-11-09 at 11.17.13 PM (1).jpeg` | Blue rain poncho by historic church & pine |
+| **Birthday Celebration** | `PHOTO 064` | `WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg` | Blowing glowing candles on cake (gold "23") |
+| **Cute Cheek Kiss** | `PHOTO 027` | `WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg` | Vaibhav kissing cheek with pink bow filters |
+| **Motorcycle Ride** | `PHOTO 045` | `WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg` | Couple selfie in motorcycle helmets |
+| **Penguin Cuddle** | `PHOTO 063` | `WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg` | Hugging plush penguin tight |
+| **Late Night Video Call** | `PHOTO 010` | `WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg` | Blanket ghost holding thermos |
+| **Christmas Celebration** | `PHOTO 055` | `WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg` | Fairy lights & Santa decorations |
+| **Diwali Diyas** | `PHOTO 011` | `WhatsApp Image 2026-11-09 at 11.15.58 PM (4).jpeg` | Lighting lamps in purple silk suit |
+| **Gurudwara Bangla Sahib** | `PHOTO 028` | `WhatsApp Image 2026-11-09 at 11.16.13 PM.jpeg` | Sarovar at night with tilak & dupatta |
 
 ---
 
-## 5. How to Select Birthday Celebration Photos
+## 4. How to Customize Captions in `src/config/loveStory.ts`
 
-The Grand Birthday Celebration modal features fireworks, confetti, and an explosion of photos floating around the screen.
+To change the caption, location, date, or title of any photo in the website:
 
-You can select photos for this celebration in two simple ways:
-- **Method A (Folder-based)**: Place your photos in `public/memories/birthday/`. Every photo in this folder is automatically tagged for the birthday celebration explosion.
-- **Method B (Config-based)**: In `src/config/loveStory.ts`, add an override with `isBirthdayCelebration: true`:
-  ```typescript
-  mediaOverrides: {
-    "our-favourite-trip.jpg": {
-      isBirthdayCelebration: true,
-    },
-  }
-  ```
-
----
-
-## 6. How to Add Captions, Dates, and Locations
-
-By default, the system displays a clean title derived from the filename and leaves dates/locations blank rather than inventing fake details.
-
-To add real captions, dates, and locations, open [`src/config/loveStory.ts`](file:///c:/Users/Vaibhav/OneDrive/Music/birthday/src/config/loveStory.ts) and add your file to `mediaOverrides`:
-
-```typescript
-mediaOverrides: {
-  "cozy-cafe.jpg": {
-    title: "Our Rainy Day Coffee",
-    caption: "The afternoon we spent three hours talking about everything and nothing.",
-    date: "October 14, 2023",
-    location: "Blue Tokai Cafe",
-    rotation: -2, // Optional tilt in degrees (-3 to 3)
-    featured: true, // Display with priority
-  },
-  "mountain-hike.jpg": {
-    title: "Reaching The Summit",
-    caption: "You were tired but kept smiling all the way to the top.",
-    date: "June 2024",
-    location: "Mussoorie Valley",
-  },
-}
-```
+1. Open `src/config/loveStory.ts`.
+2. Locate the `photos` array (around line 190).
+3. Find the photo entry or add a new one referencing the photo path:
+   ```ts
+   {
+     id: "my-photo",
+     title: "Your Custom Title",
+     category: "vacations",
+     src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg",
+     caption: "Your personal romantic caption here",
+     date: "Mussoorie Vacation",
+     location: "Mall Road",
+     rotation: -1.5,
+   }
+   ```
+4. Save the file. The Vite dev server will instantly hot-reload with your changes!
 
 ---
 
-## 7. How to Add Videos
+## 5. Privacy & Asset Protection
 
-1. Place your video files in `public/videos/memories/`, `public/videos/vacations/`, or `public/videos/special-moments/`.
-2. Example filenames:
-   - `public/videos/memories/our-laughter.mp4`
-   - `public/videos/vacations/mountain-ride.mp4`
-3. Optional video thumbnail: You can place an image with the same name (e.g. `our-laughter.jpg`) or set `thumbnail` in `mediaOverrides`.
-4. Videos are configured with `preload="metadata"` so they **never slow down initial page loads** and do not autoplay without user interaction.
-
----
-
-## 8. How to Add Background Music
-
-1. Place your MP3/M4A/WAV songs in `public/audio/`:
-   - `public/audio/opening.mp3`: Romantic acoustic/piano song for the opening screen.
-   - `public/audio/background.mp3`: Warm romantic love song playing across the website.
-   - `public/audio/birthday.mp3`: Celebration anthem triggered when she opens the fireworks modal.
-2. If any audio file is missing, the built-in **Web Audio API ambient soundscape** activates automatically, ensuring silent, smooth, error-free playback at all times.
-
----
-
-## 9. Do I Need to Rebuild After Adding Media?
-
-- **During Development (`npm run dev`)**: No rebuild required! The Vite file-watcher detects newly added files and regenerates the manifest in real time. Simply refresh your browser tab.
-- **For Production Build (`npm run build`)**: The build command automatically runs `discover-media` as a pre-build step (`prebuild`), bundling all discovered media into your final `dist/` directory.
-
----
-
-## 10. Audit CLI: Checking Your Content Status
-
-Run this command anytime to see which photos are verified and which placeholders remain:
-
-```bash
-npm run check-content
-```
-
-It reports:
-- Number of verified personal photos vs placeholders.
-- Presence of background audio and video files.
-- Any unedited `[EDITABLE: ...]` placeholders remaining in `loveStory.ts`.
-- Overall website readiness score.
+- Original files are **never** altered or overwritten.
+- `index.html` contains `<meta name="robots" content="noindex, nofollow">` to prevent web crawlers from indexing personal photographs.
+- The project is configured for private local preview or secure password-protected hosting.

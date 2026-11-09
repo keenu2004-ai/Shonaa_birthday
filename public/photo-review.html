@@ -1,0 +1,4148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shonaa Birthday ❤️ — Complete Media Review Gallery</title>
+  <style>
+    :root {
+      --bg-cream: #FFFDF9;
+      --card-bg: #FFFFFF;
+      --primary: #9E2A2B;
+      --primary-light: #FCECEF;
+      --accent: #E09F3E;
+      --rose: #D9777F;
+      --text-dark: #33272A;
+      --text-muted: #6B5B60;
+      --border: #F3E8E2;
+      --shadow-sm: 0 4px 12px rgba(42,30,34,0.06);
+      --shadow-md: 0 10px 25px rgba(42,30,34,0.10);
+      --shadow-lg: 0 20px 40px rgba(42,30,34,0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      padding: 24px;
+      line-height: 1.5;
+    }
+    header {
+      max-width: 1400px;
+      margin: 0 auto 30px auto;
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 2px dashed var(--border);
+    }
+    h1 {
+      font-family: Georgia, serif;
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stats-bar {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      background: #FFF;
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .filters {
+      max-width: 1400px;
+      margin: 0 auto 28px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      position: sticky;
+      top: 12px;
+      z-index: 30;
+      background: rgba(255, 253, 249, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .filter-btn {
+      background: #FFF;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      border-color: var(--rose);
+      color: var(--primary);
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #FFF;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(158, 42, 43, 0.25);
+    }
+    .grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-col;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--rose);
+    }
+    .media-wrap {
+      position: relative;
+      height: 280px;
+      background: #111;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .media-wrap img, .media-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .media-wrap img {
+      transform: scale(1.04);
+    }
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(158, 42, 43, 0.9);
+      color: #FFF;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .badge.cat-badge {
+      left: auto;
+      right: 10px;
+      background: rgba(224, 159, 62, 0.95);
+      color: #2A1E22;
+      font-weight: 600;
+    }
+    .badge.dup-badge {
+      top: 40px;
+      left: 10px;
+      background: rgba(80, 80, 80, 0.9);
+      font-size: 0.68rem;
+    }
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-title {
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .card-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+    .meta-table {
+      font-size: 0.75rem;
+      background: var(--bg-cream);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .meta-row:last-child {
+      margin-bottom: 0;
+    }
+    .meta-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .meta-val {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .disp-status {
+      font-size: 0.72rem;
+      color: #2D6A4F;
+      background: #E8F5E9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      border: 1px solid #C8E6C9;
+    }
+    .card-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .btn {
+      flex: 1;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #FFF;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--rose);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #FFF;
+      border-color: var(--primary);
+    }
+    .btn-primary:hover {
+      background: #7F1D1D;
+      color: #FFF;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(20, 10, 13, 0.95);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .modal-content img, .modal-content video {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      object-fit: contain;
+    }
+    .modal-caption {
+      color: #FFF;
+      font-family: Georgia, serif;
+      margin-top: 14px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    .modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: transparent;
+      border: none;
+      color: #FFF;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Shonaa Birthday ❤️ — Media Review Gallery</h1>
+    <p class="subtitle">Complete visual inventory of all 85 personal photographs and 5 personal videos. Click any media to open full resolution preview. Click "Copy ID" or "Copy Path" to reference in configuration files.</p>
+    
+    <div class="stats-bar">
+      <div class="stat-pill">📸 Total Photos: 85</div>
+      <div class="stat-pill">✨ Unique Photos: 81</div>
+      <div class="stat-pill">🎬 Total Videos: 5</div>
+      <div class="stat-pill">🎂 Birthday: 10 November 2026</div>
+      <div class="stat-pill">❤️ Official Anniversary: 14 April 2025</div>
+      <div class="stat-pill">✨ Story Began: March 2025</div>
+    </div>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCat('all')">All Media (90)</button>
+    <button class="filter-btn" onclick="filterCat('favourite')">Our Favourites</button>
+    <button class="filter-btn" onclick="filterCat('our-photos')">Just Us (Couple)</button>
+    <button class="filter-btn" onclick="filterCat('her-photos')">Her Portraits</button>
+    <button class="filter-btn" onclick="filterCat('happy-moments')">Happy & Cute</button>
+    <button class="filter-btn" onclick="filterCat('vacations')">Mussoorie & Vacations</button>
+    <button class="filter-btn" onclick="filterCat('adventures')">Adventures & Walks</button>
+    <button class="filter-btn" onclick="filterCat('special-days')">Special Days & Festivals</button>
+    <button class="filter-btn" onclick="filterCat('birthday')">Birthday Special</button>
+    <button class="filter-btn" onclick="filterCat('videos')">Videos Only (5)</button>
+  </div>
+
+  <main class="grid" id="mediaGrid">
+
+    <div class="card" data-category="favourite" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.53 PM.jpeg', 'PHOTO 001: The Legendary Cafe Pout')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.53 PM.jpeg" alt="The Legendary Cafe Pout" loading="lazy" />
+        <span class="badge">PHOTO 001</span>
+        <span class="badge cat-badge">favourite</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">The Legendary Cafe Pout</h3>
+        <p class="card-caption">Arms crossed, waiting for food with that cute little pout that melts my heart every single time.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">157.7 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Fights & Laughs (The Great Food Debate) • Photo Universe (Our Favourite Moments) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 001', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.53 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.54 PM (1).jpeg', 'PHOTO 002: Hollow of the Ancient Tree')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.54 PM (1).jpeg" alt="Hollow of the Ancient Tree" loading="lazy" />
+        <span class="badge">PHOTO 002</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Hollow of the Ancient Tree</h3>
+        <p class="card-caption">Curled up comfortably inside the multi-trunk tree in the scenic hill station woods.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">234.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Hills</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 002', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.54 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.54 PM.jpeg', 'PHOTO 003: Mountain Bridge & Mist')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.54 PM.jpeg" alt="Mountain Bridge & Mist" loading="lazy" />
+        <span class="badge">PHOTO 003</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Mountain Bridge & Mist</h3>
+        <p class="card-caption">Standing on the green iron bridge against rolling clouds and misty Himalayan cliffs.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">169.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Trail</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 003', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.54 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM (1).jpeg', 'PHOTO 004: Light Breaking Through the Cavern')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM (1).jpeg" alt="Light Breaking Through the Cavern" loading="lazy" />
+        <span class="badge">PHOTO 004</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Light Breaking Through the Cavern</h3>
+        <p class="card-caption">A dramatic beam of sunlight cutting through the natural ceiling inside Robber's Cave.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">97.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Robber's Cave (Guchhupani)</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 004', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg', 'PHOTO 005: Queen of the Hills Ridge [CANDIDATE: MUSSOORIE VACATION (Misty Peaks)]')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg" alt="Queen of the Hills Ridge [CANDIDATE: MUSSOORIE VACATION (Misty Peaks)]" loading="lazy" />
+        <span class="badge">PHOTO 005</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Queen of the Hills Ridge [CANDIDATE: MUSSOORIE VACATION (Misty Peaks)]</h3>
+        <p class="card-caption">Looking out over endless green Himalayan mountain ranges with rolling clouds below.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">133.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Viewpoint</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Travel Diary (Mussoorie Postcard) • Photo Universe (Vacations) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 005', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg', 'PHOTO 006: Mind Your Head at the Cave')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg" alt="Mind Your Head at the Cave" loading="lazy" />
+        <span class="badge">PHOTO 006</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Mind Your Head at the Cave</h3>
+        <p class="card-caption">Laughing at the "Mind Your Head" sign on the mossy rock stairs entering the caverns.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">267.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Robber's Cave Caverns</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Travel Diary (Robber's Cave Postcard) • Photo Universe (Adventures) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 006', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM.jpeg', 'PHOTO 007: Reflections in the Stream')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM.jpeg" alt="Reflections in the Stream" loading="lazy" />
+        <span class="badge">PHOTO 007</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Reflections in the Stream</h3>
+        <p class="card-caption">Stepping through the cool natural cave stream under the towering limestone gorge.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">182.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Robber's Cave Trail</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 007', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (1).jpeg', 'PHOTO 008: Warmth in Red')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (1).jpeg" alt="Warmth in Red" loading="lazy" />
+        <span class="badge">PHOTO 008</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Warmth in Red</h3>
+        <p class="card-caption">Solo portrait of Shonaa smiling warmly in her beautiful red patterned outfit.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">62.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Portrait Memory</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 008', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (2).jpeg', 'PHOTO 009: High on the Ferris Wheel')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (2).jpeg" alt="High on the Ferris Wheel" loading="lazy" />
+        <span class="badge">PHOTO 009</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">High on the Ferris Wheel</h3>
+        <p class="card-caption">Arms outstretched at the top of the giant Ferris wheel with night festival lights glowing all around.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">118.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Night Fair Carnival</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 009', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg', 'PHOTO 010: Late Night Blanket Call')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg" alt="Late Night Blanket Call" loading="lazy" />
+        <span class="badge">PHOTO 010</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Late Night Blanket Call</h3>
+        <p class="card-caption">Wrapped up in a warm blanket holding a thermos, sharing sleepy late-night whispers.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">620 × 1386</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">39.7 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Late Night Screen</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Letters (Open When You Want To Smile) • Photo Universe (Happy Moments) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 010', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="special-days" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (4).jpeg', 'PHOTO 011: Diwali Diya Glow')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (4).jpeg" alt="Diwali Diya Glow" loading="lazy" />
+        <span class="badge">PHOTO 011</span>
+        <span class="badge cat-badge">special-days</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Diwali Diya Glow</h3>
+        <p class="card-caption">Lighting festive earthen lamps in purple silk embroidered attire, radiating festival warmth.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">126.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Diwali Celebration</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Special Days] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 011', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (4).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM.jpeg', 'PHOTO 012: Capsule Pod Nap')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM.jpeg" alt="Capsule Pod Nap" loading="lazy" />
+        <span class="badge">PHOTO 012</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Capsule Pod Nap</h3>
+        <p class="card-caption">Completely relaxed and fast asleep inside the futuristic massage pod capsule at the mall.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">122.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mall Outing</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 012', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM (1).jpeg', 'PHOTO 013: Side-by-Side Smiles')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM (1).jpeg" alt="Side-by-Side Smiles" loading="lazy" />
+        <span class="badge">PHOTO 013</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Side-by-Side Smiles</h3>
+        <p class="card-caption">Casual cafe lunch date in collared shirts, smiling side by side without a care in the world.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1152 × 864</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">139.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Lunch Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 013', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg', 'PHOTO 014: Soft Daylight & Checkered Knitwear')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg" alt="Soft Daylight & Checkered Knitwear" loading="lazy" />
+        <span class="badge">PHOTO 014</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Soft Daylight & Checkered Knitwear</h3>
+        <p class="card-caption">Golden morning light illuminating your natural beauty in cozy checkered knitwear.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">643 × 1282</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">352.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Quiet Morning</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Letters (Just In Case You Forgot) • Photo Universe (Her Portraits) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 014', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM (1).jpeg', 'PHOTO 015: Plumeria in Your Hair')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM (1).jpeg" alt="Plumeria in Your Hair" loading="lazy" />
+        <span class="badge">PHOTO 015</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Plumeria in Your Hair</h3>
+        <p class="card-caption">Waving sweetly at the camera with a bright pink plumeria flower tucked into your long hair.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1039 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">71.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Sweet Selfies</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 015', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM (2).jpeg', 'PHOTO 016: Qutub Minar Under the Stars')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM (2).jpeg" alt="Qutub Minar Under the Stars" loading="lazy" />
+        <span class="badge">PHOTO 016</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Qutub Minar Under the Stars</h3>
+        <p class="card-caption">Standing by the soaring illuminated stone tower of Qutub Minar on our nighttime heritage stroll.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">78.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Qutub Complex Heritage Walk</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 016', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM.jpeg', 'PHOTO 017: Childhood Hug with Maa')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM.jpeg" alt="Childhood Hug with Maa" loading="lazy" />
+        <span class="badge">PHOTO 017</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Childhood Hug with Maa</h3>
+        <p class="card-caption">A cherished vintage memory of baby Shonaa held safely in mother's loving embrace.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">572 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">29.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Childhood Keepsake</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 017', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.02 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.04 PM.jpeg', 'PHOTO 018: Ancient Carvings & Heritage Arch')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.04 PM.jpeg" alt="Ancient Carvings & Heritage Arch" loading="lazy" />
+        <span class="badge">PHOTO 018</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Ancient Carvings & Heritage Arch</h3>
+        <p class="card-caption">Seated beneath the illuminated sandstone archways and historic motifs on our evening wander.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">139.7 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Historic Monuments</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 018', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.04 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.05 PM.jpeg', 'PHOTO 019: Illuminated Minar Promenade')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.05 PM.jpeg" alt="Illuminated Minar Promenade" loading="lazy" />
+        <span class="badge">PHOTO 019</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Illuminated Minar Promenade</h3>
+        <p class="card-caption">A quiet, peaceful walk along the stone pathways beneath the glowing spire of Qutub Minar.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">89.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Qutub Heritage Grounds</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 019', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.05 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.06 PM.jpeg', 'PHOTO 020: Night Glow & Starlit Spire')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.06 PM.jpeg" alt="Night Glow & Starlit Spire" loading="lazy" />
+        <span class="badge">PHOTO 020</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Night Glow & Starlit Spire</h3>
+        <p class="card-caption">Looking over your shoulder as the architectural grandeur of centuries stands tall in the dark sky.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">94.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Qutub Complex</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 020', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.06 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.07 PM.jpeg', 'PHOTO 021: Little Golden Puppy Friend')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.07 PM.jpeg" alt="Little Golden Puppy Friend" loading="lazy" />
+        <span class="badge">PHOTO 021</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Little Golden Puppy Friend</h3>
+        <p class="card-caption">Holding the sweetest golden puppy on your lap in your Dragon Ball tee, pure compassion in your eyes.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">63.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Evening Walk</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 021', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.07 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.08 PM.jpeg', 'PHOTO 022: Gentle Puppy Cuddles')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.08 PM.jpeg" alt="Gentle Puppy Cuddles" loading="lazy" />
+        <span class="badge">PHOTO 022</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Gentle Puppy Cuddles</h3>
+        <p class="card-caption">Gently comforting the tiny puppy — proof that your heart is the kindest place on earth.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">69.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Evening Walk</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 022', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.08 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.10 PM.jpeg', 'PHOTO 023: Holding the Black-and-Tan Pup')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.10 PM.jpeg" alt="Holding the Black-and-Tan Pup" loading="lazy" />
+        <span class="badge">PHOTO 023</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Holding the Black-and-Tan Pup</h3>
+        <p class="card-caption">Smiling with pride while holding the curious little black-and-tan pup with both hands.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">98.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Evening Walk</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 023', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.10 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.11 PM.jpeg', 'PHOTO 024: Paws & Pure Joy')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.11 PM.jpeg" alt="Paws & Pure Joy" loading="lazy" />
+        <span class="badge">PHOTO 024</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Paws & Pure Joy</h3>
+        <p class="card-caption">Looking down with so much tenderness at our little four-legged companion of the evening.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">111.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Evening Walk</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 024', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.11 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="special-days" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.12 PM.jpeg', 'PHOTO 025: Bangla Sahib Sarovar Blessing')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.12 PM.jpeg" alt="Bangla Sahib Sarovar Blessing" loading="lazy" />
+        <span class="badge">PHOTO 025</span>
+        <span class="badge cat-badge">special-days</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Bangla Sahib Sarovar Blessing</h3>
+        <p class="card-caption">A serene spiritual evening at Gurudwara Bangla Sahib, head covered with tilak by the holy sarovar.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">864 × 1152</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">109.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Gurudwara Bangla Sahib</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Special Days] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 025', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.12 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (1).jpeg', 'PHOTO 026: Baby Shonaa & Her Doll')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (1).jpeg" alt="Baby Shonaa & Her Doll" loading="lazy" />
+        <span class="badge">PHOTO 026</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Baby Shonaa & Her Doll</h3>
+        <p class="card-caption">A precious vintage scan of little baby Shonaa hugging a wrapped doll on the bed.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">900 × 1600</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">122.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Childhood Memory</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 026', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg', 'PHOTO 027: Cheek Kiss & Pink Bows')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg" alt="Cheek Kiss & Pink Bows" loading="lazy" />
+        <span class="badge">PHOTO 027</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Cheek Kiss & Pink Bows</h3>
+        <p class="card-caption">An affectionate kiss on your cheek with cute pink bow doodles — one of my favourite photos of us.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">899 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">94.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Together Always</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Hero / Opening Cover • Timeline (10 Nov 2026) • Letters (Open When Miss Me) • Celebration Fireworks • Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 027', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="special-days" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM.jpeg', 'PHOTO 028: Reflections in the Sacred Sarovar')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM.jpeg" alt="Reflections in the Sacred Sarovar" loading="lazy" />
+        <span class="badge">PHOTO 028</span>
+        <span class="badge cat-badge">special-days</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Reflections in the Sacred Sarovar</h3>
+        <p class="card-caption">Standing quietly by the illuminated waters of Bangla Sahib Sarovar under the midnight sky.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">111.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Bangla Sahib Sarovar</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Special Days] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 028', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.14 PM (1).jpeg', 'PHOTO 029: Gazing at the City Lights')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.14 PM (1).jpeg" alt="Gazing at the City Lights" loading="lazy" />
+        <span class="badge">PHOTO 029</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Gazing at the City Lights</h3>
+        <p class="card-caption">Standing by the glass balcony rail overlooking the shimmering ocean of city nightlights.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">67.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">High-Rise Balcony</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 029', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.14 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.14 PM.jpeg', 'PHOTO 030: Cozy Corner Couch')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.14 PM.jpeg" alt="Cozy Corner Couch" loading="lazy" />
+        <span class="badge">PHOTO 030</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Cozy Corner Couch</h3>
+        <p class="card-caption">Seated comfortably on the grey lounge sofa under warm amber pendant lamps in a quiet cafe.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">61.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Lounge</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 030', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.14 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.16 PM (1).jpeg', 'PHOTO 031: Studying the Menu')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.16 PM (1).jpeg" alt="Studying the Menu" loading="lazy" />
+        <span class="badge">PHOTO 031</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Studying the Menu</h3>
+        <p class="card-caption">Looking up at the dessert and food court menus with that serious focus on picking something delicious.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">129.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Food Court Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 031', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.16 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.16 PM.jpeg', 'PHOTO 032: City Lights from the Balcony')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.16 PM.jpeg" alt="City Lights from the Balcony" loading="lazy" />
+        <span class="badge">PHOTO 032</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">City Lights from the Balcony</h3>
+        <p class="card-caption">Wind blowing through your hair as you gaze out over the sparkling cityscape at night.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">98.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Balcony Viewpoint</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 032', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.16 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.17 PM (1).jpeg', 'PHOTO 033: Soft Smiles by the Bar Stools')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.17 PM (1).jpeg" alt="Soft Smiles by the Bar Stools" loading="lazy" />
+        <span class="badge">PHOTO 033</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Soft Smiles by the Bar Stools</h3>
+        <p class="card-caption">A gentle, radiant smile standing by the high wooden bar stools in the illuminated cafe.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">131.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 033', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.17 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.17 PM.jpeg', 'PHOTO 034: Effortlessly Graceful')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.17 PM.jpeg" alt="Effortlessly Graceful" loading="lazy" />
+        <span class="badge">PHOTO 034</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Effortlessly Graceful</h3>
+        <p class="card-caption">Natural, poised, and beautiful without even trying — my favourite person in any room.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">129.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Outing</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 034', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.17 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="favourite" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.18 PM (1).jpeg', 'PHOTO 035: Table for Two')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.18 PM (1).jpeg" alt="Table for Two" loading="lazy" />
+        <span class="badge">PHOTO 035</span>
+        <span class="badge cat-badge">favourite</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Table for Two</h3>
+        <p class="card-caption">Sitting right across from me with long hair framing your face, having the best conversations.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">141.1 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Keventers Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Our Favourite Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 035', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.18 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.18 PM.jpeg', 'PHOTO 036: Casual & Chic')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.18 PM.jpeg" alt="Casual & Chic" loading="lazy" />
+        <span class="badge">PHOTO 036</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Casual & Chic</h3>
+        <p class="card-caption">Leaning effortlessly by the counter, looking stylish in wide-leg denim and black sleeveless top.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">131.7 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Outing</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 036', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.18 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="favourite" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.20 PM.jpeg', 'PHOTO 037: Your Eyes Tell Stories')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.20 PM.jpeg" alt="Your Eyes Tell Stories" loading="lazy" />
+        <span class="badge">PHOTO 037</span>
+        <span class="badge cat-badge">favourite</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Your Eyes Tell Stories</h3>
+        <p class="card-caption">Arms crossed on the warm wooden table, looking straight at me with that gentle, serene gaze.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">139.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Conversation</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Our Favourite Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 037', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.20 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.21 PM.jpeg', 'PHOTO 038: Silken Hair & Quiet Thoughts')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.21 PM.jpeg" alt="Silken Hair & Quiet Thoughts" loading="lazy" />
+        <span class="badge">PHOTO 038</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Silken Hair & Quiet Thoughts</h3>
+        <p class="card-caption">A quiet, unposed moment at Keventers, long glossy hair catching the warm ceiling lights.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">154.1 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Keventers Cafe</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 038', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.21 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.25 PM.jpeg', 'PHOTO 039: Gentle Focus')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.25 PM.jpeg" alt="Gentle Focus" loading="lazy" />
+        <span class="badge">PHOTO 039</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Gentle Focus</h3>
+        <p class="card-caption">Looking down at the table, lost in the quiet warmth of an afternoon spent together.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">101.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Afternoon</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 039', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.25 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.26 PM.jpeg', 'PHOTO 040: Profile in Sunlight')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.26 PM.jpeg" alt="Profile in Sunlight" loading="lazy" />
+        <span class="badge">PHOTO 040</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Profile in Sunlight</h3>
+        <p class="card-caption">Turning slightly toward the conversation, showing off that elegant side profile and flowing hair.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">119.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Table</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 040', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.26 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.31 PM.jpeg', 'PHOTO 041: Terrace Cafe in the Hills')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.31 PM.jpeg" alt="Terrace Cafe in the Hills" loading="lazy" />
+        <span class="badge">PHOTO 041</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Terrace Cafe in the Hills</h3>
+        <p class="card-caption">Looking out over the Himalayan valley and hillside town from a wrought-iron terrace cafe.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">98.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie / Hill Station Terrace</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 041', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.31 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.36 PM.jpeg', 'PHOTO 042: Hillside Lake Valley Vista')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.36 PM.jpeg" alt="Hillside Lake Valley Vista" loading="lazy" />
+        <span class="badge">PHOTO 042</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Hillside Lake Valley Vista</h3>
+        <p class="card-caption">Standing by the viewing rail in a warm varsity jacket overlooking the tranquil lake in the valley below.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">69.1 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Scenic Lake Overlook</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 042', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.36 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.41 PM.jpeg', 'PHOTO 043: Overlooking Rolling Mountain Clouds')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.41 PM.jpeg" alt="Overlooking Rolling Mountain Clouds" loading="lazy" />
+        <span class="badge">PHOTO 043</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Overlooking Rolling Mountain Clouds</h3>
+        <p class="card-caption">Gazing into the distance across the pine valleys with dramatic clouds sweeping over the peaks.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">87.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Himalayan Ridge</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 043', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.41 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.42 PM.jpeg', 'PHOTO 044: Walking the Mountain Road')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.42 PM.jpeg" alt="Walking the Mountain Road" loading="lazy" />
+        <span class="badge">PHOTO 044</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Walking the Mountain Road</h3>
+        <p class="card-caption">A peaceful stroll along the mountain road in a classic denim jacket against green terraced hills.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">128.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Valley Route</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 044', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.42 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg', 'PHOTO 045: Helmets & Open Highways')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg" alt="Helmets & Open Highways" loading="lazy" />
+        <span class="badge">PHOTO 045</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Helmets & Open Highways</h3>
+        <p class="card-caption">Helmets buckled, ready for a cool breeze highway ride together with the open road ahead.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1152 × 648</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">81.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Motorcycle Adventure</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Timeline (Motorcycle Ride) • Photo Universe (Just Us) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 045', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.56 PM (1).jpeg', 'PHOTO 046: Mountain Trail Steps')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.56 PM (1).jpeg" alt="Mountain Trail Steps" loading="lazy" />
+        <span class="badge">PHOTO 046</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Mountain Trail Steps</h3>
+        <p class="card-caption">Climbing the hill path surrounded by deodar trees and clean mountain air.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">73.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Hills</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 046', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.56 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.56 PM.jpeg', 'PHOTO 047: Hilltop Pine Breeze')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.56 PM.jpeg" alt="Hilltop Pine Breeze" loading="lazy" />
+        <span class="badge">PHOTO 047</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Hilltop Pine Breeze</h3>
+        <p class="card-caption">Enjoying the refreshing Himalayan breeze among tall evergreens.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1152 × 648</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">73.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Hill Station Trails</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 047', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.56 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.57 PM.jpeg', 'PHOTO 048: Scenic Mountain Overlook')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.57 PM.jpeg" alt="Scenic Mountain Overlook" loading="lazy" />
+        <span class="badge">PHOTO 048</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Scenic Mountain Overlook</h3>
+        <p class="card-caption">Taking in the sweeping vistas of the Garhwal range stretching toward the horizon.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">782 × 1040</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">71.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Viewpoint</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 048', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.57 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM (1).jpeg', 'PHOTO 049: Himalayan Ridge Walk')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM (1).jpeg" alt="Himalayan Ridge Walk" loading="lazy" />
+        <span class="badge">PHOTO 049</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Himalayan Ridge Walk</h3>
+        <p class="card-caption">Walking hand in hand through the scenic trails of the Queen of the Hills.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">87.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Ridge</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 049', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM (2).jpeg', 'PHOTO 050: Tall Deodars of Mussoorie')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM (2).jpeg" alt="Tall Deodars of Mussoorie" loading="lazy" />
+        <span class="badge">PHOTO 050</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Tall Deodars of Mussoorie</h3>
+        <p class="card-caption">Standing beneath the towering Deodar cedars framing the misty mountain valley.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">292.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Deodar Cedar Forest</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 050', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM.jpeg', 'PHOTO 051: Valley Whispers')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM.jpeg" alt="Valley Whispers" loading="lazy" />
+        <span class="badge">PHOTO 051</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Valley Whispers</h3>
+        <p class="card-caption">Resting on the stone ledge overlooking the lush valley below.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">96.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Ridge</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 051', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.58 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg', 'PHOTO 052: Grand Carved Stone Doorway [CANDIDATE: FIRST DATE (Solo Ghagra)]')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg" alt="Grand Carved Stone Doorway [CANDIDATE: FIRST DATE (Solo Ghagra)]" loading="lazy" />
+        <span class="badge">PHOTO 052</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Grand Carved Stone Doorway [CANDIDATE: FIRST DATE (Solo Ghagra)]</h3>
+        <p class="card-caption">Standing gracefully beside the historic carved monument portal in your blue kurti and white ghagra.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">218.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Delhi Heritage Monument</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Travel Diary (Heritage Walk Postcard) • Timeline (First Spark) • Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 052', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg', 'PHOTO 053: Mussoorie Mall Road & Gandhi Chowk [CANDIDATE: MUSSOORIE VACATION (Mall Road)]')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg" alt="Mussoorie Mall Road & Gandhi Chowk [CANDIDATE: MUSSOORIE VACATION (Mall Road)]" loading="lazy" />
+        <span class="badge">PHOTO 053</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Mussoorie Mall Road & Gandhi Chowk [CANDIDATE: MUSSOORIE VACATION (Mall Road)]</h3>
+        <p class="card-caption">Couple selfie strolling down Mall Road with the famous Gandhi statue in the background.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1040 × 780</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">89.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Mall Road</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Timeline (Mussoorie Mall Road) • Photo Universe (Just Us) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 053', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.01 PM.jpeg', 'PHOTO 054: Heritage Grace in Ghagra')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.01 PM.jpeg" alt="Heritage Grace in Ghagra" loading="lazy" />
+        <span class="badge">PHOTO 054</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Heritage Grace in Ghagra</h3>
+        <p class="card-caption">Standing by ancient stone carvings on our first official date, looking like a royal vision.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">218.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Heritage Grounds</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 054', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.01 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg', 'PHOTO 055: Christmas Fairy Lights Celebration')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg" alt="Christmas Fairy Lights Celebration" loading="lazy" />
+        <span class="badge">PHOTO 055</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Christmas Fairy Lights Celebration</h3>
+        <p class="card-caption">Surrounded by the warm glow of Christmas fairy lights and holiday wreaths together.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1040 × 780</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">76.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Christmas Celebration</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Timeline (Christmas Fairy Lights) • Photo Universe (Special Days) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 055', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg', 'PHOTO 056: Our First Official Date & First Photograph [CANDIDATE: FIRST DATE / FIRST PHOTO]')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg" alt="Our First Official Date & First Photograph [CANDIDATE: FIRST DATE / FIRST PHOTO]" loading="lazy" />
+        <span class="badge">PHOTO 056</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Our First Official Date & First Photograph [CANDIDATE: FIRST DATE / FIRST PHOTO]</h3>
+        <p class="card-caption">The very first couple picture we ever took together at the historic monument archway.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1040 × 780</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">109.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Historic Monument Archway</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Timeline (First Date & First Photo) • Photo Universe (Just Us) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 056', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.04 PM (1).jpeg', 'PHOTO 057: Stone Wall Valley Viewpoint')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.04 PM (1).jpeg" alt="Stone Wall Valley Viewpoint" loading="lazy" />
+        <span class="badge">PHOTO 057</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Stone Wall Valley Viewpoint</h3>
+        <p class="card-caption">Standing by the mountain stone wall overlooking the rolling foothills of Garhwal.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">142.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Mussoorie Viewpoint</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 057', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.04 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.04 PM.jpeg', 'PHOTO 058: Stairs of the Ancient Fort')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.04 PM.jpeg" alt="Stairs of the Ancient Fort" loading="lazy" />
+        <span class="badge">PHOTO 058</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Stairs of the Ancient Fort</h3>
+        <p class="card-caption">Walking down the historic stone steps after exploring the monument grounds.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">101.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Heritage Complex</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 058', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.04 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM (1).jpeg', 'PHOTO 059: Courtyard Echoes')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM (1).jpeg" alt="Courtyard Echoes" loading="lazy" />
+        <span class="badge">PHOTO 059</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Courtyard Echoes</h3>
+        <p class="card-caption">Wandering through the open stone courtyards under the warm April sun.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1040 × 780</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">89.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Monument Courtyard</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 059', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM.jpeg', 'PHOTO 060: Metro Travel After Our First Date')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM.jpeg" alt="Metro Travel After Our First Date" loading="lazy" />
+        <span class="badge">PHOTO 060</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Metro Travel After Our First Date</h3>
+        <p class="card-caption">Riding the metro together after our first official date, still wearing our first-date outfits with huge smiles.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">899 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">142.1 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Metro Journey</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 060', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.07 PM.jpeg', 'PHOTO 061: Archway Whispers')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.07 PM.jpeg" alt="Archway Whispers" loading="lazy" />
+        <span class="badge">PHOTO 061</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Archway Whispers</h3>
+        <p class="card-caption">Posing naturally beneath the weathered historic stone arch on our walk.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">53.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Heritage Trail</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 061', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.07 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="adventures" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.08 PM.jpeg', 'PHOTO 062: Sunlit Pathways')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.08 PM.jpeg" alt="Sunlit Pathways" loading="lazy" />
+        <span class="badge">PHOTO 062</span>
+        <span class="badge cat-badge">adventures</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Sunlit Pathways</h3>
+        <p class="card-caption">Following the stone trail where our journey as an official couple first began.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">59.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Monument Grounds</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Adventures] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 062', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.08 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg', 'PHOTO 063: Hugging the Penguin Plushie')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg" alt="Hugging the Penguin Plushie" loading="lazy" />
+        <span class="badge">PHOTO 063</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Hugging the Penguin Plushie</h3>
+        <p class="card-caption">Holding the soft stuffed penguin tight while relaxing on the bed — the definition of adorable.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">126.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cozy Room</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Letters (Open When You Are Sad) • Photo Universe (Happy Moments) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 063', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="birthday" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg', 'PHOTO 064: Blowing Out 23rd Birthday Candles [CANDIDATE: BIRTHDAY CELEBRATION (Blowing 23 Candles)]')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg" alt="Blowing Out 23rd Birthday Candles [CANDIDATE: BIRTHDAY CELEBRATION (Blowing 23 Candles)]" loading="lazy" />
+        <span class="badge">PHOTO 064</span>
+        <span class="badge cat-badge">birthday</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Blowing Out 23rd Birthday Candles [CANDIDATE: BIRTHDAY CELEBRATION (Blowing 23 Candles)]</h3>
+        <p class="card-caption">Making a secret wish and blowing out the golden 23 candles with that unforgettable birthday smile.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">572 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">39.7 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Birthday Celebration</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Timeline (23rd Birthday Candles) • Celebration Modal (Fireworks) • Photo Universe [Birthday Special] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 064', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (1).jpeg', 'PHOTO 065: Rain Poncho at Christ Church')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (1).jpeg" alt="Rain Poncho at Christ Church" loading="lazy" />
+        <span class="badge">PHOTO 065</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Rain Poncho at Christ Church</h3>
+        <p class="card-caption">Walking across the lush green lawn of historic Christ Church Mussoorie in a blue rain poncho.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">185.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Christ Church Mussoorie</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 065', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="vacations" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (2).jpeg', 'PHOTO 066: Christ Church Spire & Pine Trees')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (2).jpeg" alt="Christ Church Spire & Pine Trees" loading="lazy" />
+        <span class="badge">PHOTO 066</span>
+        <span class="badge cat-badge">vacations</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Christ Church Spire & Pine Trees</h3>
+        <p class="card-caption">The Gothic stone tower of Christ Church rising into the misty mountain air of the hills.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">720 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">184.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Christ Church Mussoorie</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Vacations] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 066', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="birthday" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM.jpeg', 'PHOTO 067: Birthday Cake & Golden Glow [CANDIDATE: BIRTHDAY CELEBRATION (Cake Cutting)]')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM.jpeg" alt="Birthday Cake & Golden Glow [CANDIDATE: BIRTHDAY CELEBRATION (Cake Cutting)]" loading="lazy" />
+        <span class="badge">PHOTO 067</span>
+        <span class="badge cat-badge">birthday</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Birthday Cake & Golden Glow [CANDIDATE: BIRTHDAY CELEBRATION (Cake Cutting)]</h3>
+        <p class="card-caption">Admiring the birthday cake with golden sparklers and balloons on your 23rd birthday.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">572 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">39.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">Existing</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Birthday Night</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Celebration Modal (Cake Cutting) • Photo Universe (Birthday Special) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 067', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.33 AM.jpeg', 'PHOTO 068: Breathtaking in White')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.33 AM.jpeg" alt="Breathtaking in White" loading="lazy" />
+        <span class="badge">PHOTO 068</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Breathtaking in White</h3>
+        <p class="card-caption">Stunning mirror selfie in your elegant white two-piece birthday dress — truly breathtaking.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">900 × 1600</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">110.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Birthday Glam</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Celebration Modal (Birthday Glam) • Photo Universe (Her Portraits) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 068', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.33 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM (1).jpeg', 'PHOTO 069: Hello Kitty Smiles & Booth Cuddles')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM (1).jpeg" alt="Hello Kitty Smiles & Booth Cuddles" loading="lazy" />
+        <span class="badge">PHOTO 069</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Hello Kitty Smiles & Booth Cuddles</h3>
+        <p class="card-caption">Sitting close together on the teal booth with cute Hello Kitty face filters, overflowing with happiness.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">899 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">162.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Booth Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 069', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM (2).jpeg', 'PHOTO 070: Christmas Wreath & Holiday Pout')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM (2).jpeg" alt="Christmas Wreath & Holiday Pout" loading="lazy" />
+        <span class="badge">PHOTO 070</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Christmas Wreath & Holiday Pout</h3>
+        <p class="card-caption">A sweet romantic pout beside me in front of festive Christmas garlands and warm lights.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1066 × 1600</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">173.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Holiday Festivities</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Celebration Modal (Holiday Glow) • Photo Universe (Just Us) • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 070', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM.jpeg', 'PHOTO 071: Mr. Penguin Smiling Back')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM.jpeg" alt="Mr. Penguin Smiling Back" loading="lazy" />
+        <span class="badge">PHOTO 071</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Mr. Penguin Smiling Back</h3>
+        <p class="card-caption">The adorable plushie with eyes squeezed in a happy smile — our official mascot of coziness.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">899 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">101.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cozy Keepsakes</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 071', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.34 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="favourite" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.35 AM.jpeg', 'PHOTO 072: Cafe Pout Encore')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.35 AM.jpeg" alt="Cafe Pout Encore" loading="lazy" />
+        <span class="badge">PHOTO 072</span>
+        <span class="badge cat-badge">favourite</span>
+        <span class="badge dup-badge">Duplicate copy of PHOTO 001</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Cafe Pout Encore</h3>
+        <p class="card-caption">Another look at that adorable cafe pout that makes my heart flutter every time.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">157.7 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cafe Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Our Favourite Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 072', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.35 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.36 AM.jpeg', 'PHOTO 073: Rajouri Garden Social Balcony')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.36 AM.jpeg" alt="Rajouri Garden Social Balcony" loading="lazy" />
+        <span class="badge">PHOTO 073</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Rajouri Garden Social Balcony</h3>
+        <p class="card-caption">Seated at the blue-tiled table at Rajouri Garden Social overlooking the vibrant lights below.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">203.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Rajouri Garden Social</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 073', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.36 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.37 AM.jpeg', 'PHOTO 074: Take the Backpack!')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.37 AM.jpeg" alt="Take the Backpack!" loading="lazy" />
+        <span class="badge">PHOTO 074</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Take the Backpack!</h3>
+        <p class="card-caption">Playfully handing me the backpack across the table with that funny, animated expression.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">181.3 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Rajouri Garden Social</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 074', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.37 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM (1).jpeg', 'PHOTO 075: Sleeper Bus Road Trip Smiles')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM (1).jpeg" alt="Sleeper Bus Road Trip Smiles" loading="lazy" />
+        <span class="badge">PHOTO 075</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Sleeper Bus Road Trip Smiles</h3>
+        <p class="card-caption">Late-night sleeper bus adventure, Shonaa in clear glasses and Vaibhav smiling from ear to ear.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">864 × 1152</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">61.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Overnight Road Trip</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 075', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM (2).jpeg', 'PHOTO 076: Silly Face Filters on the Bed')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM (2).jpeg" alt="Silly Face Filters on the Bed" loading="lazy" />
+        <span class="badge">PHOTO 076</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Silly Face Filters on the Bed</h3>
+        <p class="card-caption">Cracking up over funny wide-face filters while lounging around together — pure unfiltered laughs.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">899 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">72.2 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Lazy Afternoon</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 076', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM.jpeg', 'PHOTO 077: Gym Mirror Selfie — Tuti Fruti Energy')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM.jpeg" alt="Gym Mirror Selfie — Tuti Fruti Energy" loading="lazy" />
+        <span class="badge">PHOTO 077</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Gym Mirror Selfie — Tuti Fruti Energy</h3>
+        <p class="card-caption">Looking sporty in grey tee and track pants at the gym, staying active and focused on goals.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">572 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">63.0 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Gym Workout</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 077', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.38 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM (1).jpeg', 'PHOTO 078: Carnival Night Under the Lights')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM (1).jpeg" alt="Carnival Night Under the Lights" loading="lazy" />
+        <span class="badge">PHOTO 078</span>
+        <span class="badge cat-badge">happy-moments</span>
+        <span class="badge dup-badge">Duplicate copy of PHOTO 009</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Carnival Night Under the Lights</h3>
+        <p class="card-caption">Soaring high above the fairgrounds on the Ferris wheel with festival lights below.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">118.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Night Carnival</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 078', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM (2).jpeg', 'PHOTO 079: Afternoon Lunch Date Together')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM (2).jpeg" alt="Afternoon Lunch Date Together" loading="lazy" />
+        <span class="badge">PHOTO 079</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Afternoon Lunch Date Together</h3>
+        <p class="card-caption">Enjoying our meal side by side in matching easygoing style, smiling for a quick memory.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1152 × 864</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">111.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Lunch Date</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 079', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="our-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM.jpeg', 'PHOTO 080: Doodle Hearts & Cozy Thoughts')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM.jpeg" alt="Doodle Hearts & Cozy Thoughts" loading="lazy" />
+        <span class="badge">PHOTO 080</span>
+        <span class="badge cat-badge">our-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Doodle Hearts & Cozy Thoughts</h3>
+        <p class="card-caption">Outlined in hand-drawn white hearts and clouds, chilling together in our warm little universe.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">899 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">99.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Cozy Afternoon</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just Us (Couple Memories)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 080', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.39 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM (1).jpeg', 'PHOTO 081: Maa\'s Loving Arms')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM (1).jpeg" alt="Maa's Loving Arms" loading="lazy" />
+        <span class="badge">PHOTO 081</span>
+        <span class="badge cat-badge">her-photos</span>
+        <span class="badge dup-badge">Duplicate copy of PHOTO 017</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Maa's Loving Arms</h3>
+        <p class="card-caption">A cherished childhood scan celebrating unconditional maternal warmth and love.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">572 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">29.6 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Family Keepsake</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 081', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM (2).jpeg', 'PHOTO 082: Plumeria Petals in the Breeze')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM (2).jpeg" alt="Plumeria Petals in the Breeze" loading="lazy" />
+        <span class="badge">PHOTO 082</span>
+        <span class="badge cat-badge">her-photos</span>
+        <span class="badge dup-badge">Duplicate copy of PHOTO 015</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Plumeria Petals in the Breeze</h3>
+        <p class="card-caption">Soft smiles with the tropical plumeria flower tucked behind your ear.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">1039 × 1599</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">71.9 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Sweet Selfies</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 082', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM (2).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="special-days" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM.jpeg', 'PHOTO 083: Dandiya Night in Sparkling Fuchsia')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM.jpeg" alt="Dandiya Night in Sparkling Fuchsia" loading="lazy" />
+        <span class="badge">PHOTO 083</span>
+        <span class="badge cat-badge">special-days</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Dandiya Night in Sparkling Fuchsia</h3>
+        <p class="card-caption">Radiant in a glittering magenta traditional lehenga under the festive festival streamers.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">180.8 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Dandiya / Garba Festival</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Special Days] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 083', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.40 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="her-photos" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.41 AM (1).jpeg', 'PHOTO 084: Qutub Minar Halo')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.41 AM (1).jpeg" alt="Qutub Minar Halo" loading="lazy" />
+        <span class="badge">PHOTO 084</span>
+        <span class="badge cat-badge">her-photos</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Qutub Minar Halo</h3>
+        <p class="card-caption">The glowing stone pinnacle of Qutub Minar rising straight behind you like an architectural crown.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">864 × 1152</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">56.5 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">Qutub Complex</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Just You (Her Portraits)] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 084', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.41 AM (1).jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="happy-moments" data-kind="photo">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.41 AM.jpeg', 'PHOTO 085: Hardware Store Ski Goggles Explorer')">
+        <img src="/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.41 AM.jpeg" alt="Hardware Store Ski Goggles Explorer" loading="lazy" />
+        <span class="badge">PHOTO 085</span>
+        <span class="badge cat-badge">happy-moments</span>
+        
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Hardware Store Ski Goggles Explorer</h3>
+        <p class="card-caption">Trying on giant reflective blue ski goggles in the hardware aisle with the biggest, cheekiest smile.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Dimensions:</span>
+            <span class="meta-val">960 × 1280</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">149.4 KB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Origin:</span>
+            <span class="meta-val">New (1:03 AM Batch)</span>
+          </div>
+          
+          <div class="meta-row">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">DIY Hardware Store</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Photo Universe [Happy Moments] • Fullscreen Lightbox Viewer
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('PHOTO 085', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Image 2026-11-10 at 1.03.41 AM.jpeg', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="videos" data-kind="video">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Video 2026-11-09 at 11.15.56 PM.mp4', 'VIDEO 001: Our Unfiltered Laughter', true)">
+        <video src="/memories/birthday/WhatsApp Video 2026-11-09 at 11.15.56 PM.mp4" preload="metadata" muted></video>
+        <span class="badge">VIDEO 001</span>
+        <span class="badge cat-badge">Video</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Our Unfiltered Laughter</h3>
+        <p class="card-caption">The spontaneous, unposed moments that make us laugh till our stomachs hurt.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Format:</span>
+            <span class="meta-val">.MP4</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">2.2 MB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Milestone:</span>
+            <span class="meta-val">Our Journey</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Video Memories Section (Grid Card 1) • Modal Player
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('VIDEO 001', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Video 2026-11-09 at 11.15.56 PM.mp4', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="videos" data-kind="video">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.10 PM.mp4', 'VIDEO 002: Sweet Memories & Playful Smiles', true)">
+        <video src="/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.10 PM.mp4" preload="metadata" muted></video>
+        <span class="badge">VIDEO 002</span>
+        <span class="badge cat-badge">Video</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Sweet Memories & Playful Smiles</h3>
+        <p class="card-caption">Playful teasing and giggles that make every day an unforgettable adventure.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Format:</span>
+            <span class="meta-val">.MP4</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">2.9 MB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Milestone:</span>
+            <span class="meta-val">Sweet Moments</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Video Memories Section (Grid Card 2) • Modal Player
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('VIDEO 002', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.10 PM.mp4', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="videos" data-kind="video">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.28 PM.mp4', 'VIDEO 003: A Beautiful Day With You', true)">
+        <video src="/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.28 PM.mp4" preload="metadata" muted></video>
+        <span class="badge">VIDEO 003</span>
+        <span class="badge cat-badge">Video</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">A Beautiful Day With You</h3>
+        <p class="card-caption">Walking hand in hand through the best moments of our life together.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Format:</span>
+            <span class="meta-val">.MP4</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">9.1 MB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Milestone:</span>
+            <span class="meta-val">Together Always</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Video Memories Section (Grid Card 3) • Modal Player
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('VIDEO 003', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.28 PM.mp4', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="videos" data-kind="video">
+      <div class="media-wrap" onclick="openPreview('/memories/birthday/WhatsApp Video 2026-11-09 at 11.17.15 PM.mp4', 'VIDEO 004: Birthday Cheer & Joy', true)">
+        <video src="/memories/birthday/WhatsApp Video 2026-11-09 at 11.17.15 PM.mp4" preload="metadata" muted></video>
+        <span class="badge">VIDEO 004</span>
+        <span class="badge cat-badge">Video</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Birthday Cheer & Joy</h3>
+        <p class="card-caption">Celebrating your special day with overflowing joy, laughter, and celebration.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Format:</span>
+            <span class="meta-val">.MP4</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">1.5 MB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Milestone:</span>
+            <span class="meta-val">Birthday Celebration</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Video Memories Section (Grid Card 4) • Birthday Celebration Modal
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('VIDEO 004', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/birthday/WhatsApp Video 2026-11-09 at 11.17.15 PM.mp4', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" data-category="videos" data-kind="video">
+      <div class="media-wrap" onclick="openPreview('/memories/favourite/Rakhlo_Tum_Chupaake_256kbps.webm', 'VIDEO 005: Rakhlo Tum Chupaake', true)">
+        <video src="/memories/favourite/Rakhlo_Tum_Chupaake_256kbps.webm" preload="metadata" muted></video>
+        <span class="badge">VIDEO 005</span>
+        <span class="badge cat-badge">Video</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Rakhlo Tum Chupaake</h3>
+        <p class="card-caption">A romantic musical memory kept close to our hearts.</p>
+        
+        <div class="meta-table">
+          <div class="meta-row">
+            <span class="meta-label">Format:</span>
+            <span class="meta-val">.WEBM</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">File Size:</span>
+            <span class="meta-val">3.4 MB</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Milestone:</span>
+            <span class="meta-val">Our Special Song</span>
+          </div>
+        </div>
+
+        <div class="disp-status">
+          <strong>Website Display:</strong> Video Memories Section (Grid Card 5) • Music Player Playlist
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="copyText('VIDEO 005', this)">Copy ID</button>
+          <button class="btn" onclick="copyText('/memories/favourite/Rakhlo_Tum_Chupaake_256kbps.webm', this)">Copy Path</button>
+        </div>
+      </div>
+    </div>
+  
+  </main>
+
+  <div class="modal" id="previewModal" onclick="closePreview(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closePreview()">&times;</button>
+      <div id="modalMedia"></div>
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    function filterCat(cat) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        const kind = card.getAttribute('data-kind');
+        if (cat === 'all') {
+          card.style.display = 'flex';
+        } else if (cat === 'videos') {
+          card.style.display = kind === 'video' ? 'flex' : 'none';
+        } else {
+          card.style.display = itemCat === cat ? 'flex' : 'none';
+        }
+      });
+    }
+
+    function openPreview(src, caption, isVideo = false) {
+      const modal = document.getElementById('previewModal');
+      const mediaBox = document.getElementById('modalMedia');
+      const captionBox = document.getElementById('modalCaption');
+      
+      if (isVideo) {
+        mediaBox.innerHTML = '<video src="' + src + '" controls autoplay style="max-height: 80vh; max-width: 90vw;"></video>';
+      } else {
+        mediaBox.innerHTML = '<img src="' + src + '" style="max-height: 80vh; max-width: 90vw;" />';
+      }
+      captionBox.innerText = caption;
+      modal.classList.add('active');
+    }
+
+    function closePreview() {
+      const modal = document.getElementById('previewModal');
+      const mediaBox = document.getElementById('modalMedia');
+      mediaBox.innerHTML = '';
+      modal.classList.remove('active');
+    }
+
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerText;
+        btn.innerText = 'Copied!';
+        setTimeout(() => btn.innerText = orig, 1500);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreview();
+    });
+  </script>
+</body>
+</html>

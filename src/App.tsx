@@ -4,6 +4,7 @@ import { useAudioPlayer } from './hooks/useAudioPlayer';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { FloatingMusicPlayer } from './components/ui/FloatingMusicPlayer';
+import { FloatingMemoryPhotos } from './components/ui/FloatingMemoryPhotos';
 import { ParticleField } from './components/ui/ParticleField';
 import { CursorTrail } from './components/ui/CursorTrail';
 import { HeroOpening } from './sections/HeroOpening';
@@ -58,15 +59,18 @@ export const App: React.FC = () => {
 
       {/* Persistent Floating Audio Soundtrack Pill */}
       {isUniverseOpen && (
-        <FloatingMusicPlayer
-          isPlaying={isPlaying}
-          isMuted={isMuted}
-          currentTrack={currentTrack}
-          onTogglePlay={togglePlay}
-          onToggleMute={toggleMute}
-          onNextTrack={nextTrack}
-          isSynthFallback={isSynthFallback}
-        />
+        <>
+          <FloatingMusicPlayer
+            isPlaying={isPlaying}
+            isMuted={isMuted}
+            currentTrack={currentTrack}
+            onTogglePlay={togglePlay}
+            onToggleMute={toggleMute}
+            onNextTrack={nextTrack}
+            isSynthFallback={isSynthFallback}
+          />
+          <FloatingMemoryPhotos />
+        </>
       )}
 
       {/* Opening Gateway Screen / Hero */}

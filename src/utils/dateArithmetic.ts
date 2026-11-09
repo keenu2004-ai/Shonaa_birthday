@@ -154,14 +154,18 @@ export function calculateBirthdayCountdown(
   let isToday = false;
   let isPast = false;
 
-  // If we are within the 24-hour birthday window in Asia/Kolkata
-  if (diffMs <= 0 && diffMs > -oneDayMs) {
-    isToday = true;
-    return { days: 0, hours: 0, minutes: 0, seconds: 0, isToday: true, isPast: false, totalSecondsRemaining: 0 };
-  } else if (diffMs <= -oneDayMs) {
-    // Birthday has passed this year, count down to next year's birthday
-    kolkataTarget = new Date(makeKolkataISO(currentKolkataYear + 1));
-    diffMs = kolkataTarget.getTime() - now.getTime();
+  // If the birthday has arrived (diffMs <= 0 in Asia/Kolkata),
+  // the celebration MUST REMAIN ACTIVE! Never restore an expired countdown or display a countdown to 2027.
+  if (diffMs <= 0) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      isToday: true,
+      isPast: false,
+      totalSecondsRemaining: 0,
+    };
   }
 
   const totalSecondsRemaining = Math.max(0, Math.floor(diffMs / 1000));

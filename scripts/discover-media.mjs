@@ -11,6 +11,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 const GENERATED_DIR = path.resolve(process.cwd(), 'src/generated');
@@ -33,6 +34,16 @@ const CATEGORY_MAP = {
   'birthday': 'birthday',
   'opening': 'favourite',
 };
+
+// Helper to get MD5 hash for image deduplication
+function getMd5(filePath) {
+  try {
+    const buf = fs.readFileSync(filePath);
+    return crypto.createHash('md5').update(buf).digest('hex');
+  } catch (e) {
+    return null;
+  }
+}
 
 // Convert filename (e.g. "cozy-hill-evening.jpg") into readable Title
 function formatTitleFromFilename(filename) {
@@ -57,55 +68,21 @@ function getDeterministicRotation(str) {
 
 // Extract mediaOverrides from src/config/loveStory.ts
 function parseMediaOverrides() {
-  const overrides = {};
-  if (!fs.existsSync(CONFIG_PATH)) return overrides;
-
+  if (!fs.existsSync(CONFIG_PATH)) return {};
   try {
     const content = fs.readFileSync(CONFIG_PATH, 'utf8');
-    // Match mediaOverrides block
-    const overridesMatch = content.match(/mediaOverrides:\s*\{([\s\S]*?)\}\s*as\s*Record/);
-    if (!overridesMatch) return overrides;
-
-    const block = overridesMatch[1];
-    // Simple line parser for entries: "filename.jpg": { ... }
-    const entryRegex = /["']([^"']+)["']\s*:\s*\{([^}]+)\}/g;
-    let match;
-    while ((match = entryRegex.exec(block)) !== null) {
-      const filename = match[1];
-      const propsStr = match[2];
-      const entry = {};
-
-      const titleMatch = propsStr.match(/title\s*:\s*["']([^"']+)["']/);
-      if (titleMatch) entry.title = titleMatch[1];
-
-      const captionMatch = propsStr.match(/caption\s*:\s*["']([^"']+)["']/);
-      if (captionMatch) entry.caption = captionMatch[1];
-
-      const dateMatch = propsStr.match(/date\s*:\s*["']([^"']+)["']/);
-      if (dateMatch) entry.date = dateMatch[1];
-
-      const locationMatch = propsStr.match(/location\s*:\s*["']([^"']+)["']/);
-      if (locationMatch) entry.location = locationMatch[1];
-
-      const categoryMatch = propsStr.match(/category\s*:\s*["']([^"']+)["']/);
-      if (categoryMatch) entry.category = categoryMatch[1];
-
-      const isBdayMatch = propsStr.match(/isBirthdayCelebration\s*:\s*(true|false)/);
-      if (isBdayMatch) entry.isBirthdayCelebration = isBdayMatch[1] === 'true';
-
-      const featuredMatch = propsStr.match(/featured\s*:\s*(true|false)/);
-      if (featuredMatch) entry.featured = featuredMatch[1] === 'true';
-
-      const orderMatch = propsStr.match(/displayOrder\s*:\s*(\d+)/);
-      if (orderMatch) entry.displayOrder = parseInt(orderMatch[1], 10);
-
-      overrides[filename] = entry;
+    const startIdx = content.indexOf('mediaOverrides:');
+    if (startIdx === -1) return {};
+    const firstBrace = content.indexOf('{', startIdx);
+    const lastBrace = content.indexOf('} as Record', startIdx);
+    if (firstBrace !== -1 && lastBrace !== -1) {
+      const jsonStr = content.slice(firstBrace, lastBrace + 1);
+      return JSON.parse(jsonStr);
     }
   } catch (err) {
     console.warn('[Media Discovery] Warning: could not parse mediaOverrides:', err.message);
   }
-
-  return overrides;
+  return {};
 }
 
 export function discoverMedia() {
@@ -115,6 +92,8 @@ export function discoverMedia() {
   const audioDir = path.resolve(PUBLIC_DIR, 'audio');
 
   const photos = [];
+  const uniquePersonalPhotos = [];
+  const seenHashes = new Set();
   const videos = [];
   const audioTracks = [];
   let heroCoverPhoto = '/memories/opening/hero-cover.svg';
@@ -160,7 +139,20 @@ export function discoverMedia() {
         const isReal = ext !== '.svg';
         const defaultTitle = formatTitleFromFilename(file);
 
-        photos.push({
+        let hash = undefined;
+        let isDuplicate = false;
+        if (isReal) {
+          hash = getMd5(path.resolve(folderPath, file));
+          if (hash) {
+            if (seenHashes.has(hash)) {
+              isDuplicate = true;
+            } else {
+              seenHashes.add(hash);
+            }
+          }
+        }
+
+        const photoItem = {
           id: `photo-${folderName}-${path.parse(file).name}`,
           title: override.title || defaultTitle,
           category: override.category || category,
@@ -173,7 +165,15 @@ export function discoverMedia() {
           displayOrder: override.displayOrder !== undefined ? override.displayOrder : 99,
           isBirthdayCelebration: override.isBirthdayCelebration || folderName === 'birthday',
           isRealAsset: isReal,
-        });
+          isDuplicate,
+          hash: hash || undefined,
+        };
+
+        photos.push(photoItem);
+
+        if (isReal && !isDuplicate) {
+          uniquePersonalPhotos.push(photoItem);
+        }
       }
 
       // Check for videos placed in memories subfolders (e.g. memories/birthday/)
@@ -312,6 +312,7 @@ export function discoverMedia() {
 
   return {
     photos,
+    uniquePersonalPhotos,
     videos,
     audioTracks,
     birthdayPhotos,
@@ -319,6 +320,7 @@ export function discoverMedia() {
     stats: {
       totalPhotos,
       personalPhotos,
+      totalUniquePhotos: uniquePersonalPhotos.length,
       totalVideos: videos.length,
       hasCustomAudio: audioTracks.length > 0,
     },
@@ -343,6 +345,8 @@ import type { PhotoMemory, VideoMemory, MusicTrack } from '../config/loveStory';
 
 export const discoveredPhotos: PhotoMemory[] = ${JSON.stringify(data.photos, null, 2)};
 
+export const uniquePersonalPhotos: PhotoMemory[] = ${JSON.stringify(data.uniquePersonalPhotos, null, 2)};
+
 export const discoveredVideos: VideoMemory[] = ${JSON.stringify(data.videos, null, 2)};
 
 export const discoveredAudioTracks: MusicTrack[] = ${JSON.stringify(data.audioTracks, null, 2)};
@@ -356,7 +360,7 @@ export const mediaDiscoveryStats = ${JSON.stringify(data.stats, null, 2)};
 
   fs.writeFileSync(MANIFEST_PATH, tsContent, 'utf8');
   console.log(`[Media Discovery] Manifest generated at: ${MANIFEST_PATH}`);
-  console.log(`[Media Discovery] Total Photos: ${data.stats.totalPhotos} (${data.stats.personalPhotos} personal) | Videos: ${data.stats.totalVideos} | Custom Audio: ${data.stats.hasCustomAudio ? 'Yes' : 'No (Synth Active)'}`);
+  console.log(`[Media Discovery] Total Photos: ${data.stats.totalPhotos} (${data.stats.personalPhotos} personal, ${data.stats.totalUniquePhotos} unique) | Videos: ${data.stats.totalVideos} | Custom Audio: ${data.stats.hasCustomAudio ? 'Yes' : 'No'}`);
 
   return data;
 }

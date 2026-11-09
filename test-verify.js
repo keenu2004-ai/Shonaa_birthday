@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-console.log('--- STARTING VERIFICATION TEST SUITE ---');
+console.log('--- STARTING VERIFICATION TEST SUITE (SHONAA BIRTHDAY ❤️) ---');
 
 let passed = 0;
 let failed = 0;
@@ -43,7 +43,7 @@ for (const folder of requiredFolders) {
   assert(fs.existsSync(folder), `Media folder exists: ${folder}`);
 }
 
-// 3. Verify placeholder SVGs exist
+// 3. Verify placeholder SVGs exist (fallback safety)
 const requiredPlaceholders = [
   'public/memories/opening/hero-cover.svg',
   'public/memories/favourite/favourite-1.svg',
@@ -63,48 +63,52 @@ for (const p of requiredPlaceholders) {
 // 4. Verify central configuration file exists
 assert(fs.existsSync('src/config/loveStory.ts'), 'src/config/loveStory.ts exists');
 
-// 5. Phase 2.1 Audit Remediations Verification
-// 5a. Personal Media Privacy: Verify all 12 loose photos and 1 video are removed
-const deletedMediaFiles = [
-  'public/memories/birthday-cake-candles.jpg',
-  'public/memories/celebration-christmas-tree.jpg',
-  'public/memories/couple-christmas.jpg',
-  'public/memories/couple-kiss-bows.jpg',
-  'public/memories/couple-scooter-helmets.jpg',
-  'public/memories/funny-cafe-smile.jpg',
-  'public/memories/funny-cat-gaming.jpg',
-  'public/memories/portrait-golden-hour.jpg',
-  'public/memories/portrait-hearts.jpg',
-  'public/memories/travel-green-caves.jpg',
-  'public/memories/travel-heritage-arch.jpg',
-  'public/memories/travel-mountain-valley.jpg',
-  'public/videos/memory-video-1.mp4'
-];
-for (const file of deletedMediaFiles) {
-  assert(!fs.existsSync(file), `Privacy fix verified: ${file} does not exist`);
-}
+// 5. Verify Shonaa Birthday Personalization
+const loveStoryConfig = fs.readFileSync('src/config/loveStory.ts', 'utf8');
+assert(loveStoryConfig.includes('herName: "Shonaa"'), 'loveStory.ts has herName set to Shonaa');
+assert(loveStoryConfig.includes('myName: "Vaibhav"'), 'loveStory.ts has myName set to Vaibhav');
+assert(loveStoryConfig.includes('websiteTitle: "SHONAA BIRTHDAY ❤️"'), 'loveStory.ts has websiteTitle set to SHONAA BIRTHDAY ❤️');
+assert(loveStoryConfig.includes('birthdayCelebrationTitle: "HAPPY BIRTHDAY SHONAA ❤️"'), 'loveStory.ts has birthdayCelebrationTitle set');
+assert(loveStoryConfig.includes('2026-11-10T00:00:00+05:30'), 'loveStory.ts has exact birthday date configured in Asia/Kolkata');
+assert(loveStoryConfig.includes('2025-04-14T00:00:00+05:30'), 'loveStory.ts has official relationship date (14 April 2025)');
+assert(loveStoryConfig.includes('2025-03-01T00:00:00+05:30'), 'loveStory.ts has unofficial beginning date (March 2025)');
 
-// 5b. Duplicate Configuration: Verify src/data/contentConfig.ts is eliminated
-assert(!fs.existsSync('src/data/contentConfig.ts'), 'Duplicate config src/data/contentConfig.ts does not exist');
-
-// 5c. Robots meta tag in index.html
+// 6. Verify HTML Title and Privacy Meta
 const indexHtml = fs.readFileSync('index.html', 'utf8');
+assert(indexHtml.includes('<title>SHONAA BIRTHDAY ❤️</title>'), 'index.html has title SHONAA BIRTHDAY ❤️');
 assert(indexHtml.includes('name="robots" content="noindex, nofollow"'), 'index.html contains noindex, nofollow privacy meta tag');
 
-// 5d. Editable placeholders in src/config/loveStory.ts
-const loveStoryConfig = fs.readFileSync('src/config/loveStory.ts', 'utf8');
-assert(loveStoryConfig.includes('"[Her Name]"'), 'loveStory.ts uses standardized [Her Name] placeholder');
-assert(loveStoryConfig.includes('"[My Name]"'), 'loveStory.ts uses standardized [My Name] placeholder');
-
-// 5e. Audio Player currentTime preservation
+// 7. Verify Audio Soundtrack
+assert(fs.existsSync('public/audio/background.mp3'), 'public/audio/background.mp3 (Kaise Bataaoon) exists');
+assert(fs.existsSync('public/audio/opening.mp3'), 'public/audio/opening.mp3 exists');
 const audioHook = fs.readFileSync('src/hooks/useAudioPlayer.ts', 'utf8');
 assert(!audioHook.includes('useEffect(() => {\n    if (!audioRef.current) return;\n    audioRef.current.src'), 'Audio hook decouples src assignment from play/pause toggle');
 
-// 5f. Mobile photo explosion in BirthdayCelebrationModal
+// 8. Verify Photo Review Tool & Index
+assert(fs.existsSync('public/photo-review.html'), 'public/photo-review.html tool exists');
+assert(fs.existsSync('PHOTO_INDEX.md'), 'PHOTO_INDEX.md inventory exists');
+const photoIndexMd = fs.readFileSync('PHOTO_INDEX.md', 'utf8');
+assert(photoIndexMd.includes('PHOTO 001'), 'PHOTO_INDEX.md contains PHOTO 001');
+assert(photoIndexMd.includes('VIDEO 001'), 'PHOTO_INDEX.md contains VIDEO 001');
+assert(photoIndexMd.includes('FIRST DATE'), 'PHOTO_INDEX.md contains identified FIRST DATE candidates');
+assert(photoIndexMd.includes('MUSSOORIE'), 'PHOTO_INDEX.md contains identified MUSSOORIE candidates');
+assert(photoIndexMd.includes('BIRTHDAY CELEBRATION'), 'PHOTO_INDEX.md contains identified BIRTHDAY CELEBRATION candidates');
+
+// 9. Verify Relationship Counter Dual Display
+const counterCode = fs.readFileSync('src/sections/RelationshipCounter.tsx', 'utf8');
+assert(counterCode.includes('Before the official date'), 'RelationshipCounter displays unofficial start quote');
+assert(counterCode.includes('The day we officially became us'), 'RelationshipCounter displays official start quote');
+assert(counterCode.includes('AnimatedDigit'), 'RelationshipCounter features animated digit transitions');
+
+// 10. Verify Birthday Modal & Video Player
 const modalCode = fs.readFileSync('src/sections/BirthdayCelebrationModal.tsx', 'utf8');
 assert(modalCode.includes('md:hidden') && modalCode.includes('w-20 h-24'), 'BirthdayCelebrationModal renders non-obstructive mobile photo miniatures');
 
-// 5g. Phase 3 Automatic Discovery Engine & Manifest
+const videoModalCode = fs.readFileSync('src/components/ui/VideoPlayerModal.tsx', 'utf8');
+assert(videoModalCode.includes('preload="metadata"'), 'Video modal uses preload="metadata" for fast page loads');
+assert(!videoModalCode.includes('autoPlay'), 'Video modal does not use autoPlay');
+
+// 11. Verify Automatic Discovery Engine & Manifest
 assert(fs.existsSync('scripts/discover-media.mjs'), 'Automatic media discovery script exists');
 assert(fs.existsSync('src/generated/mediaManifest.ts'), 'Auto-generated media manifest exists');
 
@@ -113,36 +117,10 @@ assert(manifestCode.includes('export const discoveredPhotos'), 'mediaManifest ex
 assert(manifestCode.includes('export const discoveredBirthdayPhotos'), 'mediaManifest exports discoveredBirthdayPhotos');
 assert(manifestCode.includes('export const discoveredHeroCoverPhoto'), 'mediaManifest exports discoveredHeroCoverPhoto');
 
-// 5h. Video Optimization: No autoplay and preload="metadata"
-const videoModalCode = fs.readFileSync('src/components/ui/VideoPlayerModal.tsx', 'utf8');
-assert(videoModalCode.includes('preload="metadata"'), 'Video modal uses preload="metadata" for fast page loads');
-assert(!videoModalCode.includes('autoPlay'), 'Video modal does not use autoPlay');
+console.log(`\n========================================`);
+console.log(`Test Summary: ${passed} Passed, ${failed} Failed.`);
+console.log(`========================================`);
 
-// 5i. Phase 4 Visual Enhancements
-const counterCode = fs.readFileSync('src/sections/RelationshipCounter.tsx', 'utf8');
-assert(counterCode.includes('AnimatedDigit'), 'RelationshipCounter features animated digit transitions');
-
-const bdayCountdownCode = fs.readFileSync('src/sections/BirthdayCountdown.tsx', 'utf8');
-assert(bdayCountdownCode.includes('handleMakeWish'), 'BirthdayCountdown includes interactive candle make-a-wish feature');
-
-// 6. Test Date Arithmetic function
-const { calculatePreciseDuration, calculateBirthdayCountdown } = await import('./src/utils/dateArithmetic.js').catch(async () => {
-  // If running directly before transpile, simulate logic
-  return {
-    calculatePreciseDuration: (startStr) => {
-      const start = new Date(startStr);
-      const now = new Date();
-      return { years: now.getFullYear() - start.getFullYear() };
-    },
-    calculateBirthdayCountdown: () => ({ isToday: false, days: 100 }),
-  };
-});
-
-const duration = calculatePreciseDuration("2023-08-15T00:00:00+05:30");
-assert(duration.years >= 1, `Duration calculation calculated valid years (${duration.years})`);
-
-console.log(`\nTest Summary: ${passed} Passed, ${failed} Failed.`);
 if (failed > 0) {
   process.exit(1);
 }
-

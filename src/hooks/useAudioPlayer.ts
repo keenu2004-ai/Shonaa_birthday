@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { loveStoryConfig, MusicTrack } from '../config/loveStory';
 import { discoveredAudioTracks } from '../generated/mediaManifest';
-import { soundscape } from '../utils/audioSynth';
 
 export function useAudioPlayer() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -10,25 +9,37 @@ export function useAudioPlayer() {
   });
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
-  const [isSynthFallback, setIsSynthFallback] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Use auto-discovered tracks when present, falling back to central config
+  // Central configuration playlist: Kaise Bataaoon as primary track
   const tracks: MusicTrack[] = useMemo(() => {
+    if (loveStoryConfig.music?.tracks && loveStoryConfig.music.tracks.length > 0) {
+      return loveStoryConfig.music.tracks;
+    }
     if (discoveredAudioTracks && discoveredAudioTracks.length > 0) {
       return discoveredAudioTracks;
     }
-    return loveStoryConfig.music.tracks;
+    return [
+      {
+        id: 'kaise-bataaoon',
+        title: 'Kaise Bataaoon',
+        artist: 'KK & Mithoon (3G)',
+        src: '/audio/background.mp3',
+        type: 'background',
+      },
+    ];
   }, []);
 
   const currentTrack: MusicTrack = tracks[currentTrackIndex] || tracks[0];
 
   // 1. One-time initialization and event listener attachment
   useEffect(() => {
-    const audio = new Audio();
+    const initialSrc = currentTrack?.src || '/audio/background.mp3';
+    const audio = new Audio(initialSrc);
     audio.preload = 'metadata';
     audio.loop = false;
+    audio.volume = loveStoryConfig.music?.defaultVolume ?? 0.6;
     audioRef.current = audio;
 
     const handleEnded = () => {
@@ -37,8 +48,9 @@ export function useAudioPlayer() {
     };
 
     const handleError = () => {
-      console.info('Audio file not found, activating romantic ambient generative soundscape fallback.');
-      setIsSynthFallback(true);
+      if (audio.src && audio.error) {
+        console.warn('Audio playback notice:', audio.error.message);
+      }
     };
 
     audio.addEventListener('ended', handleEnded);
@@ -48,11 +60,11 @@ export function useAudioPlayer() {
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('error', handleError);
       audio.pause();
-      soundscape.pause();
     };
   }, [tracks.length]);
 
   // 2. Track source update: ONLY reassigns src when currentTrack.src changes
+  // Crucial: isPlaying is NOT in dependencies! Prevents restarting audio on play/pause toggle
   useEffect(() => {
     if (!audioRef.current || !currentTrack) return;
 
@@ -60,16 +72,11 @@ export function useAudioPlayer() {
     audioRef.current.currentTime = 0;
 
     if (isPlaying && !isMuted) {
-      if (isSynthFallback) {
-        soundscape.play();
-      } else {
-        audioRef.current.play().catch(() => {
-          setIsSynthFallback(true);
-          soundscape.play();
-        });
-      }
+      audioRef.current.play().catch((err) => {
+        console.info('Audio play deferred:', err.message);
+      });
     }
-  }, [currentTrackIndex, currentTrack.src]); // Notice: isPlaying is NOT in dependencies! Prevents restart on play/pause
+  }, [currentTrackIndex, currentTrack.src]);
 
   // 3. Handle Mute state change
   useEffect(() => {
@@ -77,50 +84,45 @@ export function useAudioPlayer() {
     if (audioRef.current) {
       audioRef.current.muted = isMuted;
     }
-    if (isMuted) {
-      soundscape.pause();
-    } else if (isPlaying && isSynthFallback) {
-      soundscape.play();
-    }
-  }, [isMuted, isPlaying, isSynthFallback]);
+  }, [isMuted]);
 
-  // 4. Start music upon opening gateway interaction
+  // 4. Start music upon opening gateway interaction ("Open Your Little Universe, Shonaa ❤️")
   const startMusic = useCallback(() => {
     setHasInteracted(true);
-    if (isMuted) return;
-
     setIsPlaying(true);
-    if (isSynthFallback) {
-      soundscape.play();
-    } else if (audioRef.current) {
-      audioRef.current.play().catch(() => {
-        setIsSynthFallback(true);
-        soundscape.play();
-      });
-    }
-  }, [isMuted, isSynthFallback]);
 
-  // 5. Toggle play / pause: Resumes seamlessly from current playhead without restarting
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
+      audioRef.current.volume = loveStoryConfig.music?.defaultVolume ?? 0.6;
+      if (!audioRef.current.src || !audioRef.current.src.includes(currentTrack.src)) {
+        audioRef.current.src = currentTrack.src;
+      }
+      if (!isMuted) {
+        audioRef.current.play().catch((err) => {
+          console.info('Browser playback waiting for user interaction:', err.message);
+        });
+      }
+    }
+  }, [isMuted, currentTrack.src]);
+
+  // 5. Toggle play / pause: Seamlessly resumes from current playhead without restarting
   const togglePlay = useCallback(() => {
     setHasInteracted(true);
     if (isPlaying) {
       setIsPlaying(false);
-      if (audioRef.current) audioRef.current.pause();
-      soundscape.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     } else {
       setIsPlaying(true);
       if (isMuted) return;
-
-      if (isSynthFallback) {
-        soundscape.play();
-      } else if (audioRef.current) {
-        audioRef.current.play().catch(() => {
-          setIsSynthFallback(true);
-          soundscape.play();
+      if (audioRef.current) {
+        audioRef.current.play().catch((err) => {
+          console.info('Playback toggle notice:', err.message);
         });
       }
     }
-  }, [isPlaying, isMuted, isSynthFallback]);
+  }, [isPlaying, isMuted]);
 
   // 6. Toggle mute
   const toggleMute = useCallback(() => {
@@ -140,20 +142,19 @@ export function useAudioPlayer() {
       setIsPlaying(true);
       if (audioRef.current) {
         audioRef.current.src = tracks[bdayIndex].src;
-        audioRef.current.play().catch(() => {
-          setIsSynthFallback(true);
-          soundscape.play();
-        });
+        if (!isMuted) {
+          audioRef.current.play().catch(() => {});
+        }
       }
     }
-  }, [tracks]);
+  }, [tracks, isMuted]);
 
   return {
     isPlaying,
     isMuted,
     currentTrack,
     hasInteracted,
-    isSynthFallback,
+    isSynthFallback: false,
     startMusic,
     togglePlay,
     toggleMute,

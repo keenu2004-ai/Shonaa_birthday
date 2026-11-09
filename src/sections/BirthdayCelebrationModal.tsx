@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, Cake, PartyPopper } from 'lucide-react';
-import { loveStoryConfig } from '../config/loveStory';
-import { discoveredBirthdayPhotos, discoveredPhotos } from '../generated/mediaManifest';
+import { loveStoryConfig, PhotoMemory } from '../config/loveStory';
+import { discoveredBirthdayPhotos, discoveredPhotos, uniquePersonalPhotos } from '../generated/mediaManifest';
 import { triggerGrandBirthdayCelebration } from '../utils/confettiUtils';
+import { ShuffleBag } from '../utils/shuffleBag';
 
 interface BirthdayCelebrationModalProps {
   isOpen: boolean;
@@ -18,24 +19,52 @@ export const BirthdayCelebrationModal: React.FC<BirthdayCelebrationModalProps> =
 }) => {
   const [candlesLit] = useState(true);
 
+  // Full pool of unique photos mixing birthday, couple, vacations, and happy memories
+  const allUniqueMedia: PhotoMemory[] = useMemo(() => {
+    if (uniquePersonalPhotos && uniquePersonalPhotos.length > 0) {
+      return uniquePersonalPhotos;
+    }
+    return discoveredPhotos;
+  }, []);
+
+  const shuffleBagRef = useRef<ShuffleBag<PhotoMemory>>(
+    new ShuffleBag(allUniqueMedia, p => p.src)
+  );
+
+  // Initial set of 8 photos for desktop and 3 for mobile
+  const [celebrationPhotos, setCelebrationPhotos] = useState<PhotoMemory[]>(() => {
+    return shuffleBagRef.current.drawMultiple(8);
+  });
+
   useEffect(() => {
     if (isOpen) {
       triggerGrandBirthdayCelebration();
       onPlayBirthdayMusic?.();
+
+      // Refresh initial draw
+      setCelebrationPhotos(shuffleBagRef.current.drawMultiple(8));
+
+      // Continuously rotate 2 floating photos every 4.5 seconds with new memories from the shuffle bag
+      const interval = setInterval(() => {
+        if (document.visibilityState === 'hidden') return;
+
+        setCelebrationPhotos(prev => {
+          const updated = [...prev];
+          const newPhoto1 = shuffleBagRef.current.draw();
+          const newPhoto2 = shuffleBagRef.current.draw();
+          const slot1 = Math.floor(Math.random() * updated.length);
+          let slot2 = Math.floor(Math.random() * updated.length);
+          if (slot2 === slot1) slot2 = (slot1 + 1) % updated.length;
+
+          if (newPhoto1) updated[slot1] = newPhoto1;
+          if (newPhoto2) updated[slot2] = newPhoto2;
+          return updated;
+        });
+      }, 4500);
+
+      return () => clearInterval(interval);
     }
   }, [isOpen, onPlayBirthdayMusic]);
-
-  // Prioritize discovered birthday photographs, falling back gracefully
-  const celebrationPhotos = useMemo(() => {
-    if (discoveredBirthdayPhotos && discoveredBirthdayPhotos.length > 0) {
-      return discoveredBirthdayPhotos.slice(0, 8);
-    }
-    const birthdayMarked = (discoveredPhotos || []).filter(p => p.isBirthdayCelebration || p.category === 'birthday');
-    if (birthdayMarked.length > 0) {
-      return birthdayMarked.slice(0, 8);
-    }
-    return loveStoryConfig.photos.slice(0, 8);
-  }, []);
 
   // Desktop perimeter positions
   const desktopPositions = [
@@ -78,21 +107,21 @@ export const BirthdayCelebrationModal: React.FC<BirthdayCelebrationModalProps> =
             <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
-          {/* Animated Photo Bombardment in Background */}
+          {/* Animated Photo Bombardment in Background — Automatically changing over time */}
           <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
-            {/* Desktop Photos (8 distributed items) */}
+            {/* Desktop Photos (8 distributed items continuously rotating) */}
             {celebrationPhotos.map((photo, index) => {
               const pos = desktopPositions[index % desktopPositions.length];
               return (
                 <motion.div
-                  key={`desktop-${photo.id}`}
-                  initial={{ opacity: 0, scale: 0, y: 100 }}
+                  key={`desktop-${photo.id}-${index}`}
+                  initial={{ opacity: 0, scale: 0.8, y: 30 }}
                   animate={{ opacity: 0.85, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: -30 }}
                   transition={{
                     type: 'spring',
                     stiffness: 150,
                     damping: 20,
-                    delay: 0.2 + index * 0.1,
                   }}
                   className="absolute hidden md:block w-36 h-44 lg:w-44 lg:h-52 p-2 bg-white rounded-lg shadow-2xl border-2 border-champagne"
                   style={{
@@ -114,14 +143,14 @@ export const BirthdayCelebrationModal: React.FC<BirthdayCelebrationModalProps> =
               const pos = mobilePositions[index % mobilePositions.length];
               return (
                 <motion.div
-                  key={`mobile-${photo.id}`}
+                  key={`mobile-${photo.id}-${index}`}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 0.75, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
                   transition={{
                     type: 'spring',
                     stiffness: 160,
                     damping: 20,
-                    delay: 0.25 + index * 0.12,
                   }}
                   className="absolute md:hidden w-20 h-24 p-1 bg-white rounded shadow-xl border border-champagne"
                   style={{
@@ -139,67 +168,69 @@ export const BirthdayCelebrationModal: React.FC<BirthdayCelebrationModalProps> =
             })}
           </div>
 
-          {/* Central Birthday Surprise Card */}
+          {/* Central Modal Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 30 }}
+            initial={{ opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 30 }}
-            transition={{ type: 'spring', damping: 22, stiffness: 260 }}
-            className="relative z-20 max-w-xl w-full bg-[#FFFDF9] rounded-3xl p-5 sm:p-10 text-center shadow-[0_25px_60px_-15px_rgba(212,175,55,0.3)] border-2 border-champagne/80 paper-texture my-6 sm:my-8"
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="relative z-20 max-w-xl w-full bg-[#FFFDF9] rounded-3xl p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] border-2 border-champagne text-center overflow-hidden my-auto"
           >
-            {/* Animated Cake Icon */}
-            <motion.div
-              animate={{ rotate: [0, -5, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-              className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full bg-blush-100 flex items-center justify-center text-burgundy mb-4 sm:mb-6 border-2 border-rose-vintage/40 shadow-inner"
-            >
-              <Cake className="w-10 h-10 sm:w-12 sm:h-12 text-burgundy" />
+            {/* Romantic background gradient glow */}
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-rose-vintage/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-gold-warm/20 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Cake / Party icon */}
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-burgundy/10 border-2 border-champagne/40 mb-6 relative">
+              <Cake className="w-10 h-10 text-burgundy" />
               {candlesLit && (
-                <span className="absolute -top-2 flex gap-1">
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-champagne fill-champagne animate-pulse" />
+                <span className="absolute -top-1 right-2 flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-warm opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-gold-warm items-center justify-center">
+                    <Sparkles className="w-2.5 h-2.5 text-white" />
+                  </span>
                 </span>
               )}
-            </motion.div>
-
-            {/* Sub-badge */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-blush-100 text-burgundy font-serif italic text-xs sm:text-sm mb-3">
-              <PartyPopper className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-champagne" />
-              <span>A Grand Celebration For You</span>
             </div>
 
-            {/* Grand Birthday Headline */}
-            <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-extrabold text-burgundy tracking-tight leading-tight">
-              {loveStoryConfig.names.birthdayCelebrationTitle}
+            {/* Greeting Headline */}
+            <h2 className="font-serif text-3xl sm:text-5xl font-extrabold text-burgundy tracking-tight mb-2">
+              HAPPY BIRTHDAY SHONAA ❤️
             </h2>
 
-            {/* Emotional Birthday Subtitle */}
-            <p className="mt-3 sm:mt-4 font-handwriting text-xl sm:text-2xl md:text-3xl text-rose-deep leading-relaxed">
-              "The universe became infinitely more beautiful the day you were born."
-            </p>
+            {/* Sub-badge */}
+            <div className="inline-block px-4 py-1.5 rounded-full bg-blush-100/80 border border-blush-200 text-burgundy font-serif font-bold text-sm sm:text-base mb-6 shadow-sm">
+              Today is 10 November 2026 — Celebrating Your 24th Birthday!
+            </div>
 
-            <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-blush-200/60 text-xs sm:text-sm font-sans text-espresso-soft leading-relaxed space-y-2.5 sm:space-y-3 px-1 sm:px-2">
+            {/* Romantic Heartfelt Message */}
+            <div className="space-y-4 text-espresso-soft font-sans text-sm sm:text-base leading-relaxed max-w-md mx-auto">
               <p>
-                Today isn't just another day on the calendar. It is the day the world was gifted with your laughter, your gentle kindness, and your brilliant mind.
+                To my favourite person in the entire world, my Shonaa:
+              </p>
+              <p className="font-serif italic text-base sm:text-lg text-burgundy font-semibold">
+                "May your 24th year be as radiant, joyful, and completely breathtaking as you make my life every single day."
               </p>
               <p>
-                May this year bring you closer to all your wildest dreams, fill your heart with overwhelming joy, and remind you every day that you are deeply, unconditionally loved.
+                From March 2025 when our story first began, to officially becoming us on 14 April 2025, and every single second since — loving you is the greatest privilege of my life.
               </p>
             </div>
 
-            {/* Actions */}
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">
+            {/* Fireworks / Re-trigger button */}
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={() => triggerGrandBirthdayCelebration()}
-                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-burgundy hover:bg-burgundy-light text-ivory-100 font-serif font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-3 rounded-full bg-burgundy hover:bg-rose-deep text-champagne font-serif font-bold text-sm shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 border border-champagne/40"
               >
-                <Sparkles className="w-4 h-4 text-champagne" />
-                <span>Launch More Fireworks!</span>
+                <PartyPopper className="w-4 h-4" />
+                Launch Fireworks Again!
               </button>
+
               <button
                 onClick={onClose}
-                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-blush-100 hover:bg-blush-200 text-burgundy font-serif font-bold text-xs sm:text-sm transition-all"
+                className="w-full sm:w-auto px-6 py-3 rounded-full bg-blush-50 hover:bg-blush-100 text-espresso-soft font-sans font-medium text-sm transition-colors border border-blush-200"
               >
-                Continue In Our Universe
+                Explore The Rest of Your Universe
               </button>
             </div>
           </motion.div>

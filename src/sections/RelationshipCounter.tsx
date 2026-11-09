@@ -45,6 +45,12 @@ export const RelationshipCounter: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Unofficial Beginning Duration (Month-level precision from March 2025)
+  const now = new Date();
+  const diffMonths = (now.getFullYear() - 2025) * 12 + (now.getMonth() - 2); // March is 0-indexed month 2
+  const unofficialYears = Math.max(0, Math.floor(diffMonths / 12));
+  const unofficialMonths = Math.max(0, diffMonths % 12);
+
   const timeUnits = [
     { label: 'Years', value: duration.years },
     { label: 'Months', value: duration.months },
@@ -69,10 +75,57 @@ export const RelationshipCounter: React.FC = () => {
     <section id="counter" className="py-20 sm:py-28 bg-[#FFFDF9] relative paper-texture border-b border-blush-200/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <SectionHeader
-          badge="Live Relationship Counter"
+          badge="Our Relationship Journey"
           title="Counting Every Precious Moment Together"
           subtitle={loveStoryConfig.dates.counterCaption}
         />
+
+        {/* SECTION 2: UNOFFICIAL BEGINNING vs OFFICIAL RELATIONSHIP */}
+        <div className="max-w-4xl mx-auto mb-10">
+          {/* Unofficial Beginning Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-[#FAF6ED] rounded-2xl p-5 sm:p-6 border border-[#E8DCC9] shadow-sm mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-full bg-blush-100 text-burgundy flex items-center justify-center shrink-0 border border-rose-vintage/40">
+                <Sparkles className="w-6 h-6 text-champagne" />
+              </div>
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-rose-vintage font-bold block">
+                  The Unofficial Beginning • March 2025
+                </span>
+                <h4 className="font-serif text-xl sm:text-2xl font-bold text-burgundy">
+                  Our story began in March 2025.
+                </h4>
+                <p className="font-handwriting text-lg sm:text-xl text-rose-deep italic">
+                  "Before the official date, there was already an us."
+                </p>
+              </div>
+            </div>
+            <div className="sm:text-right bg-white/90 px-4 py-2.5 rounded-xl border border-blush-200 shrink-0 w-full sm:w-auto">
+              <span className="text-[11px] text-espresso-muted block font-sans uppercase tracking-wider font-semibold">
+                Sparks & Laughter
+              </span>
+              <span className="font-serif text-base sm:text-lg font-bold text-burgundy">
+                {unofficialYears > 0 ? `${unofficialYears} Year & ` : ''}{unofficialMonths} Months
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Official Relationship Live Counter Header */}
+          <div className="text-center mb-6">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blush-100 text-burgundy text-xs font-serif italic border border-blush-200">
+              <Heart className="w-3.5 h-3.5 text-rose-vintage fill-rose-vintage" />
+              <span>Official Relationship Anniversary</span>
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-burgundy mt-2">
+              14 April 2025 — The day we officially became us.
+            </h3>
+          </div>
+        </div>
 
         {/* Counter Cards Grid with Animated Digits */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-4xl mx-auto">

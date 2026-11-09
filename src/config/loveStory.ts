@@ -3,8 +3,7 @@
  * OUR LITTLE UNIVERSE ❤️ — CENTRAL CONFIGURATION (src/config/loveStory.ts)
  * =========================================================================
  * 
- * Edit this single file to personalize the entire website!
- * Replace the bracketed placeholders [LIKE THIS] with your real information.
+ * Personalized for SHONAA BIRTHDAY ❤️ (10 November 2026)
  * All components across the application consume data directly from this configuration.
  */
 
@@ -43,6 +42,8 @@ export interface PhotoMemory {
   displayOrder?: number; // Custom sorting order
   isBirthdayCelebration?: boolean; // Included in birthday fireworks/explosion
   isRealAsset?: boolean; // True if uploaded by user, false if SVG placeholder
+  isDuplicate?: boolean; // True if identical hash duplicate of another file
+  hash?: string; // MD5 content hash for integrity and deduplication
 }
 
 export interface MediaOverride {
@@ -114,246 +115,1120 @@ export interface MusicTrack {
 
 export const loveStoryConfig = {
   // =========================================================================
-  // 1. NAMES & TITLES
+  // 1. NAMES & TITLES — SHONAA BIRTHDAY ❤️
   // =========================================================================
   names: {
-    herName: "[Her Name]",              // [EDITABLE: e.g. "Theia"]
-    herNickname: "[Her Nickname]",      // [EDITABLE: e.g. "Shona"]
-    myName: "[My Name]",                // [EDITABLE: e.g. "Vaibhav"]
-    websiteTitle: "Our Little Universe",// Title shown in navbar & header
-    heroOpeningTagline: "For the girl who made my world beautiful.",
-    openingButtonText: "Open Your Little Universe ❤️",
-    birthdayCelebrationTitle: "Happy Birthday, Beautiful!",
-    birthdayAge: 24,                    // [EDITABLE: Her milestone age, optional]
-    heroCoverPhoto: "/memories/opening/hero-cover.svg", // [EDITABLE: Set to "/memories/opening/hero-cover.jpg" once you add your photo]
+    herName: "Shonaa",
+    herNickname: "Shonaa",
+    myName: "Vaibhav",
+    websiteTitle: "SHONAA BIRTHDAY ❤️",
+    heroOpeningTagline: "To my favourite person, my Shonaa. This little universe is all yours.",
+    openingButtonText: "Open Your Little Universe, Shonaa ❤️",
+    birthdayCelebrationTitle: "HAPPY BIRTHDAY SHONAA ❤️",
+    birthdayAge: 24,
+    heroCoverPhoto: "/memories/opening/hero-cover.jpeg",
   },
 
   // =========================================================================
   // 2. DATES & COUNTDOWNS
   // =========================================================================
   dates: {
-    // Relationship start date: format "YYYY-MM-DDTHH:mm:ss+05:30"
-    // Used for the live Years | Months | Days | Hours | Minutes | Seconds counter
-    relationshipStart: "2023-01-01T00:00:00+05:30", // [EDITABLE: Replace with your actual anniversary date]
-    relationshipStartDisplay: "[Month Day, Year]",    // [EDITABLE: e.g. "August 15, 2023"]
+    // 1. Unofficial Beginning: March 2025
+    unofficialStart: "2025-03-01T00:00:00+05:30",
+    unofficialStartDisplay: "March 2025",
+    unofficialQuote: "Before the official date, there was already an us.",
 
-    // First meeting date (optional milestone)
-    firstMeetingDate: "2022-10-01T00:00:00+05:30",    // [EDITABLE: When you first met]
-    firstMeetingDateDisplay: "[Month Day, Year]",     // [EDITABLE: e.g. "October 1, 2022"]
+    // 2. Official Relationship: 14 April 2025
+    relationshipStart: "2025-04-14T00:00:00+05:30",
+    relationshipStartDisplay: "14 April 2025",
+    officialQuote: "14 April 2025 — The day we officially became us.",
 
-    // Her Birthday date & midnight time in Asia/Kolkata timezone
-    // Format: "YYYY-MM-DDTHH:mm:ss+05:30"
-    birthdayDate: "2027-07-31T00:00:00+05:30",        // [EDITABLE: Replace with her upcoming birthday date]
-    birthdayDisplay: "[Her Birthday: e.g. July 31]",  // [EDITABLE: e.g. "July 31"]
+    // 3. Her Birthday: 10 November 2026, 00:00 Asia/Kolkata
+    birthdayDate: "2026-11-10T00:00:00+05:30",
+    birthdayDisplay: "10 November 2026",
     birthdayTime: "00:00:00",
     timezone: "Asia/Kolkata",
 
     // Preview Flag: Set to true anytime to immediately test the Grand Birthday Fireworks Celebration!
     forceTestCelebration: false,
 
-    // Relationship milestones for the counter header
-    counterCaption: "Every second with you is my favourite second.",
+    counterCaption: "From our little beginning in March 2025 to officially becoming us on 14 April 2025.",
   },
 
   // =========================================================================
-  // 3. BACKGROUND MUSIC PLAYLIST
+  // 3. BACKGROUND MUSIC PLAYLIST (Continuous Background Soundtrack)
   // =========================================================================
   music: {
     enabled: true,
-    defaultVolume: 0.5,
-    // Add your mp3 audio files to public/audio/ (fallback synthesizer plays automatically if not present)
+    defaultVolume: 0.6,
     tracks: [
       {
-        id: "opening-melody",
-        title: "Golden Hour Piano",
-        artist: "Our Soundtrack",
-        src: "/audio/opening.mp3",
-        type: "opening",
+        id: "kaise-bataaoon",
+        title: "Kaise Bataaoon",
+        artist: "KK & Mithoon (3G)",
+        src: "/audio/background.mp3",
+        type: "background",
       },
       {
-        id: "background-melody",
-        title: "Acoustic Love Melody",
-        artist: "Quiet Moments",
-        src: "/audio/background.mp3",
+        id: "rakhlo-tum-chupaake",
+        title: "Rakhlo Tum Chupaake",
+        artist: "Our Special Memories",
+        src: "/audio/Rakhlo_Tum_Chupaake.webm",
         type: "background",
       },
       {
         id: "birthday-fanfare",
         title: "Birthday Wonder & Joy",
-        artist: "Celebration Special",
-        src: "/audio/birthday.mp3",
+        artist: "Happy Birthday Shonaa Special",
+        src: "/audio/background.mp3",
         type: "birthday",
       },
     ] as MusicTrack[],
   },
 
   // =========================================================================
-  // 4. OUR MEMORIES — PHOTO GALLERY
+  // 4. OUR MEMORIES — PHOTO GALLERY (Curated Real Photographs)
   // =========================================================================
-  // Drop your photos into public/memories/<category>/ and update filenames below!
   photos: [
     {
       id: "photo-1",
-      title: "[Memory Title: e.g. Our Warmest Holiday]",
-      category: "favourite",
-      src: "/memories/favourite/favourite-1.svg",
-      caption: "[Caption: Add a personal caption for your favourite memory here]",
-      date: "[Date: e.g. Cozy Holiday Evening]",
-      location: "[Location: e.g. Our Warm Corner]",
+      title: "Our First Photograph Together",
+      category: "our-photos",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg",
+      caption: "Our very first photo together by the historic monument archway on our first date, wearing your white and blue ghagra.",
+      date: "14 April 2025",
+      location: "Historic Monument Walk",
       rotation: -2,
+      featured: true,
+      displayOrder: 1,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-2",
-      title: "[Memory Title: e.g. The Sweetest Cheek Kiss]",
+      title: "The Sweetest Cheek Kiss",
       category: "our-photos",
-      src: "/memories/our-photos/our-photo-1.svg",
-      caption: "[Caption: A sweet memory of laughing and smiling together]",
-      date: "[Date: e.g. Sunny Afternoon]",
-      location: "[Location: e.g. Everyday Magic]",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg",
+      caption: "Pink bows, happy smiles, and the softest kiss on your cheek.",
+      date: "Cozy Afternoon",
+      location: "Our Safe Corner",
       rotation: 2.5,
+      featured: true,
+      displayOrder: 2,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-3",
-      title: "[Memory Title: e.g. Mountain Heights & Valley Views]",
+      title: "Mussoorie Mall Road",
       category: "vacations",
-      src: "/memories/vacations/vacation-1.svg",
-      caption: "[Caption: A breathtaking view from our travels together]",
-      date: "[Date: e.g. Mountain Getaway]",
-      location: "[Location: e.g. Scenic Mountain Overlook]",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg",
+      caption: "Wandering through the cool hill station breeze with Gandhi Chowk behind us.",
+      date: "Mussoorie Trip",
+      location: "Mall Road, Mussoorie",
       rotation: -1.5,
+      featured: true,
+      displayOrder: 3,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-4",
-      title: "[Memory Title: e.g. Golden Hour Radiance]",
-      category: "her-photos",
-      src: "/memories/her-photos/her-portrait-1.svg",
-      caption: "[Caption: My favourite solo photograph of you smiling]",
-      date: "[Date: e.g. Golden Hour]",
-      location: "[Location: e.g. Under The Sun]",
+      title: "Above The Clouds",
+      category: "vacations",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg",
+      caption: "Standing high above the Garhwal mountains with misty clouds rolling over the ridges.",
+      date: "Mountain Getaway",
+      location: "Mussoorie Heights",
       rotation: 2,
+      displayOrder: 4,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-5",
-      title: "[Memory Title: e.g. Silly Face Across The Table]",
-      category: "happy-moments",
-      src: "/memories/happy-moments/happy-2.svg",
-      caption: "[Caption: The playful candid smile that always makes me laugh]",
-      date: "[Date: e.g. Cafe Date]",
-      location: "[Location: e.g. Food & Laughter]",
-      rotation: -3,
+      title: "Making A Birthday Wish",
+      category: "birthday",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg",
+      caption: "Watching candlelight glow on your face as you make a wish on your birthday cake.",
+      date: "10 November 2025",
+      location: "Birthday Midnight",
+      rotation: -2.5,
+      featured: true,
+      displayOrder: 5,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-6",
-      title: "[Memory Title: e.g. Nature Trail Walk]",
-      category: "adventures",
-      src: "/memories/travel/travel-1.svg",
-      caption: "[Caption: Exploring new pathways and trails hand in hand]",
-      date: "[Date: e.g. Weekend Trail]",
-      location: "[Location: e.g. Forest Caves]",
+      title: "Helmets & Open Roads",
+      category: "our-photos",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg",
+      caption: "Two helmets, open highways, wind in our faces, and endless laughter.",
+      date: "Road Adventure",
+      location: "Open Road",
       rotation: 1.5,
+      displayOrder: 6,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-7",
-      title: "[Memory Title: e.g. Helmets & Open Roads]",
-      category: "our-photos",
-      src: "/memories/our-photos/our-photo-2.svg",
-      caption: "[Caption: Wherever the road takes us, as long as you're with me]",
-      date: "[Date: e.g. Evening Ride]",
-      location: "[Location: e.g. Open Roads]",
+      title: "Holiday Lights & Christmas Cheer",
+      category: "special-days",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg",
+      caption: "Warm golden fairy lights, holiday decorations, and feeling completely at home with you.",
+      date: "December Holidays",
+      location: "Holiday Warmth",
       rotation: -2,
+      displayOrder: 7,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-8",
-      title: "[Memory Title: e.g. Radiant Smile]",
-      category: "her-photos",
-      src: "/memories/her-photos/her-portrait-2.svg",
-      caption: "[Caption: A face that deserves all the love and happiness in the universe]",
-      date: "[Date: e.g. Special Evening]",
-      location: "[Location: e.g. City Lights]",
+      title: "Cuddles & Plushie Friends",
+      category: "happy-moments",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg",
+      caption: "Hugging the plush penguin tight while smiling at memories on your phone.",
+      date: "Cozy Evening",
+      location: "Home Comfort",
       rotation: 1.8,
+      displayOrder: 8,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-9",
-      title: "[Memory Title: e.g. Historic Archways]",
+      title: "Mind Your Head, Hold My Hand",
       category: "adventures",
-      src: "/memories/travel/travel-2.svg",
-      caption: "[Caption: Exploring historic architecture and quiet corners]",
-      date: "[Date: e.g. Day Trip]",
-      location: "[Location: e.g. Heritage Walk]",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg",
+      caption: "Stepping through moss-covered cavern trails and laughing at low stone ceilings.",
+      date: "Cave Hike",
+      location: "Robber's Cave Trail",
       rotation: -1,
+      displayOrder: 9,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-10",
-      title: "[Memory Title: e.g. Making A Birthday Wish]",
+      title: "Diwali Evening Radiance",
       category: "special-days",
-      src: "/memories/birthday/birthday-cake.svg",
-      caption: "[Caption: Watching you make a wish with glowing candles on your face]",
-      date: "[Date: e.g. Birthday Midnight]",
-      location: "[Location: e.g. Birthday Warmth]",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (4).jpeg",
+      caption: "Lighting golden diyas and flower rangoli in your regal purple silk suit.",
+      date: "Festival of Lights",
+      location: "Diwali Night",
       rotation: 2.2,
+      displayOrder: 10,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-11",
-      title: "[Memory Title: e.g. Festive Celebrations]",
-      category: "favourite",
-      src: "/memories/favourite/favourite-2.svg",
-      caption: "[Caption: My favourite present in every season of life]",
-      date: "[Date: e.g. Holiday Season]",
-      location: "[Location: e.g. Home]",
+      title: "Late Night Blanket Calls",
+      category: "happy-moments",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg",
+      caption: "Wrapped up like a blanket ghost holding a thermos, keeping each other company late into the night.",
+      date: "Midnight Call",
+      location: "Across The Screen",
       rotation: -2.5,
+      displayOrder: 11,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
     {
       id: "photo-12",
-      title: "[Memory Title: e.g. Unfiltered Happiness]",
+      title: "High Above The Fairgrounds",
       category: "happy-moments",
-      src: "/memories/happy-moments/happy-1.svg",
-      caption: "[Caption: The spontaneous, unplanned moments that turned into our best memories]",
-      date: "[Date: e.g. Random Afternoon]",
-      location: "[Location: e.g. Together]",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (2).jpeg",
+      caption: "At the top of the Ferris wheel under the nighttime carnival lights.",
+      date: "Carnival Night",
+      location: "City Fair",
       rotation: 1.5,
+      displayOrder: 12,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
+    },
+    {
+      id: "photo-13",
+      title: "Peace at Bangla Sahib",
+      category: "special-days",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM.jpeg",
+      caption: "Serene night by the holy Sarovar waters with tilak and maroon dupatta.",
+      date: "Spiritual Visit",
+      location: "Gurudwara Bangla Sahib",
+      rotation: -1.5,
+      displayOrder: 13,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
+    },
+    {
+      id: "photo-14",
+      title: "Golden Hour Radiance",
+      category: "her-photos",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg",
+      caption: "Soft daylight catching your smile in your cozy knit sweater.",
+      date: "Winter Afternoon",
+      location: "Sunlit Glow",
+      rotation: 2,
+      displayOrder: 14,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
+    },
+    {
+      id: "photo-15",
+      title: "Raindrops at Christ Church",
+      category: "vacations",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.13 PM (1).jpeg",
+      caption: "Standing in a blue rain poncho on the church grounds among tall Himalayan pines.",
+      date: "Mussoorie Monsoons",
+      location: "Christ Church, Mussoorie",
+      rotation: -2,
+      displayOrder: 15,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
+    },
+    {
+      id: "photo-16",
+      title: "Historic Archway Walk",
+      category: "adventures",
+      src: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg",
+      caption: "Your white and blue ghagra glowing against the ancient carved stone door.",
+      date: "First Date",
+      location: "Heritage Monument",
+      rotation: 1.5,
+      featured: true,
+      displayOrder: 16,
+      isBirthdayCelebration: true,
+      isRealAsset: true,
     },
   ] as PhotoMemory[],
 
-  // =========================================================================
-  // 4b. OPTIONAL MEDIA OVERRIDES (Automatic Media Discovery Customization)
-  // =========================================================================
-  // When you drop personal photos/videos into public/memories/ or public/videos/,
-  // they are automatically discovered at build time!
-  // To customize title, caption, location, or mark as a birthday celebration photo,
-  // simply add an entry matching your filename or path below:
   mediaOverrides: {
-    // Example:
-    // "vacation-1.jpg": {
-    //   title: "Sunset Over The Bay",
-    //   caption: "The evening you took my breath away",
-    //   date: "June 2024",
-    //   location: "Goa Beach",
-    //   isBirthdayCelebration: true,
-    // },
-  } as Record<string, MediaOverride>,
+  "WhatsApp Image 2026-11-09 at 11.15.53 PM.jpeg": {
+    "title": "The Legendary Cafe Pout",
+    "caption": "Arms crossed, waiting for food with that cute little pout that melts my heart every single time.",
+    "category": "favourite",
+    "location": "Cafe Date",
+    "date": "2025",
+    "featured": true,
+    "displayOrder": 1
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.54 PM (1).jpeg": {
+    "title": "Hollow of the Ancient Tree",
+    "caption": "Curled up comfortably inside the multi-trunk tree in the scenic hill station woods.",
+    "category": "vacations",
+    "location": "Mussoorie Hills",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 15
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.54 PM.jpeg": {
+    "title": "Mountain Bridge & Mist",
+    "caption": "Standing on the green iron bridge against rolling clouds and misty Himalayan cliffs.",
+    "category": "vacations",
+    "location": "Mussoorie Trail",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 16
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.56 PM (1).jpeg": {
+    "title": "Light Breaking Through the Cavern",
+    "caption": "A dramatic beam of sunlight cutting through the natural ceiling inside Robber's Cave.",
+    "category": "adventures",
+    "location": "Robber's Cave (Guchhupani)",
+    "date": "Nature Trek",
+    "featured": false,
+    "displayOrder": 25
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg": {
+    "title": "Queen of the Hills Ridge",
+    "caption": "Looking out over endless green Himalayan mountain ranges with rolling clouds below.",
+    "category": "vacations",
+    "location": "Mussoorie Viewpoint",
+    "date": "Our First Vacation",
+    "featured": true,
+    "displayOrder": 5
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg": {
+    "title": "Mind Your Head at the Cave",
+    "caption": "Laughing at the \"Mind Your Head\" sign on the mossy rock stairs entering the caverns.",
+    "category": "adventures",
+    "location": "Robber's Cave Caverns",
+    "date": "Nature Trek",
+    "featured": true,
+    "displayOrder": 8
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.57 PM.jpeg": {
+    "title": "Reflections in the Stream",
+    "caption": "Stepping through the cool natural cave stream under the towering limestone gorge.",
+    "category": "adventures",
+    "location": "Robber's Cave Trail",
+    "date": "Nature Trek",
+    "featured": false,
+    "displayOrder": 26
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.58 PM (1).jpeg": {
+    "title": "Warmth in Red",
+    "caption": "Solo portrait of Shonaa smiling warmly in her beautiful red patterned outfit.",
+    "category": "her-photos",
+    "location": "Portrait Memory",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 35
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.58 PM (2).jpeg": {
+    "title": "High on the Ferris Wheel",
+    "caption": "Arms outstretched at the top of the giant Ferris wheel with night festival lights glowing all around.",
+    "category": "happy-moments",
+    "location": "Night Fair Carnival",
+    "date": "Pure Joy",
+    "featured": true,
+    "displayOrder": 4
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg": {
+    "title": "Late Night Blanket Call",
+    "caption": "Wrapped up in a warm blanket holding a thermos, sharing sleepy late-night whispers.",
+    "category": "happy-moments",
+    "location": "Late Night Screen",
+    "date": "Everyday Magic",
+    "featured": true,
+    "displayOrder": 10
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.58 PM (4).jpeg": {
+    "title": "Diwali Diya Glow",
+    "caption": "Lighting festive earthen lamps in purple silk embroidered attire, radiating festival warmth.",
+    "category": "special-days",
+    "location": "Diwali Celebration",
+    "date": "Festival of Lights",
+    "featured": true,
+    "displayOrder": 9
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.58 PM.jpeg": {
+    "title": "Capsule Pod Nap",
+    "caption": "Completely relaxed and fast asleep inside the futuristic massage pod capsule at the mall.",
+    "category": "happy-moments",
+    "location": "Mall Outing",
+    "date": "Goofy Moments",
+    "featured": false,
+    "displayOrder": 20
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.59 PM (1).jpeg": {
+    "title": "Side-by-Side Smiles",
+    "caption": "Casual cafe lunch date in collared shirts, smiling side by side without a care in the world.",
+    "category": "our-photos",
+    "location": "Cafe Lunch Date",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 11
+  },
+  "WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg": {
+    "title": "Soft Daylight & Checkered Knitwear",
+    "caption": "Golden morning light illuminating your natural beauty in cozy checkered knitwear.",
+    "category": "her-photos",
+    "location": "Quiet Morning",
+    "date": "2025",
+    "featured": true,
+    "displayOrder": 7
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.02 PM (1).jpeg": {
+    "title": "Plumeria in Your Hair",
+    "caption": "Waving sweetly at the camera with a bright pink plumeria flower tucked into your long hair.",
+    "category": "her-photos",
+    "location": "Sweet Selfies",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 36
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.02 PM (2).jpeg": {
+    "title": "Qutub Minar Under the Stars",
+    "caption": "Standing by the soaring illuminated stone tower of Qutub Minar on our nighttime heritage stroll.",
+    "category": "adventures",
+    "location": "Qutub Complex Heritage Walk",
+    "date": "Night Walk",
+    "featured": true,
+    "displayOrder": 6
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.02 PM.jpeg": {
+    "title": "Childhood Hug with Maa",
+    "caption": "A cherished vintage memory of baby Shonaa held safely in mother's loving embrace.",
+    "category": "her-photos",
+    "location": "Childhood Keepsake",
+    "date": "Precious Memories",
+    "featured": false,
+    "displayOrder": 45
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.04 PM.jpeg": {
+    "title": "Ancient Carvings & Heritage Arch",
+    "caption": "Seated beneath the illuminated sandstone archways and historic motifs on our evening wander.",
+    "category": "adventures",
+    "location": "Historic Monuments",
+    "date": "Heritage Night",
+    "featured": false,
+    "displayOrder": 27
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.05 PM.jpeg": {
+    "title": "Illuminated Minar Promenade",
+    "caption": "A quiet, peaceful walk along the stone pathways beneath the glowing spire of Qutub Minar.",
+    "category": "adventures",
+    "location": "Qutub Heritage Grounds",
+    "date": "Night Walk",
+    "featured": false,
+    "displayOrder": 28
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.06 PM.jpeg": {
+    "title": "Night Glow & Starlit Spire",
+    "caption": "Looking over your shoulder as the architectural grandeur of centuries stands tall in the dark sky.",
+    "category": "adventures",
+    "location": "Qutub Complex",
+    "date": "Night Walk",
+    "featured": false,
+    "displayOrder": 29
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.07 PM.jpeg": {
+    "title": "Little Golden Puppy Friend",
+    "caption": "Holding the sweetest golden puppy on your lap in your Dragon Ball tee, pure compassion in your eyes.",
+    "category": "happy-moments",
+    "location": "Evening Walk",
+    "date": "Puppy Love",
+    "featured": true,
+    "displayOrder": 12
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.08 PM.jpeg": {
+    "title": "Gentle Puppy Cuddles",
+    "caption": "Gently comforting the tiny puppy — proof that your heart is the kindest place on earth.",
+    "category": "happy-moments",
+    "location": "Evening Walk",
+    "date": "Puppy Love",
+    "featured": false,
+    "displayOrder": 21
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.10 PM.jpeg": {
+    "title": "Holding the Black-and-Tan Pup",
+    "caption": "Smiling with pride while holding the curious little black-and-tan pup with both hands.",
+    "category": "happy-moments",
+    "location": "Evening Walk",
+    "date": "Puppy Love",
+    "featured": false,
+    "displayOrder": 22
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.11 PM.jpeg": {
+    "title": "Paws & Pure Joy",
+    "caption": "Looking down with so much tenderness at our little four-legged companion of the evening.",
+    "category": "happy-moments",
+    "location": "Evening Walk",
+    "date": "Puppy Love",
+    "featured": false,
+    "displayOrder": 23
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.12 PM.jpeg": {
+    "title": "Bangla Sahib Sarovar Blessing",
+    "caption": "A serene spiritual evening at Gurudwara Bangla Sahib, head covered with tilak by the holy sarovar.",
+    "category": "special-days",
+    "location": "Gurudwara Bangla Sahib",
+    "date": "Sacred Moments",
+    "featured": true,
+    "displayOrder": 3
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.13 PM (1).jpeg": {
+    "title": "Baby Shonaa & Her Doll",
+    "caption": "A precious vintage scan of little baby Shonaa hugging a wrapped doll on the bed.",
+    "category": "her-photos",
+    "location": "Childhood Memory",
+    "date": "The Very Beginning",
+    "featured": false,
+    "displayOrder": 46
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg": {
+    "title": "Cheek Kiss & Pink Bows",
+    "caption": "An affectionate kiss on your cheek with cute pink bow doodles — one of my favourite photos of us.",
+    "category": "our-photos",
+    "location": "Together Always",
+    "date": "Sweetest Love",
+    "featured": true,
+    "displayOrder": 2
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.13 PM.jpeg": {
+    "title": "Reflections in the Sacred Sarovar",
+    "caption": "Standing quietly by the illuminated waters of Bangla Sahib Sarovar under the midnight sky.",
+    "category": "special-days",
+    "location": "Bangla Sahib Sarovar",
+    "date": "Peaceful Night",
+    "featured": false,
+    "displayOrder": 30
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.14 PM (1).jpeg": {
+    "title": "Gazing at the City Lights",
+    "caption": "Standing by the glass balcony rail overlooking the shimmering ocean of city nightlights.",
+    "category": "her-photos",
+    "location": "High-Rise Balcony",
+    "date": "Nightscape",
+    "featured": false,
+    "displayOrder": 37
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.14 PM.jpeg": {
+    "title": "Cozy Corner Couch",
+    "caption": "Seated comfortably on the grey lounge sofa under warm amber pendant lamps in a quiet cafe.",
+    "category": "her-photos",
+    "location": "Cafe Lounge",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 38
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.16 PM (1).jpeg": {
+    "title": "Studying the Menu",
+    "caption": "Looking up at the dessert and food court menus with that serious focus on picking something delicious.",
+    "category": "her-photos",
+    "location": "Food Court Date",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 39
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.16 PM.jpeg": {
+    "title": "City Lights from the Balcony",
+    "caption": "Wind blowing through your hair as you gaze out over the sparkling cityscape at night.",
+    "category": "her-photos",
+    "location": "Balcony Viewpoint",
+    "date": "Night Thoughts",
+    "featured": false,
+    "displayOrder": 40
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.17 PM (1).jpeg": {
+    "title": "Soft Smiles by the Bar Stools",
+    "caption": "A gentle, radiant smile standing by the high wooden bar stools in the illuminated cafe.",
+    "category": "her-photos",
+    "location": "Cafe Date",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 41
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.17 PM.jpeg": {
+    "title": "Effortlessly Graceful",
+    "caption": "Natural, poised, and beautiful without even trying — my favourite person in any room.",
+    "category": "her-photos",
+    "location": "Cafe Outing",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 42
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.18 PM (1).jpeg": {
+    "title": "Table for Two",
+    "caption": "Sitting right across from me with long hair framing your face, having the best conversations.",
+    "category": "favourite",
+    "location": "Keventers Date",
+    "date": "2025",
+    "featured": true,
+    "displayOrder": 13
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.18 PM.jpeg": {
+    "title": "Casual & Chic",
+    "caption": "Leaning effortlessly by the counter, looking stylish in wide-leg denim and black sleeveless top.",
+    "category": "her-photos",
+    "location": "Cafe Outing",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 43
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.20 PM.jpeg": {
+    "title": "Your Eyes Tell Stories",
+    "caption": "Arms crossed on the warm wooden table, looking straight at me with that gentle, serene gaze.",
+    "category": "favourite",
+    "location": "Cafe Conversation",
+    "date": "2025",
+    "featured": true,
+    "displayOrder": 14
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.21 PM.jpeg": {
+    "title": "Silken Hair & Quiet Thoughts",
+    "caption": "A quiet, unposed moment at Keventers, long glossy hair catching the warm ceiling lights.",
+    "category": "her-photos",
+    "location": "Keventers Cafe",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 44
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.25 PM.jpeg": {
+    "title": "Gentle Focus",
+    "caption": "Looking down at the table, lost in the quiet warmth of an afternoon spent together.",
+    "category": "her-photos",
+    "location": "Cafe Afternoon",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 47
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.26 PM.jpeg": {
+    "title": "Profile in Sunlight",
+    "caption": "Turning slightly toward the conversation, showing off that elegant side profile and flowing hair.",
+    "category": "her-photos",
+    "location": "Cafe Table",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 48
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.31 PM.jpeg": {
+    "title": "Terrace Cafe in the Hills",
+    "caption": "Looking out over the Himalayan valley and hillside town from a wrought-iron terrace cafe.",
+    "category": "vacations",
+    "location": "Mussoorie / Hill Station Terrace",
+    "date": "Our First Vacation",
+    "featured": true,
+    "displayOrder": 17
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.36 PM.jpeg": {
+    "title": "Hillside Lake Valley Vista",
+    "caption": "Standing by the viewing rail in a warm varsity jacket overlooking the tranquil lake in the valley below.",
+    "category": "vacations",
+    "location": "Scenic Lake Overlook",
+    "date": "Hill Station Trip",
+    "featured": false,
+    "displayOrder": 18
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.41 PM.jpeg": {
+    "title": "Overlooking Rolling Mountain Clouds",
+    "caption": "Gazing into the distance across the pine valleys with dramatic clouds sweeping over the peaks.",
+    "category": "vacations",
+    "location": "Himalayan Ridge",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 19
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.42 PM.jpeg": {
+    "title": "Walking the Mountain Road",
+    "caption": "A peaceful stroll along the mountain road in a classic denim jacket against green terraced hills.",
+    "category": "vacations",
+    "location": "Valley Route",
+    "date": "Hillside Walk",
+    "featured": false,
+    "displayOrder": 24
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg": {
+    "title": "Helmets & Open Highways",
+    "caption": "Helmets buckled, ready for a cool breeze highway ride together with the open road ahead.",
+    "category": "our-photos",
+    "location": "Motorcycle Adventure",
+    "date": "Road Trip",
+    "featured": true,
+    "displayOrder": 18
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.56 PM (1).jpeg": {
+    "title": "Mountain Trail Steps",
+    "caption": "Climbing the hill path surrounded by deodar trees and clean mountain air.",
+    "category": "vacations",
+    "location": "Mussoorie Hills",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 31
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.56 PM.jpeg": {
+    "title": "Hilltop Pine Breeze",
+    "caption": "Enjoying the refreshing Himalayan breeze among tall evergreens.",
+    "category": "vacations",
+    "location": "Hill Station Trails",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 32
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.57 PM.jpeg": {
+    "title": "Scenic Mountain Overlook",
+    "caption": "Taking in the sweeping vistas of the Garhwal range stretching toward the horizon.",
+    "category": "vacations",
+    "location": "Mussoorie Viewpoint",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 33
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.58 PM (1).jpeg": {
+    "title": "Himalayan Ridge Walk",
+    "caption": "Walking hand in hand through the scenic trails of the Queen of the Hills.",
+    "category": "vacations",
+    "location": "Mussoorie Ridge",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 34
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.58 PM (2).jpeg": {
+    "title": "Tall Deodars of Mussoorie",
+    "caption": "Standing beneath the towering Deodar cedars framing the misty mountain valley.",
+    "category": "vacations",
+    "location": "Deodar Cedar Forest",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 35
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.58 PM.jpeg": {
+    "title": "Valley Whispers",
+    "caption": "Resting on the stone ledge overlooking the lush valley below.",
+    "category": "vacations",
+    "location": "Mussoorie Ridge",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 36
+  },
+  "WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg": {
+    "title": "Grand Carved Stone Doorway",
+    "caption": "Standing gracefully beside the historic carved monument portal in your blue kurti and white ghagra.",
+    "category": "her-photos",
+    "location": "Delhi Heritage Monument",
+    "date": "Our First Official Date",
+    "featured": true,
+    "displayOrder": 20
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg": {
+    "title": "Mussoorie Mall Road & Gandhi Chowk",
+    "caption": "Couple selfie strolling down Mall Road with the famous Gandhi statue in the background.",
+    "category": "our-photos",
+    "location": "Mussoorie Mall Road",
+    "date": "Our First Vacation",
+    "featured": true,
+    "displayOrder": 21
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.01 PM.jpeg": {
+    "title": "Heritage Grace in Ghagra",
+    "caption": "Standing by ancient stone carvings on our first official date, looking like a royal vision.",
+    "category": "her-photos",
+    "location": "Heritage Grounds",
+    "date": "Our First Official Date",
+    "featured": false,
+    "displayOrder": 49
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg": {
+    "title": "Christmas Fairy Lights Celebration",
+    "caption": "Surrounded by the warm glow of Christmas fairy lights and holiday wreaths together.",
+    "category": "our-photos",
+    "location": "Christmas Celebration",
+    "date": "Holiday Season",
+    "featured": true,
+    "displayOrder": 22
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg": {
+    "title": "Our First Official Date & First Photograph",
+    "caption": "The very first couple picture we ever took together at the historic monument archway.",
+    "category": "our-photos",
+    "location": "Historic Monument Archway",
+    "date": "April 2025",
+    "featured": true,
+    "displayOrder": 1
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.04 PM (1).jpeg": {
+    "title": "Stone Wall Valley Viewpoint",
+    "caption": "Standing by the mountain stone wall overlooking the rolling foothills of Garhwal.",
+    "category": "vacations",
+    "location": "Mussoorie Viewpoint",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 37
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.04 PM.jpeg": {
+    "title": "Stairs of the Ancient Fort",
+    "caption": "Walking down the historic stone steps after exploring the monument grounds.",
+    "category": "adventures",
+    "location": "Heritage Complex",
+    "date": "Our First Official Date",
+    "featured": false,
+    "displayOrder": 38
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.05 PM (1).jpeg": {
+    "title": "Courtyard Echoes",
+    "caption": "Wandering through the open stone courtyards under the warm April sun.",
+    "category": "adventures",
+    "location": "Monument Courtyard",
+    "date": "Our First Official Date",
+    "featured": false,
+    "displayOrder": 39
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.05 PM.jpeg": {
+    "title": "Metro Travel After Our First Date",
+    "caption": "Riding the metro together after our first official date, still wearing our first-date outfits with huge smiles.",
+    "category": "our-photos",
+    "location": "Metro Journey",
+    "date": "Our First Official Date",
+    "featured": true,
+    "displayOrder": 23
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.07 PM.jpeg": {
+    "title": "Archway Whispers",
+    "caption": "Posing naturally beneath the weathered historic stone arch on our walk.",
+    "category": "adventures",
+    "location": "Heritage Trail",
+    "date": "Our First Official Date",
+    "featured": false,
+    "displayOrder": 40
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.08 PM.jpeg": {
+    "title": "Sunlit Pathways",
+    "caption": "Following the stone trail where our journey as an official couple first began.",
+    "category": "adventures",
+    "location": "Monument Grounds",
+    "date": "Our First Official Date",
+    "featured": false,
+    "displayOrder": 41
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg": {
+    "title": "Hugging the Penguin Plushie",
+    "caption": "Holding the soft stuffed penguin tight while relaxing on the bed — the definition of adorable.",
+    "category": "happy-moments",
+    "location": "Cozy Room",
+    "date": "Pure Comfort",
+    "featured": true,
+    "displayOrder": 24
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg": {
+    "title": "Blowing Out 23rd Birthday Candles",
+    "caption": "Making a secret wish and blowing out the golden 23 candles with that unforgettable birthday smile.",
+    "category": "birthday",
+    "location": "Birthday Celebration",
+    "date": "10 November 2025",
+    "isBirthdayCelebration": true,
+    "featured": true,
+    "displayOrder": 25
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.13 PM (1).jpeg": {
+    "title": "Rain Poncho at Christ Church",
+    "caption": "Walking across the lush green lawn of historic Christ Church Mussoorie in a blue rain poncho.",
+    "category": "vacations",
+    "location": "Christ Church Mussoorie",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 42
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.13 PM (2).jpeg": {
+    "title": "Christ Church Spire & Pine Trees",
+    "caption": "The Gothic stone tower of Christ Church rising into the misty mountain air of the hills.",
+    "category": "vacations",
+    "location": "Christ Church Mussoorie",
+    "date": "Our First Vacation",
+    "featured": false,
+    "displayOrder": 43
+  },
+  "WhatsApp Image 2026-11-09 at 11.17.13 PM.jpeg": {
+    "title": "Birthday Cake & Golden Glow",
+    "caption": "Admiring the birthday cake with golden sparklers and balloons on your 23rd birthday.",
+    "category": "birthday",
+    "location": "Birthday Night",
+    "date": "10 November 2025",
+    "isBirthdayCelebration": true,
+    "featured": true,
+    "displayOrder": 26
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.33 AM.jpeg": {
+    "title": "Breathtaking in White",
+    "caption": "Stunning mirror selfie in your elegant white two-piece birthday dress — truly breathtaking.",
+    "category": "her-photos",
+    "location": "Birthday Glam",
+    "date": "Special Occasion",
+    "isBirthdayCelebration": true,
+    "featured": true,
+    "displayOrder": 27
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.34 AM (1).jpeg": {
+    "title": "Hello Kitty Smiles & Booth Cuddles",
+    "caption": "Sitting close together on the teal booth with cute Hello Kitty face filters, overflowing with happiness.",
+    "category": "our-photos",
+    "location": "Cafe Booth Date",
+    "date": "Pure Happiness",
+    "featured": true,
+    "displayOrder": 28
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.34 AM (2).jpeg": {
+    "title": "Christmas Wreath & Holiday Pout",
+    "caption": "A sweet romantic pout beside me in front of festive Christmas garlands and warm lights.",
+    "category": "our-photos",
+    "location": "Holiday Festivities",
+    "date": "Christmas Season",
+    "featured": true,
+    "displayOrder": 29
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.34 AM.jpeg": {
+    "title": "Mr. Penguin Smiling Back",
+    "caption": "The adorable plushie with eyes squeezed in a happy smile — our official mascot of coziness.",
+    "category": "happy-moments",
+    "location": "Cozy Keepsakes",
+    "date": "Sweet Memories",
+    "featured": false,
+    "displayOrder": 44
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.35 AM.jpeg": {
+    "title": "Cafe Pout Encore",
+    "caption": "Another look at that adorable cafe pout that makes my heart flutter every time.",
+    "category": "favourite",
+    "location": "Cafe Date",
+    "date": "Special Dates",
+    "featured": false,
+    "displayOrder": 50
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.36 AM.jpeg": {
+    "title": "Rajouri Garden Social Balcony",
+    "caption": "Seated at the blue-tiled table at Rajouri Garden Social overlooking the vibrant lights below.",
+    "category": "her-photos",
+    "location": "Rajouri Garden Social",
+    "date": "Dinner Date",
+    "featured": true,
+    "displayOrder": 30
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.37 AM.jpeg": {
+    "title": "Take the Backpack!",
+    "caption": "Playfully handing me the backpack across the table with that funny, animated expression.",
+    "category": "happy-moments",
+    "location": "Rajouri Garden Social",
+    "date": "Playful Moments",
+    "featured": false,
+    "displayOrder": 45
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.38 AM (1).jpeg": {
+    "title": "Sleeper Bus Road Trip Smiles",
+    "caption": "Late-night sleeper bus adventure, Shonaa in clear glasses and Vaibhav smiling from ear to ear.",
+    "category": "our-photos",
+    "location": "Overnight Road Trip",
+    "date": "Travel Adventures",
+    "featured": true,
+    "displayOrder": 31
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.38 AM (2).jpeg": {
+    "title": "Silly Face Filters on the Bed",
+    "caption": "Cracking up over funny wide-face filters while lounging around together — pure unfiltered laughs.",
+    "category": "happy-moments",
+    "location": "Lazy Afternoon",
+    "date": "Goofy Laughs",
+    "featured": false,
+    "displayOrder": 46
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.38 AM.jpeg": {
+    "title": "Gym Mirror Selfie — Tuti Fruti Energy",
+    "caption": "Looking sporty in grey tee and track pants at the gym, staying active and focused on goals.",
+    "category": "her-photos",
+    "location": "Gym Workout",
+    "date": "Fitness Days",
+    "featured": false,
+    "displayOrder": 47
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.39 AM (1).jpeg": {
+    "title": "Carnival Night Under the Lights",
+    "caption": "Soaring high above the fairgrounds on the Ferris wheel with festival lights below.",
+    "category": "happy-moments",
+    "location": "Night Carnival",
+    "date": "Pure Joy",
+    "featured": false,
+    "displayOrder": 51
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.39 AM (2).jpeg": {
+    "title": "Afternoon Lunch Date Together",
+    "caption": "Enjoying our meal side by side in matching easygoing style, smiling for a quick memory.",
+    "category": "our-photos",
+    "location": "Lunch Date",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 48
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.39 AM.jpeg": {
+    "title": "Doodle Hearts & Cozy Thoughts",
+    "caption": "Outlined in hand-drawn white hearts and clouds, chilling together in our warm little universe.",
+    "category": "our-photos",
+    "location": "Cozy Afternoon",
+    "date": "Doodle Love",
+    "featured": true,
+    "displayOrder": 32
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.40 AM (1).jpeg": {
+    "title": "Maa's Loving Arms",
+    "caption": "A cherished childhood scan celebrating unconditional maternal warmth and love.",
+    "category": "her-photos",
+    "location": "Family Keepsake",
+    "date": "Precious Memories",
+    "featured": false,
+    "displayOrder": 52
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.40 AM (2).jpeg": {
+    "title": "Plumeria Petals in the Breeze",
+    "caption": "Soft smiles with the tropical plumeria flower tucked behind your ear.",
+    "category": "her-photos",
+    "location": "Sweet Selfies",
+    "date": "2025",
+    "featured": false,
+    "displayOrder": 53
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.40 AM.jpeg": {
+    "title": "Dandiya Night in Sparkling Fuchsia",
+    "caption": "Radiant in a glittering magenta traditional lehenga under the festive festival streamers.",
+    "category": "special-days",
+    "location": "Dandiya / Garba Festival",
+    "date": "Festival Nights",
+    "featured": true,
+    "displayOrder": 33
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.41 AM (1).jpeg": {
+    "title": "Qutub Minar Halo",
+    "caption": "The glowing stone pinnacle of Qutub Minar rising straight behind you like an architectural crown.",
+    "category": "her-photos",
+    "location": "Qutub Complex",
+    "date": "Night Walk",
+    "featured": false,
+    "displayOrder": 49
+  },
+  "WhatsApp Image 2026-11-10 at 1.03.41 AM.jpeg": {
+    "title": "Hardware Store Ski Goggles Explorer",
+    "caption": "Trying on giant reflective blue ski goggles in the hardware aisle with the biggest, cheekiest smile.",
+    "category": "happy-moments",
+    "location": "DIY Hardware Store",
+    "date": "Silly Adventures",
+    "featured": true,
+    "displayOrder": 34
+  }
+} as Record<string, MediaOverride>,
 
   // =========================================================================
   // 5. OUR VIDEOS
   // =========================================================================
-  // Place your video files in public/videos/memories/ and update paths below!
   videos: [
     {
       id: "video-1",
-      title: "[Video 1 Title: e.g. Our Unfiltered Laughter]",
-      src: "/videos/memories/our-laughter.mp4",
-      thumbnail: "/memories/favourite/favourite-1.svg",
-      caption: "[Caption: The moments between the poses, the sound of your laugh, and how everything felt so effortless]",
-      date: "[Date: e.g. Summer Memories]",
-      duration: "0:30",
+      title: "Our Unfiltered Laughter",
+      src: "/memories/birthday/WhatsApp Video 2026-11-09 at 11.15.56 PM.mp4",
+      thumbnail: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg",
+      caption: "The spontaneous, unposed moments that make us laugh till our stomachs hurt.",
+      date: "Our Journey",
+      duration: "0:25",
+      isRealAsset: true,
     },
     {
       id: "video-2",
-      title: "[Video 2 Title: e.g. Roads, Wind & Us]",
-      src: "/videos/vacations/mountain-ride.mp4",
-      thumbnail: "/memories/vacations/vacation-1.svg",
-      caption: "[Caption: Zipping through the cool breeze with you holding on tight]",
-      date: "[Date: e.g. Road Trip]",
+      title: "Sweet Memories & Playful Smiles",
+      src: "/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.10 PM.mp4",
+      thumbnail: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg",
+      caption: "The tender, quiet seconds where everything in the universe feels just right.",
+      date: "Cherished Times",
+      duration: "0:30",
+      isRealAsset: true,
+    },
+    {
+      id: "video-3",
+      title: "Wanderlust & Breezy Roads",
+      src: "/memories/birthday/WhatsApp Video 2026-11-09 at 11.16.28 PM.mp4",
+      thumbnail: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg",
+      caption: "Cool breezes, open roads, and traveling together side by side.",
+      date: "Travel Diaries",
       duration: "0:45",
+      isRealAsset: true,
+    },
+    {
+      id: "video-4",
+      title: "Birthday Cheer & Joy",
+      src: "/memories/birthday/WhatsApp Video 2026-11-09 at 11.17.15 PM.mp4",
+      thumbnail: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg",
+      caption: "Celebrating your special day with overflowing joy and happiness.",
+      date: "Birthday Celebration",
+      duration: "0:20",
+      isRealAsset: true,
+    },
+    {
+      id: "video-5",
+      title: "Rakhlo Tum Chupaake",
+      src: "/audio/Rakhlo_Tum_Chupaake.webm",
+      thumbnail: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg",
+      caption: "A romantic musical memory kept close to our hearts.",
+      date: "Our Special Song",
+      duration: "3:40",
+      isRealAsset: true,
     },
   ] as VideoMemory[],
 
@@ -363,74 +1238,75 @@ export const loveStoryConfig = {
   timeline: [
     {
       id: "tl-1",
-      title: "[Milestone 1: The First Time We Met]",
-      date: "[Date: e.g. Autumn 2022]",
-      tag: "The First Meeting",
-      description: "[Description: Write about the day you first saw each other, what you noticed about her, and how that moment became the turning point of your story.]",
-      image: "/memories/her-photos/her-portrait-1.svg",
-      note: "Some people walk into your life quietly, but their echo stays forever.",
+      title: "The First Spark",
+      date: "March 2025",
+      tag: "The Beginning",
+      description: "Our story began in March 2025. Before any official date, there was already an unspoken connection between us — a feeling that something rare and magical had quietly arrived.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg",
+      note: "Before the official date, there was already an us.",
     },
     {
       id: "tl-2",
-      title: "[Milestone 2: Our Very First Conversation]",
-      date: "[Date: e.g. Late 2022]",
-      tag: "First Words",
-      description: "[Description: Describe your first long conversation where hours felt like minutes, and you realized how rare and special she is.]",
-      note: "That was the moment I realized you were someone genuinely rare.",
+      title: "14 April 2025 — Officially Us",
+      date: "14 April 2025",
+      tag: "Official Date",
+      description: "The day we made it official. 14 April 2025 marks the exact moment we chose each other, took each other's hands, and began walking this beautiful road together.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.05 PM.jpeg",
+      note: "14 April 2025 — The day we officially became us.",
     },
     {
       id: "tl-3",
-      title: "[Milestone 3: Our First Official Date]",
-      date: "[Date: e.g. Early 2023]",
-      tag: "First Date",
-      description: "[Description: Share what it felt like sitting across from her with butterflies, shy smiles, and not wanting the night to end.]",
-      image: "/memories/our-photos/our-photo-1.svg",
-      note: "I walked away with butterflies that haven't stopped flying since.",
+      title: "Our First Official Date & First Photograph",
+      date: "April 2025",
+      tag: "First Photo",
+      description: "Our first date after officially coming together. You wore your breathtaking white and blue ghagra, and we stood by the carved stone monument to take our very first photograph together as a couple.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.03 PM.jpeg",
+      note: "The very first picture of us — the start of our memory gallery.",
     },
     {
       id: "tl-4",
-      title: "[Milestone 4: Our First Photograph Together]",
-      date: "[Date: e.g. Mid 2023]",
-      tag: "First Photo",
-      description: "[Description: The story behind the first picture you took together, and the start of your memory scrapbook.]",
-      image: "/memories/our-photos/our-photo-2.svg",
-      note: "The start of our personal gallery.",
+      title: "First Vacation — Mussoorie Getaway",
+      date: "Mussoorie Trip",
+      tag: "First Vacation",
+      description: "Our first trip together to the Queen of the Hills. Walking along Mall Road past Gandhi Chowk, climbing through cool mountain air, exploring Robber's Cave trails, and visiting Christ Church.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.00 PM.jpeg",
+      note: "No mountain height or valley view compares to having you beside me.",
     },
     {
       id: "tl-5",
-      title: "[Milestone 5: Our First Getaway / Trip]",
-      date: "[Date: e.g. Autumn 2023]",
-      tag: "First Getaway",
-      description: "[Description: Describe your first trip together, traveling side by side, and discovering that the journey is sweeter with her.]",
-      image: "/memories/vacations/vacation-1.svg",
-      note: "No altitude or view can match the high of loving you.",
+      title: "Helmets & Open Highway Rides",
+      date: "Road Adventure",
+      tag: "Adventures",
+      description: "Strapping on our helmets, feeling the rush of cool wind, and holding on tight. Wherever the road leads, as long as it's with you, every journey is an adventure.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.45 PM.jpeg",
+      note: "Two helmets, open roads, and an endless horizon together.",
     },
     {
       id: "tl-6",
-      title: "[Milestone 6: Special Holiday Celebration]",
-      date: "[Date: e.g. Winter 2023]",
+      title: "Fairy Lights & Holiday Warmth",
+      date: "December Holidays",
       tag: "Celebration",
-      description: "[Description: Celebrating holidays together, glowing lights, warm drinks, and feeling completely at home in her presence.]",
-      image: "/memories/favourite/favourite-1.svg",
-      note: "Home isn't a building; it's you.",
+      description: "Celebrating Christmas and festive evenings together surrounded by warm yellow fairy lights. Standing close, laughing, and realizing that home isn't a building — it's being with you.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.02 PM.jpeg",
+      note: "Warm lights, holiday warmth, and the greatest gift of all — you.",
     },
     {
       id: "tl-7",
-      title: "[Milestone 7: Outdoor Adventures & Walks]",
-      date: "[Date: e.g. Summer 2024]",
-      tag: "Adventures",
-      description: "[Description: Exploring nature, hiking trails, laughing at silly hurdles, and falling in love with her adventurous spirit.]",
-      image: "/memories/travel/travel-1.svg",
-      note: "You turn every little walk into a story worth telling.",
+      title: "Your 23rd Birthday Celebration",
+      date: "10 November 2025",
+      tag: "Birthday Memories",
+      description: "Watching the golden glow of candles light up your face as you made a wish and blew out the candles with golden number 23 on your cake.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.12 PM.jpeg",
+      note: "A wish whispered in the dark, and a love that grows brighter every year.",
     },
     {
       id: "tl-8",
-      title: "[Milestone 8: Today — And Every Tomorrow]",
-      date: "Present & Future",
-      tag: "Forever",
-      description: "[Description: A message celebrating everything you have built together, and wishing her the happiest birthday today.]",
-      image: "/memories/birthday/birthday-celebration.svg",
-      note: "Happy Birthday, my love. The best chapters are yet to be written.",
+      title: "Today — Happy 24th Birthday, Shonaa! ❤️",
+      date: "10 November 2026",
+      tag: "Forever & Always",
+      description: "Today is 10 November 2026 — your 24th birthday! This entire website, every song, every photo, and every word is built to celebrate you, my favourite person.",
+      image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg",
+      note: "Happy 24th Birthday Shonaa. The universe is yours, today and forever.",
     },
   ] as MilestoneItem[],
 
@@ -443,38 +1319,38 @@ export const loveStoryConfig = {
     fights: [
       {
         id: "fight-1",
-        topic: "[Disagreement 1: e.g. The \"What Should We Eat?\" Debate]",
-        whatHappened: "\"[What Happened: 'I'm fine with anything!' 'Okay, pizza?' 'No, not pizza...' 45 minutes of menu browsing later...]\"",
-        aftermath: "[The Aftermath: Ended up ordering our comfort order, eating together, and laughing at how silly we are every single time.]",
-        verdict: "[The Sweet Verdict: I would still wait 2 hours just to eat whatever you're craving.]",
+        topic: "The Great 'What Should We Eat?' Debate",
+        whatHappened: "\"I'm good with anything! Okay, pizza? No, definitely not pizza... 45 minutes of menu browsing later...\"",
+        aftermath: "Ended up ordering our comfort food, eating together, and laughing at how silly we are every single time.",
+        verdict: "I would still wait two hours just to eat whatever you are craving.",
       },
       {
         id: "fight-2",
-        topic: "[Disagreement 2: e.g. \"Just 5 More Minutes Of My Game/Hobby\"]",
-        whatHappened: "\"[What Happened: Promised 'last round' three rounds ago while getting the legendary loving side-eye.]\"",
-        aftermath: "[The Aftermath: Closed the game, apologized sheepishly, and gave 100% undivided cuddles and attention.]",
-        verdict: "[The Sweet Verdict: Winning any game < Making you smile.]",
+        topic: "Just 5 More Minutes...",
+        whatHappened: "\"Promised 'last round' three rounds ago while receiving the legendary loving side-eye.\"",
+        aftermath: "Closed the screen, apologized sheepishly, and gave 100% undivided cuddles and attention.",
+        verdict: "Winning any game < Making you smile.",
       },
       {
         id: "fight-3",
-        topic: "[Disagreement 3: e.g. Navigation & Missing The Turn]",
-        whatHappened: "\"[What Happened: 'Turn left! No, the OTHER left!' Missed the exit because we were singing too loud to notice the map.]\"",
-        aftermath: "[The Aftermath: Turned a 15-minute drive into a scenic 45-minute tour with songs on full volume.]",
-        verdict: "[The Sweet Verdict: I never mind taking the long way home when it means 30 more minutes with you.]",
+        topic: "Navigation & Missing The Highway Exit",
+        whatHappened: "\"Turn left! No, the OTHER left! Missed the exit because we were singing too loud to notice the GPS.\"",
+        aftermath: "Turned a 15-minute commute into a scenic 45-minute tour with songs on maximum volume.",
+        verdict: "I never mind taking the scenic route when it means 30 more minutes with you.",
       },
       {
         id: "fight-4",
-        topic: "[Disagreement 4: e.g. The \"Who Loves Who More?\" Debate]",
-        whatHappened: "\"[What Happened: An endless back-and-forth of 'I love you more' / 'No, scientifically impossible, I love you more.']\"",
-        aftermath: "[The Aftermath: Agreed to declare it a tie, but deep down I know I'm the lucky one who got you.]",
-        verdict: "[The Sweet Verdict: A disagreement I'm happy to lose every single day.]",
+        topic: "The 'Who Loves Who More?' Battle",
+        whatHappened: "\"An endless back-and-forth of 'I love you more' / 'No, scientifically impossible, I love you more.'\"",
+        aftermath: "Agreed to declare it a tie, but deep down I know I'm the lucky one who got you.",
+        verdict: "A disagreement I am happy to lose every single day of my life.",
       },
     ],
     reasonsToChooseYou: [
-      "[Reason 1: Because your angry pout is secretly the most adorable thing on earth.]",
-      "[Reason 2: Because you never let an argument go to sleep without checking if we're okay.]",
-      "[Reason 3: Because saying sorry to you feels like coming home.]",
-      "[Reason 4: Because even when we disagree, you still hold my hand tight.]",
+      "Because your angry pout is secretly the most adorable thing on earth.",
+      "Because you never let an argument go to sleep without checking if we're okay.",
+      "Because saying sorry to you feels like coming home.",
+      "Because even when we disagree, you still hold my hand tight.",
     ],
   },
 
@@ -487,26 +1363,26 @@ export const loveStoryConfig = {
     moments: [
       {
         id: "hm-1",
-        title: "[Happy Moment 1: Random Midnight Calls]",
-        description: "[Description: Whispering through the dark when the whole world is asleep, sharing silly thoughts, sleepy giggles, and drifting off to the sound of each other breathing.]",
+        title: "Late Night Blanket Video Calls",
+        description: "Whispering through the screen when the whole world is asleep, wrapped up in warm blankets, sharing sleepy giggles, and drifting off together.",
         badge: "Late Nights",
       },
       {
         id: "hm-2",
-        title: "[Happy Moment 2: The Uncontrollable Laugh Attacks]",
-        description: "[Description: Those moments when one of us says something totally absurd and we both laugh so hard our stomachs hurt and no sound comes out.]",
+        title: "Uncontrollable Laugh Attacks",
+        description: "Those moments when one of us says something absurd and we both laugh so hard our stomachs hurt and no sound comes out.",
         badge: "Pure Joy",
       },
       {
         id: "hm-3",
-        title: "[Happy Moment 3: Food Comas & Shared Desserts]",
-        description: "[Description: Stealing the last fry, arguing over who gets more frosting, and claiming we're 'too full' right before ordering dessert.]",
+        title: "Food Comas & Shared Desserts",
+        description: "Stealing the last fry, arguing over who gets more frosting, and claiming we're 'too full' right before ordering dessert.",
         badge: "Comfort",
       },
       {
         id: "hm-4",
-        title: "[Happy Moment 4: Surprise Hugs From Behind]",
-        description: "[Description: Wrapping arms around each other when least expected and feeling our whole bodies relax into a safe place.]",
+        title: "Surprise Hugs & Cheek Kisses",
+        description: "Wrapping arms around each other when least expected and feeling our whole bodies relax into our safest place.",
         badge: "Safe Place",
       },
     ],
@@ -521,36 +1397,36 @@ export const loveStoryConfig = {
     destinations: [
       {
         id: "dest-1",
-        placeName: "[Destination 1: e.g. Mountain Valley Overlook]",
-        stateOrCountry: "[Location: e.g. Scenic Hill Country]",
-        date: "[Date: e.g. September Getaway]",
-        image: "/memories/vacations/vacation-1.svg",
-        whatWeDid: "[What We Did: Stood against the railing overlooking winding mountain roads, breathing in the fresh mountain air.]",
-        favouriteMemory: "[Favourite Memory: The way the golden afternoon sun hit your hair while looking out into the misty horizon.]",
-        personalNote: "[Personal Note: I used to look at scenic wallpapers; now I just look at you standing against the hills.]",
-        stampText: "AIR MAIL — SPECIAL",
+        placeName: "Mussoorie — Queen of the Hills",
+        stateOrCountry: "Uttarakhand, India",
+        date: "Our First Vacation",
+        image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.56 PM.jpeg",
+        whatWeDid: "Stood high on the cliffs overlooking misty mountain ridges, wandered Mall Road hand in hand past Gandhi Chowk, and visited historic Christ Church.",
+        favouriteMemory: "The way the cool mountain breeze blew through your hair as you stood against the rolling clouds.",
+        personalNote: "I used to admire scenic wallpapers; now I just admire you standing against the Himalayan mountains.",
+        stampText: "HILL STATION POST",
       },
       {
         id: "dest-2",
-        placeName: "[Destination 2: e.g. Nature Trail & Water Caves]",
-        stateOrCountry: "[Location: e.g. Forest Nature Trails]",
-        date: "[Date: e.g. Summer Trail Walk]",
-        image: "/memories/travel/travel-1.svg",
-        whatWeDid: "[What We Did: Hiked through moss-covered cavernous trails, ducked beneath natural stone tunnels, and stepped through fresh streams.]",
-        favouriteMemory: "[Favourite Memory: Warning each other at the low rock ceilings and taking candid photos under the stone canopy.]",
-        personalNote: "[Personal Note: No hike feels long when every step is taken beside you.]",
-        stampText: "SPECIAL DELIVERY",
+        placeName: "Robber's Cave (Guchhupani) Nature Trail",
+        stateOrCountry: "Dehradun / Mussoorie Route",
+        date: "Nature Hike & Caverns",
+        image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.57 PM (1).jpeg",
+        whatWeDid: "Hiked through moss-covered cavernous trails, laughed at the 'Mind Your Head' sign, ducked beneath natural stone tunnels, and stepped through cool streams.",
+        favouriteMemory: "Catching a beam of pure sunlight breaking through the dark cave ceiling right onto us.",
+        personalNote: "No hike feels long or arduous when every step is taken beside you.",
+        stampText: "ADVENTURE AIR MAIL",
       },
       {
         id: "dest-3",
-        placeName: "[Destination 3: e.g. Historic Heritage Archways]",
-        stateOrCountry: "[Location: e.g. Heritage Monument Walk]",
-        date: "[Date: e.g. Autumn Walk]",
-        image: "/memories/travel/travel-2.svg",
-        whatWeDid: "[What We Did: Walked along historic stonework archways and carved windows, discovering quiet corners away from the city buzz.]",
-        favouriteMemory: "[Favourite Memory: You turning around with the calmest, most graceful smile.]",
-        personalNote: "[Personal Note: Stone might stand for centuries, but what we have is eternal.]",
-        stampText: "ROYAL POST",
+        placeName: "Historic Monuments & Heritage Walk",
+        stateOrCountry: "Delhi Heritage",
+        date: "Our First Official Date",
+        image: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.59 PM.jpeg",
+        whatWeDid: "Walked along historic stonework archways and carved jali windows on our first official date.",
+        favouriteMemory: "You turning around in your white and blue ghagra with the calmest, most graceful smile.",
+        personalNote: "Stone might stand for centuries, but what we have built is eternal.",
+        stampText: "ROYAL POST — FIRST DATE",
       },
     ] as TravelDestination[],
   },
@@ -559,49 +1435,49 @@ export const loveStoryConfig = {
   // 10. HER DREAMS AND ASPIRATIONS
   // =========================================================================
   dreams: {
-    title: "Your Dreams Matter to Me.",
+    title: "Your Dreams Matter to Me, Shonaa.",
     subtitle: "I believe in your talent, your ambition, and your brilliant mind more than words can express.",
     aspirations: [
       {
         id: "asp-1",
-        title: "[Aspiration 1: Soaring In Your Career]",
-        description: "[Description: Watching you conquer new challenges, lead meaningful projects, and earn every bit of recognition and success you deserve.]",
+        title: "Soaring In Your Career",
+        description: "Watching you conquer new challenges, lead meaningful projects, and earn every bit of recognition and success you deserve.",
         icon: "Briefcase",
       },
       {
         id: "asp-2",
-        title: "[Aspiration 2: Independence & Cozy Living]",
-        description: "[Description: Building a space of your own, filled with warm lighting, cozy corners, flourishing plants, and your favourite books.]",
+        title: "Independence & Cozy Living",
+        description: "Building a space of your own, filled with warm lighting, cozy corners, flourishing plants, and your favourite books.",
         icon: "Sparkles",
       },
       {
         id: "asp-3",
-        title: "[Aspiration 3: Mastering New Passions]",
-        description: "[Description: Exploring creative pursuits, languages, culinary arts, and expanding that sharp, beautiful intellect.]",
+        title: "Mastering New Passions",
+        description: "Exploring creative pursuits, languages, culinary arts, and expanding that sharp, beautiful intellect.",
         icon: "BookOpen",
       },
       {
         id: "asp-4",
-        title: "[Aspiration 4: Inner Peace & Abundant Joy]",
-        description: "[Description: Days where you wake up without stress, surrounded by people who cherish you, feeling deeply fulfilled.]",
+        title: "Inner Peace & Abundant Joy",
+        description: "Days where you wake up without stress, surrounded by people who cherish you, feeling deeply fulfilled.",
         icon: "Heart",
       },
     ],
     bucketList: [
-      { id: "bl-1", text: "[Bucket List 1: Watch Northern Lights dancing under the Arctic sky in Norway]", category: "travel", completed: false },
-      { id: "bl-2", text: "[Bucket List 2: Walk through pink cherry blossom tunnels in Kyoto, Japan]", category: "travel", completed: false },
-      { id: "bl-3", text: "[Bucket List 3: Spend a week in a cozy glass-roof cottage in the Swiss Alps]", category: "travel", completed: false },
-      { id: "bl-4", text: "[Bucket List 4: Go on a midnight seaside drive with windows down and music up]", category: "experience", completed: true, notes: "One of our best drives!" },
-      { id: "bl-5", text: "[Bucket List 5: Bake a multi-layer birthday cake from scratch together]", category: "together", completed: false },
-      { id: "bl-6", text: "[Bucket List 6: Adopt a furry golden retriever puppy and give it a silly name]", category: "goals", completed: false },
-      { id: "bl-7", text: "[Bucket List 7: Build our dream home with a sunny reading nook and balcony garden]", category: "together", completed: false },
-      { id: "bl-8", text: "[Bucket List 8: Celebrate your 50th birthday together, still laughing just as hard]", category: "together", completed: false },
+      { id: "bl-1", text: "Watch Northern Lights dancing under the Arctic sky in Norway", category: "travel", completed: false },
+      { id: "bl-2", text: "Walk through pink cherry blossom tunnels in Kyoto, Japan", category: "travel", completed: false },
+      { id: "bl-3", text: "Spend a week in a cozy glass-roof cottage in the Swiss Alps", category: "travel", completed: false },
+      { id: "bl-4", text: "Midnight motorcycle rides with the cool wind and music playing", category: "experience", completed: true, notes: "One of our best adventures!" },
+      { id: "bl-5", text: "Bake a multi-layer birthday cake from scratch together", category: "together", completed: false },
+      { id: "bl-6", text: "Adopt a furry puppy and give it a silly name", category: "goals", completed: false },
+      { id: "bl-7", text: "Build our dream home with a sunny reading nook and balcony garden", category: "together", completed: false },
+      { id: "bl-8", text: "Celebrate your 50th birthday together, still laughing just as hard", category: "together", completed: false },
     ] as BucketListItem[],
     dreamDestinations: [
-      { name: "[Destination 1: Santorini, Greece]", country: "[Description: White terraces & blue sunsets over the Aegean]" },
-      { name: "[Destination 2: Switzerland]", country: "[Description: Snow-covered peaks, alpine trains, and fondue]" },
-      { name: "[Destination 3: Kyoto & Tokyo, Japan]", country: "[Description: Lantern-lit streets, cherry blossoms & ramen]" },
-      { name: "[Destination 4: Amalfi Coast, Italy]", country: "[Description: Pastel cliffside villas overlooking turquoise waters]" },
+      { name: "Santorini, Greece", country: "White terraces & blue sunsets over the Aegean Sea" },
+      { name: "Swiss Alps", country: "Snow-covered peaks, alpine trains, and cozy chalets" },
+      { name: "Kyoto & Tokyo, Japan", country: "Lantern-lit streets, cherry blossoms & ramen" },
+      { name: "Amalfi Coast, Italy", country: "Pastel cliffside villas overlooking turquoise waters" },
     ],
   },
 
@@ -609,18 +1485,18 @@ export const loveStoryConfig = {
   // 11. REASONS I LOVE YOU
   // =========================================================================
   reasonsILoveYou: [
-    { id: 1, reason: "[Reason 1: The way your eyes crinkle at the corners when something genuinely amuses you.]", category: "smile" },
-    { id: 2, reason: "[Reason 2: How you make anywhere we go feel safe, comfortable, and warm.]", category: "heart" },
-    { id: 3, reason: "[Reason 3: The way you hold my arm tightly when we're walking through crowded streets.]", category: "together" },
-    { id: 4, reason: "[Reason 4: Your silly little happy dance whenever delicious food arrives at the table.]", category: "quirk" },
-    { id: 5, reason: "[Reason 5: How you genuinely care about people and animals around you.]", category: "heart" },
-    { id: 6, reason: "[Reason 6: The sound of your voice first thing in the morning and right before sleep.]", category: "smile" },
-    { id: 7, reason: "[Reason 7: How you can calm my stormy mind with just a single touch of your hand.]", category: "heart" },
-    { id: 8, reason: "[Reason 8: Because you make me want to be the best version of myself every single day.]", category: "together" },
-    { id: 9, reason: "[Reason 9: Your stubborn determination when you set your mind to achieving a goal.]", category: "quirk" },
-    { id: 10, reason: "[Reason 10: The way you look in cozy oversized sweatshirts with hot coffee or tea.]", category: "quirk" },
-    { id: 11, reason: "[Reason 11: How you remember the smallest details I mentioned weeks ago in passing.]", category: "heart" },
-    { id: 12, reason: "[Reason 12: Because out of eight billion people on this planet, my soul chose you.]", category: "together" },
+    { id: 1, reason: "The way your eyes crinkle at the corners when something genuinely amuses you.", category: "smile" },
+    { id: 2, reason: "How you make anywhere we go feel safe, comfortable, and warm.", category: "heart" },
+    { id: 3, reason: "The way you hold my arm tightly when we're walking through crowded streets.", category: "together" },
+    { id: 4, reason: "Your silly little happy dance whenever delicious food arrives at the table.", category: "quirk" },
+    { id: 5, reason: "How you genuinely care about people and animals around you.", category: "heart" },
+    { id: 6, reason: "The sound of your voice first thing in the morning and right before sleep.", category: "smile" },
+    { id: 7, reason: "How you can calm my stormy mind with just a single touch of your hand.", category: "heart" },
+    { id: 8, reason: "Because you make me want to be the best version of myself every single day.", category: "together" },
+    { id: 9, reason: "Your stubborn determination when you set your mind to achieving a goal.", category: "quirk" },
+    { id: 10, reason: "The way you look in cozy oversized sweatshirts with hot coffee or tea.", category: "quirk" },
+    { id: 11, reason: "How you remember the smallest details I mentioned weeks ago in passing.", category: "heart" },
+    { id: 12, reason: "Because out of eight billion people on this planet, my soul chose you.", category: "together" },
   ] as LoveReason[],
 
   // =========================================================================
@@ -634,9 +1510,9 @@ export const loveStoryConfig = {
       title: "I Am Never Far From You",
       letter: `Whenever you feel far away from me, look at your phone, look at these photos, or close your eyes for ten seconds. 
 
-[EDITABLE: Write your personal comfort message for when she misses you. Remind her that distance is temporary, but your love is always with her.]`,
-      signature: "Always a heartbeat away, [My Name]",
-      photo: "/memories/our-photos/our-photo-1.svg",
+Remember our rides under the open sky, our walks through Mussoorie, and every time you rested your head on my shoulder. Distance is just physical space — my heart is always right beside yours, listening, caring, and loving you every second.`,
+      signature: "Always a heartbeat away, Vaibhav ❤️",
+      photo: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.16.13 PM (2).jpeg",
     },
     {
       id: "ow-2",
@@ -645,9 +1521,9 @@ export const loveStoryConfig = {
       title: "You Don't Have To Be Strong Today",
       letter: `It's okay to feel overwhelmed. It's okay to have days where you just want to curl up and do nothing. You don't have to carry the weight of the entire world on your shoulders.
 
-[EDITABLE: Write your gentle words for when she feels down. Remind her she is safe, cared for, and never alone.]`,
-      signature: "Your safe haven, [My Name]",
-      photo: "/memories/her-photos/her-portrait-2.svg",
+You are safe, you are deeply cherished, and whatever is worrying you right now, we will handle it together. Take a deep breath, my love. You are never alone.`,
+      signature: "Your safe haven, Vaibhav ❤️",
+      photo: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.17.09 PM.jpeg",
     },
     {
       id: "ow-3",
@@ -656,30 +1532,30 @@ export const loveStoryConfig = {
       title: "You Are Capable Of Anything",
       letter: `Remember how hard you've worked to get here. Remember every single challenge you thought was impossible, and yet you conquered it.
 
-[EDITABLE: Write an inspiring pep-talk reminding her of her brilliance, resilience, and unique strength.]`,
-      signature: "Cheering for you always, [My Name]",
+You have a sharp mind, an unstoppable spirit, and a heart full of courage. Walk into that room with your head held high. I believe in you with every fiber of my being.`,
+      signature: "Cheering for you always, Vaibhav ❤️",
     },
     {
       id: "ow-4",
       trigger: "Open When You Want To Smile",
       tagline: "A quick dose of instant happiness",
       title: "Remember That Time...",
-      letter: `Remember the funny little moments that made us laugh until our stomachs hurt?
+      letter: `Remember when you wrapped yourself in a blanket like a ghost holding a thermos on our late night call? Or when you fell asleep inside that futuristic massage chair capsule pod? Or how we argued for 45 minutes over what to eat only to order our exact usual comfort food?
 
-[EDITABLE: Write a funny inside joke, silly memory, or funny story that never fails to make her grin.]`,
-      signature: "Your goofy partner, [My Name]",
-      photo: "/memories/happy-moments/happy-2.svg",
+You bring so much unfiltered joy into my life, Shonaa. Never stop smiling that radiant smile.`,
+      signature: "Your goofy partner, Vaibhav ❤️",
+      photo: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.58 PM (3).jpeg",
     },
     {
       id: "ow-5",
       trigger: "Open When You Need A Reminder",
       tagline: "How truly special you are",
       title: "Just In Case You Forgot",
-      letter: `You are breathtakingly beautiful — not just when you're dressed up, but in the morning with messy hair, in oversized hoodies, and when you're laughing so hard your nose scrunches up.
+      letter: `You are breathtakingly beautiful — not just when you're dressed up in your white and blue ghagra, but in the morning with messy hair, in oversized hoodies, and when you're laughing so hard your nose scrunches up.
 
-[EDITABLE: Remind her of all the reasons she is worthy, cherished, and uniquely irreplaceable.]`,
-      signature: "Yours completely, [My Name]",
-      photo: "/memories/her-photos/her-portrait-1.svg",
+You make ordinary days feel extraordinary. Don't ever doubt how truly irreplaceable and treasured you are to me.`,
+      signature: "Yours completely, Vaibhav ❤️",
+      photo: "/memories/birthday/WhatsApp Image 2026-11-09 at 11.15.59 PM.jpeg",
     },
   ] as OpenWhenLetter[],
 
@@ -690,10 +1566,10 @@ export const loveStoryConfig = {
     title: "Our Future Together",
     subtitle: "A lifetime of adventures, quiet moments, and dreams we're building side by side.",
     futurePromises: [
-      "[Promise 1: To always listen to your thoughts, even when they're whispered late at night.]",
-      "[Promise 2: To celebrate your small victories just as loudly as the big milestones.]",
-      "[Promise 3: To hold your hand through every unfamiliar city and every unexpected storm.]",
-      "[Promise 4: To never let our playful laughter fade as the years roll on.]",
+      "To always listen to your thoughts, even when they're whispered late at night.",
+      "To celebrate your small victories just as loudly as the big milestones.",
+      "To hold your hand through every unfamiliar city and every unexpected storm.",
+      "To never let our playful laughter fade as the years roll on.",
     ],
   },
 
@@ -701,15 +1577,18 @@ export const loveStoryConfig = {
   // 14. THE FINAL LETTER (Closing Envelope & Birthday Surprise)
   // =========================================================================
   finalLetter: {
-    envelopePrompt: "Click to open your special birthday letter",
-    title: "My Dearest [Her Name],",
+    envelopePrompt: "Click to open your special birthday letter, Shonaa",
+    title: "My Dearest Shonaa,",
     subtitle: "A Letter From My Heart To Yours",
-    date: "[Her Birthday: e.g. July 31st]",
+    date: "10 November 2026",
     content: `If I had to summarize everything you are to me in a single sentence, it would be this: You made my life feel like poetry.
 
-[EDITABLE: Pour your heart out here! Write your full personal birthday letter to her.
-Tell her how she changed your life, what you cherish about her soul, and your warmest wishes for her year ahead.]`,
+Looking back on our journey — from that quiet spark in March 2025 to 14 April 2025 when we officially became us, through our first date in your white and blue ghagra, our chilly walks on Mussoorie's Mall Road, our motorcycle rides in the wind, and all the silly late-night blanket calls — every single second has been the greatest gift of my life.
+
+You have the kindest heart, the most infectious smile, and a brilliance that inspires me every single day. Seeing you blow out your candles and smile that radiant smile is all I ever want.
+
+Happy 24th Birthday, Shonaa. May this year bring you all the success, happiness, and peace you so richly deserve. I will always be right here, cheering for you, holding your hand, and loving you through every chapter of our lives.`,
     closingQuote: "Here's to you, to us, and to all the beautiful memories still waiting to happen.",
-    signature: "Forever yours, [My Name]",
+    signature: "Forever yours, Vaibhav ❤️",
   },
 };
